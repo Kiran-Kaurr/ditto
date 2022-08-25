@@ -244,6 +244,10 @@
         <japicmp-maven-plugin.version>0.15.7</japicmp-maven-plugin.version>
 
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+
+        <sonar.organization>kiran-kaurr</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
     </properties>
 
     <build>
