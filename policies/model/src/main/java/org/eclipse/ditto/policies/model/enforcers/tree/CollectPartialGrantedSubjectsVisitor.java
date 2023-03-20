@@ -62,7 +62,7 @@ final class CollectPartialGrantedSubjectsVisitor implements Visitor<Set<Authoriz
 
     @Override
     public void visitTreeNode(final PolicyTreeNode node) {
-        if (PolicyTreeNode.Type.SUBJECT == node.getType()) {
+        if (node.getType() == PolicyTreeNode.Type.SUBJECT) {
             visitSubjectNode(node);
         } else {
             visitResourceNode((ResourceNode) node);
@@ -111,11 +111,11 @@ final class CollectPartialGrantedSubjectsVisitor implements Visitor<Set<Authoriz
             final PointerLocation pointerLocation = getLocationInRelationToTargetPointer(resourceNode);
             final EffectedPermissions effectedPermissions = resourceNode.getPermissions();
             final Permissions grantedPermissions = effectedPermissions.getGrantedPermissions();
-            if (PointerLocation.ABOVE == pointerLocation || PointerLocation.SAME == pointerLocation) {
+            if (pointerLocation == PointerLocation.ABOVE || pointerLocation == PointerLocation.SAME) {
                 final Permissions revokedPermissions = effectedPermissions.getRevokedPermissions();
                 weightedPermissionsForSubjectId.addGranted(grantedPermissions, resourceNode.getLevel());
                 weightedPermissionsForSubjectId.addRevoked(revokedPermissions, resourceNode.getLevel());
-            } else if (PointerLocation.BELOW == pointerLocation) {
+            } else if (pointerLocation == PointerLocation.BELOW) {
                 weightedPermissionsForSubjectId.addGranted(grantedPermissions, resourceNode.getLevel());
             }
         }

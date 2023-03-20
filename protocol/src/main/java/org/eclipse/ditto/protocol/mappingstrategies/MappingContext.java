@@ -425,7 +425,7 @@ final class MappingContext {
             @Nullable final JsonKey actualJsonKey = messagePathAsList.get(level);
             if (!Objects.equals(actualJsonKey, expectedJsonKey)) {
                 final String message;
-                if (0 == level) {
+                if (level == 0) {
                     message = MessageFormat.format("Message path of payload does not start with <{0}>.",
                             expectedJsonKey.asPointer());
                 } else {
@@ -463,7 +463,7 @@ final class MappingContext {
         final Optional<String> result;
         final TopicPath topicPath = adaptable.getTopicPath();
         final String namespace = topicPath.getNamespace();
-        if (TopicPath.ID_PLACEHOLDER.equals(namespace)) {
+        if (namespace.equals(TopicPath.ID_PLACEHOLDER)) {
             result = Optional.empty();
         } else {
             result = Optional.of(namespace);

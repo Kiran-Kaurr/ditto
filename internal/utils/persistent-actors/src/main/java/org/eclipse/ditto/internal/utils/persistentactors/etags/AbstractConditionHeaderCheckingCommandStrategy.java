@@ -57,7 +57,8 @@ public abstract class AbstractConditionHeaderCheckingCommandStrategy<
     }
 
     /**
-     * @return the conditional header validator.
+     *Returns the conditional header validator.
+ 
      */
     protected abstract ConditionalHeadersValidator getValidator();
 

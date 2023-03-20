@@ -100,21 +100,24 @@ public final class MongoMetrics implements Jsonifiable<JsonObject> {
     }
 
     /**
-     * @return the reporter who reported this metrics.
+     *Returns the reporter who reported this metrics.
+ 
      */
     public String getReporter() {
         return reporter;
     }
 
     /**
-     * @return the resolution in which the metrics were reported.
+     *Returns the resolution in which the metrics were reported.
+ 
      */
     public Duration getResolution() {
         return resolution;
     }
 
     /**
-     * @return the list of maximum nanoseconds encountered on MongoDB insert times.
+     *Returns the list of maximum nanoseconds encountered on MongoDB insert times.
+ 
      */
     public List<Long> getMaxTimerNanos() {
         return maxTimerNanos;

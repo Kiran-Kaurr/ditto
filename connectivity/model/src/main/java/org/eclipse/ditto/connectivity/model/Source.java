@@ -36,12 +36,14 @@ import org.eclipse.ditto.json.JsonObject;
 public interface Source extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the addresses of this source
+     *Returns the addresses of this source.
+ 
      */
     Set<String> getAddresses();
 
     /**
-     * @return number of consumers (connections) that will be opened to the remote server, default is {@code 1}
+     *Returns number of consumers (connections) that will be opened to the remote server, default is {@code 1}.
+ 
      */
     int getConsumerCount();
 
@@ -54,17 +56,20 @@ public interface Source extends Jsonifiable.WithFieldSelectorAndPredicate<JsonFi
     AuthorizationContext getAuthorizationContext();
 
     /**
-     * @return an index to distinguish between sources that would otherwise be different
+     *Returns an index to distinguish between sources that would otherwise be different.
+ 
      */
     int getIndex();
 
     /**
-     * @return the optional qos value of this source - only applicable for certain {@link ConnectionType}s.
+     *Returns the optional qos value of this source - only applicable for certain {@link ConnectionType}s.
+ 
      */
     Optional<Integer> getQos();
 
     /**
-     * @return the enforcement options that should be applied to this source
+     *Returns the enforcement options that should be applied to this source.
+ 
      */
     Optional<Enforcement> getEnforcement();
 

@@ -95,7 +95,7 @@ abstract class AbstractNamespaceCommand<T extends AbstractNamespaceCommand<T>> e
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractNamespaceCommand)) {
             return false;
         }
         if (!super.equals(o)) {

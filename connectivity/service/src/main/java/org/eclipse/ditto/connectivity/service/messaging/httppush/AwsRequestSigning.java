@@ -12,26 +12,6 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.httppush;
 
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.function.IntPredicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
-
-import org.eclipse.ditto.base.service.UriEncoding;
-import org.eclipse.ditto.connectivity.service.messaging.signing.Signing;
-import org.eclipse.ditto.internal.utils.pubsub.ddata.Hashes;
-import org.eclipse.ditto.json.JsonParseException;
-
 import akka.NotUsed;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.model.ContentType;
@@ -44,6 +24,25 @@ import akka.http.javadsl.model.headers.HttpCredentials;
 import akka.japi.Pair;
 import akka.stream.javadsl.Source;
 import akka.util.ByteString;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.function.IntPredicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+import org.eclipse.ditto.base.service.UriEncoding;
+import org.eclipse.ditto.connectivity.service.messaging.signing.Signing;
+import org.eclipse.ditto.internal.utils.pubsub.ddata.Hashes;
+import org.eclipse.ditto.json.JsonParseException;
 
 /**
  * Signing of HTTP requests to authenticate at AWS.
@@ -60,9 +59,9 @@ final class AwsRequestSigning implements HttpRequestSigning {
     private static final String X_AMZ_CONTENT_SHA256_HEADER = "x-amz-content-sha256";
     private static final String HOST_HEADER = "host";
     private static final DateTimeFormatter DATE_STAMP_FORMATTER =
-            DateTimeFormatter.ofPattern("yyyyMMdd").withZone(ZoneId.of("Z"));
+            DateTimeFormatter.ofPattern("yyyyMMdd").withZone(ZoneOffset.UTC);
     static final DateTimeFormatter X_AMZ_DATE_FORMATTER =
-            DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmssz").withZone(ZoneId.of("Z"));
+            DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmssz").withZone(ZoneOffset.UTC);
 
     private final ActorSystem actorSystem;
     private final Collection<String> canonicalHeaderNames;

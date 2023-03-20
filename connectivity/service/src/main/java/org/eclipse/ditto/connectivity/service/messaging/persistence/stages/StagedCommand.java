@@ -12,6 +12,8 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.persistence.stages;
 
+import akka.actor.ActorRef;
+import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -21,9 +23,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.function.Predicate;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
 import org.eclipse.ditto.base.model.headers.WithDittoHeaders;
 import org.eclipse.ditto.base.model.json.JsonSchemaVersion;
@@ -31,8 +31,6 @@ import org.eclipse.ditto.connectivity.model.signals.commands.ConnectivityCommand
 import org.eclipse.ditto.connectivity.model.signals.events.ConnectivityEvent;
 import org.eclipse.ditto.json.JsonField;
 import org.eclipse.ditto.json.JsonObject;
-
-import akka.actor.ActorRef;
 
 /**
  * Non-serializable local-only command for multi-stage processing by
@@ -76,28 +74,32 @@ public final class StagedCommand implements ConnectivityCommand<StagedCommand>, 
     }
 
     /**
-     * @return the wrapped command.
+     *Returns the wrapped command.
+ 
      */
     public ConnectivityCommand<?> getCommand() {
         return command;
     }
 
     /**
-     * @return the event to persist, apply or publish or dummy-event.
+     *Returns the event to persist, apply or publish or dummy-event.
+ 
      */
     public Optional<ConnectivityEvent<?>> getEvent() {
         return Optional.ofNullable(event);
     }
 
     /**
-     * @return the response to send to the original sender, or the signal to forward to client actors.
+     *Returns the response to send to the original sender, or the signal to forward to client actors.
+ 
      */
     public WithDittoHeaders getResponse() {
         return response;
     }
 
     /**
-     * @return the original sender of a command that created this staged  command.
+     *Returns the original sender of a command that created this staged  command.
+ 
      */
     public ActorRef getSender() {
         return sender;
@@ -208,6 +210,6 @@ public final class StagedCommand implements ConnectivityCommand<StagedCommand>, 
     }
 
     private Queue<ConnectionAction> getActionsAsQueue() {
-        return new LinkedList<>(actions);
+        return new ArrayDeque<>(actions);
     }
 }

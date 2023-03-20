@@ -12,43 +12,8 @@
  */
 package org.eclipse.ditto.gateway.service.endpoints.routes;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.time.Duration;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
-import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
-import org.eclipse.ditto.base.model.headers.DittoHeaders;
-import org.eclipse.ditto.base.model.json.JsonSchemaVersion;
-import org.eclipse.ditto.base.model.signals.commands.Command;
-import org.eclipse.ditto.base.model.signals.commands.CommandNotSupportedException;
-import org.eclipse.ditto.base.model.signals.commands.exceptions.GatewayTimeoutInvalidException;
-import org.eclipse.ditto.base.service.config.ThrottlingConfig;
-import org.eclipse.ditto.gateway.service.endpoints.actors.AbstractHttpRequestActor;
-import org.eclipse.ditto.gateway.service.endpoints.actors.HttpRequestActorPropsFactory;
-import org.eclipse.ditto.gateway.service.endpoints.directives.ContentTypeValidationDirective;
-import org.eclipse.ditto.gateway.service.util.config.endpoints.CommandConfig;
-import org.eclipse.ditto.internal.utils.akka.AkkaClassLoader;
-import org.eclipse.ditto.internal.utils.akka.logging.DittoLogger;
-import org.eclipse.ditto.internal.utils.akka.logging.DittoLoggerFactory;
-import org.eclipse.ditto.json.JsonFactory;
-import org.eclipse.ditto.json.JsonFieldSelector;
-import org.eclipse.ditto.json.JsonParseException;
-import org.eclipse.ditto.json.JsonParseOptions;
-import org.eclipse.ditto.json.JsonValue;
 
 import akka.NotUsed;
 import akka.actor.ActorRef;
@@ -68,6 +33,39 @@ import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
 import akka.stream.javadsl.StreamConverters;
 import akka.util.ByteString;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.time.Duration;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
+import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
+import org.eclipse.ditto.base.model.headers.DittoHeaders;
+import org.eclipse.ditto.base.model.json.JsonSchemaVersion;
+import org.eclipse.ditto.base.model.signals.commands.Command;
+import org.eclipse.ditto.base.model.signals.commands.CommandNotSupportedException;
+import org.eclipse.ditto.base.model.signals.commands.exceptions.GatewayTimeoutInvalidException;
+import org.eclipse.ditto.base.service.config.ThrottlingConfig;
+import org.eclipse.ditto.gateway.service.endpoints.actors.AbstractHttpRequestActor;
+import org.eclipse.ditto.gateway.service.endpoints.actors.HttpRequestActorPropsFactory;
+import org.eclipse.ditto.gateway.service.endpoints.directives.ContentTypeValidationDirective;
+import org.eclipse.ditto.gateway.service.util.config.endpoints.CommandConfig;
+import org.eclipse.ditto.internal.utils.akka.AkkaClassLoader;
+import org.eclipse.ditto.internal.utils.akka.logging.DittoLogger;
+import org.eclipse.ditto.internal.utils.akka.logging.DittoLoggerFactory;
+import org.eclipse.ditto.json.JsonFactory;
+import org.eclipse.ditto.json.JsonFieldSelector;
+import org.eclipse.ditto.json.JsonParseException;
+import org.eclipse.ditto.json.JsonParseOptions;
+import org.eclipse.ditto.json.JsonValue;
 
 /**
  * Base class for Akka HTTP routes.
@@ -245,7 +243,7 @@ public abstract class AbstractRoute extends AllDirectives {
                             .fold(ByteString.emptyByteString(), ByteString::concat)
                             .toMat(StreamConverters.asInputStream(), Keep.right())
                     );
-                    final JsonValue jsonValue = JsonFactory.readFrom(new InputStreamReader(inputStream));
+                    final JsonValue jsonValue = JsonFactory.readFrom(new InputStreamReader(inputStream, UTF_8));
                     try {
                         return responseValueTransformFunction.apply(jsonValue, response);
                     } catch (final Exception e) {
@@ -307,7 +305,7 @@ public abstract class AbstractRoute extends AllDirectives {
      */
     protected Route ensureMediaTypeJsonWithFallbacksThenExtractDataBytes(final RequestContext ctx,
             final DittoHeaders dittoHeaders,
-            final java.util.function.Function<Source<ByteString, Object>, Route> inner) {
+            final Function<Source<ByteString, Object>, Route> inner) {
 
         return ContentTypeValidationDirective.ensureValidContentType(mediaTypeJsonWithFallbacks, ctx, dittoHeaders,
                 () -> extractDataBytes(inner));
@@ -325,7 +323,7 @@ public abstract class AbstractRoute extends AllDirectives {
      */
     protected Route ensureMediaTypeMergePatchJsonThenExtractDataBytes(final RequestContext ctx,
             final DittoHeaders dittoHeaders,
-            final java.util.function.Function<Source<ByteString, Object>, Route> inner) {
+            final Function<Source<ByteString, Object>, Route> inner) {
 
         return ContentTypeValidationDirective.ensureMergePatchJsonContentType(ctx, dittoHeaders,
                 () -> extractDataBytes(inner));
@@ -345,7 +343,7 @@ public abstract class AbstractRoute extends AllDirectives {
      */
     protected Route withCustomRequestTimeout(@Nullable final Duration optionalTimeout,
             final UnaryOperator<Duration> checkTimeoutFunction,
-            final java.util.function.Function<Duration, Route> inner) {
+            final Function<Duration, Route> inner) {
 
         Duration customRequestTimeout = routeBaseProperties.getHttpConfig().getRequestTimeout();
         if (null != optionalTimeout) {
@@ -355,13 +353,13 @@ public abstract class AbstractRoute extends AllDirectives {
         return increaseHttpRequestTimeout(inner, customRequestTimeout);
     }
 
-    private Route increaseHttpRequestTimeout(final java.util.function.Function<Duration, Route> inner,
+    private Route increaseHttpRequestTimeout(final Function<Duration, Route> inner,
             final Duration requestTimeout) {
         return increaseHttpRequestTimeout(inner,
                 scala.concurrent.duration.Duration.create(requestTimeout.toMillis(), TimeUnit.MILLISECONDS));
     }
 
-    private Route increaseHttpRequestTimeout(final java.util.function.Function<Duration, Route> inner,
+    private Route increaseHttpRequestTimeout(final Function<Duration, Route> inner,
             final scala.concurrent.duration.Duration requestTimeout) {
         return withRequestTimeout(AKKA_HTTP_TIMEOUT,
                 () -> inner.apply(Duration.ofMillis(requestTimeout.toMillis())));

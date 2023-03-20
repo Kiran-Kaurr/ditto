@@ -16,10 +16,10 @@ import static org.eclipse.ditto.base.model.common.ConditionChecker.argumentNotEm
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotEmpty;
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import com.google.common.base.Splitter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
@@ -55,13 +55,13 @@ public final class ImmutableJsonWebToken extends AbstractJsonWebToken {
         checkNotNull(authorizationString, "authorizationString");
         checkNotEmpty(authorizationString, "authorizationString");
 
-        final String[] authorizationStringSplit = authorizationString.split(" ");
-        if (2 != authorizationStringSplit.length) {
+        final List<String> authorizationStringSplit = Splitter.on(' ').splitToList(authorizationString);
+        if (authorizationStringSplit.length != authorizationStringSplit.size()) {
             throw JwtInvalidException.newBuilder()
                     .description("The Authorization Header is invalid!")
                     .build();
         }
-        return authorizationStringSplit[1];
+        return authorizationStringSplit.get(1);
     }
 
     /**

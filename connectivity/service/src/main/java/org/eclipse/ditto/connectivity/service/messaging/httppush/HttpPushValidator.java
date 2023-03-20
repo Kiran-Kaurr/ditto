@@ -217,7 +217,7 @@ public final class HttpPushValidator extends AbstractProtocolValidator {
     }
 
     static boolean isSecureScheme(final String scheme) {
-        return HTTPS.equals(scheme);
+        return scheme.equals(HTTPS);
     }
 
 }

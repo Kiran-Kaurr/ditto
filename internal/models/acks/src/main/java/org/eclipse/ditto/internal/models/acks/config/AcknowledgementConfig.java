@@ -78,7 +78,7 @@ public interface AcknowledgementConfig {
         /**
          * The fallback timeout to apply when waiting for {@code ResponseCollectorActor} output.
          */
-        COLLECTOR_FALLBACK_ASK_TIMEOUT("collector-fallback-ask-timeout", Duration.ofSeconds(120)),
+        COLLECTOR_FALLBACK_ASK_TIMEOUT("collector-fallback-ask-timeout", Duration.ofMinutes(2)),
 
         /**
          * The maximum number of bytes for the payload of an automatically issued acknowledgement.

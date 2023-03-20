@@ -108,7 +108,7 @@ final class CredentialsValidationVisitor implements CredentialsVisitor<Void> {
 
     @Override
     public Void oauthClientCredentials(final OAuthClientCredentials credentials) {
-        if (ConnectionType.HTTP_PUSH != connection.getConnectionType()) {
+        if (connection.getConnectionType() != ConnectionType.HTTP_PUSH) {
             throw ConnectionConfigurationInvalidException.newBuilder(
                             "OAuth client credentials are only supported for HTTP connection type.")
                     .description("Only HTTP connections support OAuth client credentials.")

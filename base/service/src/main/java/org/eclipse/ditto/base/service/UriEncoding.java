@@ -30,15 +30,15 @@ import java.util.function.IntPredicate;
 public final class UriEncoding {
 
     private static final String ENCODING = StandardCharsets.UTF_8.name();
-    private static final IntPredicate ALLOWED_IN_PATH = c -> isPchar(c) || '/' == c;
+    private static  boolean allowedInPath(int c){return isPchar(c) || '/' == c;}
     private static final IntPredicate ALLOWED_IN_PATH_SEGMENT = UriEncoding::isPchar;
     /*
      * Workaround: '+' needs to be escaped to '%2B', otherwise it will be recognized as blank when decoding with MIME
      * format {@code application/x-www-form-urlencoded} - what most servers do (such as akka-http).
      */
-    private static final IntPredicate ALLOWED_IN_QUERY = c -> c != '+' && (isPchar(c) || '/' == c || '?' == c);
-    private static final IntPredicate ALLOWED_IN_QUERY_PARAM =
-            c -> !('=' == c || '&' == c) && ALLOWED_IN_QUERY.test(c);
+    private static  boolean allowedInQuery(int c){return c != '+' && (isPchar(c) || '/' == c || '?' == c);}
+    private static IntPredicate ALLOWED_IN_QUERY_PARAM =
+            c -> !(c == '=' || c == '&') && allowedInQuery(c);
 
     /**
      * Encodes the given path according to RFC 3986.
@@ -49,7 +49,7 @@ public final class UriEncoding {
     public static String encodePath(final String path) {
         requireNonNull(path);
 
-        return encodeRFC3986UriComponent(path, ALLOWED_IN_PATH);
+        return encodeRFC3986UriComponent(path, UriEncoding::allowedInPath);
     }
 
     /**
@@ -80,7 +80,7 @@ public final class UriEncoding {
                     .replaceAll("%3D", "=") //
                     .replaceAll("%26", "&");
         } else {
-            return encodeRFC3986UriComponent(query, ALLOWED_IN_QUERY);
+            return encodeRFC3986UriComponent(query, UriEncoding::allowedInQuery);
         }
     }
 
@@ -98,7 +98,7 @@ public final class UriEncoding {
         if (encType == EncodingType.FORM_URL_ENCODED) {
             return encodeFormUrlEncoded(queryParam);
         } else {
-            return encodeRFC3986UriComponent(queryParam, ALLOWED_IN_QUERY_PARAM);
+            return encodeRFC3986UriComponent(queryParam, UriEncoding::allowedInQueryParam);
         }
     }
 
@@ -215,7 +215,7 @@ public final class UriEncoding {
         final ByteArrayOutputStream out = new ByteArrayOutputStream(source.length);
         for (byte b : source) {
             if (b < 0) {
-                b += 256;
+                b = (byte) (b + 256);
             }
             if (allowedChars.test((char) b)) {
                 out.write(b);
@@ -238,7 +238,7 @@ public final class UriEncoding {
      * @since 2.1.0
      */
     public static boolean isPchar(final int c) {
-        return isUnreserved(c) || isSubDelimiter(c) || ':' == c || '@' == c;
+        return isUnreserved(c) || isSubDelimiter(c) || c == ':' || c == '@';
     }
 
     /**
@@ -248,14 +248,14 @@ public final class UriEncoding {
      * @return whether it belongs to the {@code unreserved} set.
      */
     public static boolean isUnreserved(final int c) {
-        return isAlpha(c) || isDigit(c) || '-' == c || '.' == c || '_' == c || '~' == c;
+        return isAlpha(c) || isDigit(c) || c == '-' || c == '.' || c == '_' || c == '~';
     }
 
     /**
      * Whether the given char belongs to the {@code ALPHA} set.
      */
     private static boolean isAlpha(final int c) {
-        return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
     }
 
     /**
@@ -269,8 +269,8 @@ public final class UriEncoding {
      * Whether the given char belongs to the {@code sub-delims} set.
      */
     private static boolean isSubDelimiter(final int c) {
-        return '!' == c || '$' == c || '&' == c || '\'' == c || '(' == c || ')' == c || '*' == c || '+' == c || ',' == c
-                || ';' == c || '=' == c;
+        return c == '!' || c == '$' || c == '&' || c == '\'' || c == '(' || c == ')' || c == '*' || c == '+' || c == ','
+                || c == ';' || c == '=';
     }
 
     /**

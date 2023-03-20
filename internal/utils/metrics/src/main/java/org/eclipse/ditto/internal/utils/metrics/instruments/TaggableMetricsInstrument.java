@@ -77,7 +77,8 @@ public interface TaggableMetricsInstrument<T extends MetricInstrument> extends M
     T tags(Map<String, String> tags);
 
     /**
-     * @return this instance.
+     *Returns this instance.
+ 
      */
     T self();
 }

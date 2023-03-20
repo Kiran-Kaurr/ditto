@@ -80,7 +80,7 @@ public final class GetFilterBsonVisitor extends AbstractFieldBsonCreator impleme
 
     @Override
     public Bson visitFeatureIdProperty(final String featureId, final String property) {
-        if (FEATURE_ID_WILDCARD.equals(featureId)) {
+        if (FEATURE_ID_WILDCARD.toString().equals(featureId)) {
             return matchWildcardFeatureValue(PROPERTIES + property);
         } else {
             return matchValue(FIELD_FEATURES_PATH + featureId + PROPERTIES + property);

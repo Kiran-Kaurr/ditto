@@ -121,8 +121,8 @@ public final class ConditionalHeadersValidator {
     private boolean skipPreconditionHeaderCheck(final Command<?> command, @Nullable final EntityTag
             currentETagValue) {
         return (currentETagValue == null &&
-                (Command.Category.DELETE.equals(command.getCategory()) ||
-                        Command.Category.QUERY.equals(command.getCategory()))
+                (command.getCategory().equals(Command.Category.DELETE) ||
+                        command.getCategory().equals(Command.Category.QUERY))
         ) || additionalSkipPreconditionHeaderCheckPredicate.test(command);
     }
 
@@ -141,7 +141,7 @@ public final class ConditionalHeadersValidator {
 
         IfNoneMatchPreconditionHeader.fromDittoHeaders(dittoHeaders).ifPresent(ifNoneMatch -> {
             if (!ifNoneMatch.meetsConditionFor(currentETagValue)) {
-                if (Command.Category.QUERY.equals(command.getCategory())) {
+                if (command.getCategory().equals(Command.Category.QUERY)) {
                     throw buildNotModifiedException(ifNoneMatch, dittoHeaders, currentETagValue);
                 } else {
                     throw buildPreconditionFailedException(ifNoneMatch, dittoHeaders, currentETagValue);

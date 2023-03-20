@@ -479,34 +479,40 @@ public interface ConnectionMonitor {
     interface InfoProvider {
 
         /**
-         * @return the correlation id of the monitoring event.
+         *Returns the correlation id of the monitoring event.
+ 
          */
         String getCorrelationId();
 
         /**
-         * @return the timestamp of the monitoring event.
+         *Returns the timestamp of the monitoring event.
+ 
          */
         Instant getTimestamp();
 
         /**
-         * @return the entity ID for which the monitoring event was thrown.
+         *Returns the entity ID for which the monitoring event was thrown.
+ 
          */
         @Nullable
         EntityId getEntityId();
 
         /**
-         * @return the headers that were part of the message that caused the monitoring event.
+         *Returns the headers that were part of the message that caused the monitoring event.
+ 
          */
         Map<String, String> getHeaders();
 
         /**
-         * @return the payload that was part of the message that caused the monitoring event.
+         *Returns the payload that was part of the message that caused the monitoring event.
+ 
          */
         @Nullable
         String getPayload();
 
         /**
-         * @return whether this info provider has any data.
+         *Returns whether this info provider has any data.
+ 
          */
         boolean isEmpty();
 

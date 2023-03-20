@@ -89,7 +89,7 @@ public abstract class TimeMeasuringAuthenticationProvider<R extends Authenticati
                         return toFailedAuthenticationResult(rootCause, dittoHeaders);
                     }
                 });
-        resultFuture.whenComplete((result, error) -> timer.stop());
+        resultFuture = resultFuture.whenComplete((result, error) -> timer.stop());
         return resultFuture;
     }
 

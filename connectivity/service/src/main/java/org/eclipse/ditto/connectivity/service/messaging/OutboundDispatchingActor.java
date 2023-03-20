@@ -176,7 +176,7 @@ final class OutboundDispatchingActor extends AbstractActor {
     }
 
     private void handleInboundResponseOrAcknowledgement(final Signal<?> responseOrAck) {
-        if (Acknowledgement.TYPE.equals(responseOrAck.getType())) {
+        if (responseOrAck.getType().equals(Acknowledgement.TYPE)) {
             final var acknowledgement = (Acknowledgement) responseOrAck;
             if (isNotSourceDeclaredAck(acknowledgement)) {
                 denyNonSourceDeclaredAck(acknowledgement);

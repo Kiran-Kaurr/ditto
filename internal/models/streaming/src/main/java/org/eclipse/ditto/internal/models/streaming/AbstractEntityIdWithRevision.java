@@ -66,11 +66,11 @@ public abstract class AbstractEntityIdWithRevision<I extends EntityId> implement
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (!(obj instanceof AbstractEntityIdWithRevision)) {
             return false;
         }
         final AbstractEntityIdWithRevision<?> that = (AbstractEntityIdWithRevision<?>) obj;
-        return Objects.equals(id, that.id) && Objects.equals(revision, that.revision);
+        return Objects.equals(id, that.id) && (revision == that.revision);
     }
 
     @Override

@@ -58,7 +58,7 @@ final class MessageCommandResponseMappingStrategies
         return mappingStrategies;
     }
 
-    protected static String featureIdForMessageFrom(final Adaptable adaptable) {
+    static String featureIdForMessageFrom(final Adaptable adaptable) {
         return adaptable.getPayload().getPath()
                 .getFeatureId()
                 .orElseThrow(() -> JsonParseException.newBuilder().build());

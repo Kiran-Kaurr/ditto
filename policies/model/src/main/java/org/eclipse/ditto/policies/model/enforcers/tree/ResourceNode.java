@@ -213,7 +213,7 @@ final class ResourceNode implements PolicyTreeNode {
 
     private JsonPointer getAbsolutePointer(final ResourceNode resourceNode) {
         final JsonPointer result = resourceNode.getParent()
-                .filter(p -> Type.RESOURCE == p.getType())
+                .filter(p -> p.getType() == Type.RESOURCE)
                 .map(ResourceNode.class::cast)
                 .map(this::getAbsolutePointer) // Recursion!
                 .orElseGet(JsonFactory::emptyPointer);

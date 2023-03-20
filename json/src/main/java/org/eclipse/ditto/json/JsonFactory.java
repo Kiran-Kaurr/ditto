@@ -12,6 +12,7 @@
  */
 package org.eclipse.ditto.json;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Objects.requireNonNull;
 
 import java.io.ByteArrayInputStream;
@@ -27,7 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
@@ -287,7 +287,7 @@ public final class JsonFactory {
         if (isJsonNullLiteralData(jsonData)) {
             return nullObject();
         } else {
-            final Reader reader = new InputStreamReader(new ByteArrayInputStream(jsonData));
+            final Reader reader = new InputStreamReader(new ByteArrayInputStream(jsonData), UTF_8);
             final JsonValue jsonValue = JsonValueParser.fromReader().apply(reader);
             if (!jsonValue.isObject()) {
                 final String msgPattern = "<{0}> is not a valid JSON object!";
@@ -299,7 +299,7 @@ public final class JsonFactory {
     }
 
     private static boolean isJsonNullLiteralString(final String s) {
-        return NULL_STRING.equals(s);
+        return s.equals(NULL_STRING);
     }
 
     private static boolean isJsonNullLiteralData(final byte[] data) {
@@ -344,9 +344,10 @@ public final class JsonFactory {
     }
 
     /**
-     * @param jsonFields the json fields to create a new JsonObject from.
-     * @return a null object if {@code jsonFields} is a null json object. Else this returns a new object containing the
-     * given {code jsonFields}.
+     *Returns a null object if {@code jsonFields} is a null json object. Else this returns a new object containing the
+ given {code jsonFields}.
+ @param jsonFields the json fields to create a new JsonObject from.
+     * 
      */
     public static JsonObject newObject(final Iterable<JsonField> jsonFields) {
         if (jsonFields instanceof JsonObject && ((JsonValue) jsonFields).isNull()) {
@@ -932,8 +933,8 @@ public final class JsonFactory {
         return null != charSequence &&
                 !JsonKey.class.isAssignableFrom(charSequence.getClass()) &&
                 (JsonPointer.class.isAssignableFrom(charSequence.getClass()) ||
-                        0 == charSequence.length() ||
-                        '/' == charSequence.charAt(0)
+                        charSequence.length() == 0 ||
+                        charSequence.charAt(0) == '/'
                 );
     }
 

@@ -92,7 +92,7 @@ public final class DevOpsCommandsActor extends AbstractActor implements Retrieve
      */
     private static final String POISON_PILL_NAME = "poison-pill";
 
-    private static final Duration DEFAULT_RECEIVE_TIMEOUT = Duration.ofMillis(10_000);
+    private static final Duration DEFAULT_RECEIVE_TIMEOUT = Duration.ofSeconds(10);
     private static final String UNKNOWN_MESSAGE_TEMPLATE = "Unknown message: {}";
     private static final String TOPIC_HEADER = "topic";
     private static final String IS_GROUP_TOPIC_HEADER = "is-group-topic";
@@ -210,7 +210,7 @@ public final class DevOpsCommandsActor extends AbstractActor implements Retrieve
 
     private boolean isExecutePiggybackCommandToPubSubMediator(final DevOpsCommand<?> command) {
         final boolean result;
-        if (ExecutePiggybackCommand.TYPE.equals(command.getType())) {
+        if (command.getType().equals(ExecutePiggybackCommand.TYPE)) {
             final var executePiggyback = (ExecutePiggybackCommand) command;
             final var pubSubMediatorPath = pubSubMediator.path();
             result = Objects.equals(executePiggyback.getTargetActorSelection(),
@@ -385,7 +385,7 @@ public final class DevOpsCommandsActor extends AbstractActor implements Retrieve
         final JsonObject piggybackCommandJson = command.getPiggybackCommand();
         @Nullable final String piggybackCommandType = piggybackCommandJson.getValue(Command.JsonFields.TYPE)
                 .orElse(null);
-        if (POISON_PILL_NAME.equals(piggybackCommandType)) {
+        if (piggybackCommandType.equals(POISON_PILL_NAME)) {
             onSuccess.accept(PoisonPill.getInstance());
         } else {
             final Consumer<JsonParsable<Jsonifiable<?>>> action = mappingStrategy -> {

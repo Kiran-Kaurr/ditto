@@ -56,28 +56,32 @@ public final class OAuthClientCredentials implements Credentials {
     }
 
     /**
-     * @return the token endpoint
+     *Returns the token endpoint.
+ 
      */
     public String getTokenEndpoint() {
         return tokenEndpoint;
     }
 
     /**
-     * @return the client id
+     *Returns the client id.
+ 
      */
     public String getClientId() {
         return clientId;
     }
 
     /**
-     * @return the client secret
+     *Returns the client secret.
+ 
      */
     public String getClientSecret() {
         return clientSecret;
     }
 
     /**
-     * @return the scope
+     *Returns the scope.
+ 
      */
     public String getRequestedScopes() {
         return requestedScopes;
@@ -166,8 +170,9 @@ public final class OAuthClientCredentials implements Credentials {
         private String scope;
 
         /**
-         * @param tokenEndpoint the token endpoint
-         * @return this builder
+         *Returns this builder.
+ @param tokenEndpoint the token endpoint
+         * 
          */
         public Builder tokenEndpoint(final String tokenEndpoint) {
             this.tokenEndpoint = checkNotNull(tokenEndpoint, "tokenEndpoint");
@@ -175,8 +180,9 @@ public final class OAuthClientCredentials implements Credentials {
         }
 
         /**
-         * @param clientId the clientId
-         * @return this builder
+         *Returns this builder.
+ @param clientId the clientId
+         * 
          */
         public Builder clientId(final String clientId) {
             this.clientId = checkNotNull(clientId, "clientId");
@@ -184,8 +190,9 @@ public final class OAuthClientCredentials implements Credentials {
         }
 
         /**
-         * @param clientSecret the clientSecret
-         * @return this builder
+         *Returns this builder.
+ @param clientSecret the clientSecret
+         * 
          */
         public Builder clientSecret(final String clientSecret) {
             this.clientSecret = checkNotNull(clientSecret, "clientSecret");
@@ -193,8 +200,9 @@ public final class OAuthClientCredentials implements Credentials {
         }
 
         /**
-         * @param scope the scope
-         * @return this builder
+         *Returns this builder.
+ @param scope the scope
+         * 
          */
         public Builder scope(final String scope) {
             this.scope = checkNotNull(scope, "scope");

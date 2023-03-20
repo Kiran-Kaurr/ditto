@@ -38,7 +38,8 @@ final class WebSocketJwtExtractor implements JwtExtractor {
     }
 
     /**
-     * @return the singleton instance of WebSocketJwtExtractor
+     *Returns the singleton instance of WebSocketJwtExtractor.
+ 
      */
     static JwtExtractor getInstance() {
         return INSTANCE;

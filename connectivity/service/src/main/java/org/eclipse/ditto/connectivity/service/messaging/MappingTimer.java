@@ -59,10 +59,11 @@ final class MappingTimer {
     }
 
     /**
-     * @param connectionId ID of the connection
+     *Returns a new {@link MappingTimer} instance ready to measure inbound mappings.
+ @param connectionId ID of the connection
      * @param connectionType the type of the connection.
      * @param parentContext the trace context
-     * @return a new {@link MappingTimer} instance ready to measure inbound mappings.
+     * 
      */
     static MappingTimer inbound(final ConnectionId connectionId, final ConnectionType connectionType,
             final Context parentContext) {
@@ -73,9 +74,10 @@ final class MappingTimer {
     }
 
     /**
-     * @param connectionId ID of the connection.
+     *Returns a new {@link MappingTimer} instance ready to measure outbound mappings.
+ @param connectionId ID of the connection.
      * @param connectionType the type of the connection.
-     * @return a new {@link MappingTimer} instance ready to measure outbound mappings.
+     * 
      */
     static MappingTimer outbound(final ConnectionId connectionId, final ConnectionType connectionType,
             final Context parentContext) {
@@ -184,7 +186,8 @@ final class MappingTimer {
     }
 
     /**
-     * @return the current trace context
+     *Returns the current trace context.
+ 
      */
     Context getContext() {
         return context;

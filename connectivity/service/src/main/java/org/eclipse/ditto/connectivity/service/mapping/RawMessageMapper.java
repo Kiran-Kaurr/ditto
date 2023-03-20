@@ -12,6 +12,9 @@
  */
 package org.eclipse.ditto.connectivity.service.mapping;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import akka.http.javadsl.model.ContentTypes;
 import java.nio.ByteBuffer;
 import java.util.Base64;
 import java.util.Collections;
@@ -19,9 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.common.ByteBufferUtils;
 import org.eclipse.ditto.base.model.headers.DittoHeaderDefinition;
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
@@ -58,8 +59,6 @@ import org.eclipse.ditto.protocol.ProtocolFactory;
 import org.eclipse.ditto.protocol.TopicPath;
 import org.eclipse.ditto.things.model.Thing;
 import org.eclipse.ditto.things.model.ThingId;
-
-import akka.http.javadsl.model.ContentTypes;
 
 /**
  * A message mapper implementation to convert between raw message payload and external message payload.
@@ -316,7 +315,7 @@ public final class RawMessageMapper extends AbstractMessageMapper {
                     );
         } else {
             return externalMessage.getBytePayload()
-                    .or(() -> externalMessage.getTextPayload().map(text -> ByteBuffer.wrap(text.getBytes())))
+                    .or(() -> externalMessage.getTextPayload().map(text -> ByteBuffer.wrap(text.getBytes(UTF_8))))
                     .map(bytePayload ->
                             JsonFactory.newValue(Base64.getEncoder().encodeToString(bytePayload.array()))
                     );

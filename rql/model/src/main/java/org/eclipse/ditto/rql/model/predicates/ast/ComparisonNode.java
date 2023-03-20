@@ -74,7 +74,7 @@ abstract class ComparisonNode<T extends Enum<T>, V> implements Node {
     /**
      * {@inheritDoc}
      */
-    public void accept(final PredicateVisitor predicateVisitor) {
+    @Override public void accept(final PredicateVisitor predicateVisitor) {
         predicateVisitor.visit(this);
     }
 
@@ -103,10 +103,8 @@ abstract class ComparisonNode<T extends Enum<T>, V> implements Node {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        
+        if (!(obj instanceof ComparisonNode)) {
             return false;
         }
         final ComparisonNode<?, ?> other = (ComparisonNode<?, ?>) obj;

@@ -42,7 +42,8 @@ interface MongoHints {
     Optional<Bson> getHint(@Nullable Set<String> namespaces);
 
     /**
-     * @return no hints for any namespace.
+     *Returns no hints for any namespace.
+ 
      */
     static MongoHints empty() {
         return new Empty();

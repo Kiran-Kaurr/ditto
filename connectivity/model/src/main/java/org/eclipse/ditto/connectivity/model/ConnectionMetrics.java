@@ -30,12 +30,14 @@ import org.eclipse.ditto.json.JsonObject;
 public interface ConnectionMetrics extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the inbound {@link AddressMetric}s for the connection
+     *Returns the inbound {@link AddressMetric}s for the connection.
+ 
      */
     AddressMetric getInboundMetrics();
 
     /**
-     * @return the outbound {@link AddressMetric}s for the connection
+     *Returns the outbound {@link AddressMetric}s for the connection.
+ 
      */
     AddressMetric getOutboundMetrics();
 

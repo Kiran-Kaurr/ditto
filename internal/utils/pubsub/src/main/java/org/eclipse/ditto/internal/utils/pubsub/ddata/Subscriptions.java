@@ -111,7 +111,8 @@ public interface Subscriptions<T> {
     T export();
 
     /**
-     * @return whether there are no subscribers.
+     *Returns whether there are no subscribers.
+ 
      */
     default boolean isEmpty() {
         return estimateSize() <= 0;

@@ -102,7 +102,7 @@ public final class AcknowledgementAggregatorActor extends AbstractActorWithTimer
                 this::getDefaultMatchingValidationFailureConsumer
         );
         timers().startSingleTimer(Control.WAITING_FOR_ACKS_TIMED_OUT, Control.WAITING_FOR_ACKS_TIMED_OUT, timeout);
-        getAsTimeoutErrorResponse = getDefaultGetAsTimeoutErrorResponse();
+        getAsTimeoutErrorResponse = this::getDefaultGetAsTimeoutErrorResponse;
 
         final var acknowledgementRequests = signalDittoHeaders.getAcknowledgementRequests();
         ackregator = AcknowledgementAggregator.getInstance(entityId, correlationId, timeout, headerTranslator);
@@ -112,23 +112,19 @@ public final class AcknowledgementAggregatorActor extends AbstractActorWithTimer
                         acknowledgementRequests, timeout);
     }
 
-    private Function<Acknowledgements, ThingErrorResponse> getDefaultGetAsTimeoutErrorResponse() {
-        return aggregatedAcknowledgements -> {
+    private  ThingErrorResponse getDefaultGetAsTimeoutErrorResponse(Acknowledgements aggregatedAcknowledgements){
             final var thingId = ThingId.of(aggregatedAcknowledgements.getEntityId());
             final var gatewayCommandTimeoutException = GatewayCommandTimeoutException.newBuilder(timeout)
                     .dittoHeaders(aggregatedAcknowledgements.getDittoHeaders())
                     .build();
 
             return ThingErrorResponse.of(thingId, gatewayCommandTimeoutException);
-        };
-    }
+        }
 
-    private Consumer<MatchingValidationResult.Failure> getDefaultMatchingValidationFailureConsumer() {
-        return failure -> log.withCorrelationId(originatingSignal)
+    private  void getDefaultMatchingValidationFailureConsumer(MatchingValidationResult.Failure failure){log.withCorrelationId(originatingSignal)
                 .warning("No {} consumer provided." +
                                 " Thus no further processing of response validation failure is going to happen.",
-                        MatchingValidationResult.Failure.class.getSimpleName());
-    }
+                        MatchingValidationResult.Failure.class.getSimpleName());}
 
     /**
      * Creates Akka configuration object Props for this AcknowledgementAggregatorActor.

@@ -22,7 +22,8 @@ import java.util.Optional;
 public interface GenericTarget {
 
     /**
-     * @return the address for an outbound signal.
+     *Returns the address for an outbound signal.
+ 
      */
     String getAddress();
 

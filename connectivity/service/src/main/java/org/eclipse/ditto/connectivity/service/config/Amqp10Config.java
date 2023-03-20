@@ -107,7 +107,8 @@ public interface Amqp10Config {
     int getGlobalPrefetchPolicyAllCount();
 
     /**
-     * @return configuration of HMAC request-signing algorithms.
+     *Returns configuration of HMAC request-signing algorithms.
+ 
      */
     Map<String, String> getHmacAlgorithms();
 

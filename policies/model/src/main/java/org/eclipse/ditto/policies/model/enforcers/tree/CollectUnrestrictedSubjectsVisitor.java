@@ -58,7 +58,7 @@ final class CollectUnrestrictedSubjectsVisitor implements Visitor<Set<Authorizat
 
     @Override
     public void visitTreeNode(final PolicyTreeNode node) {
-        if (PolicyTreeNode.Type.SUBJECT == node.getType()) {
+        if (node.getType() == PolicyTreeNode.Type.SUBJECT) {
             visitSubjectNode(node);
         } else {
             visitResourceNode((ResourceNode) node);
@@ -109,10 +109,10 @@ final class CollectUnrestrictedSubjectsVisitor implements Visitor<Set<Authorizat
             final Permissions revokedPermissions = effectedPermissions.getRevokedPermissions();
 
             final PointerLocation pointerLocation = getLocationInRelationToTargetPointer(resourceNode);
-            if (PointerLocation.ABOVE == pointerLocation || PointerLocation.SAME == pointerLocation) {
+            if (pointerLocation == PointerLocation.ABOVE || pointerLocation == PointerLocation.SAME) {
                 weightedPermissions.addGranted(grantedPermissions, resourceNode.getLevel());
                 weightedPermissions.addRevoked(revokedPermissions, resourceNode.getLevel());
-            } else if (PointerLocation.BELOW == pointerLocation) {
+            } else if (pointerLocation == PointerLocation.BELOW) {
                 weightedPermissions.addRevoked(revokedPermissions, resourceNode.getLevel());
             }
         }

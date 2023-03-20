@@ -301,7 +301,7 @@ public final class ResumeSource {
 
         @Override
         public GraphStageLogic createLogic(final Attributes inheritedAttributes) {
-            return new Logic();
+            return new EndStreamOnEOS.Logic();
         }
 
         private final class Logic extends GraphStageLogic {
@@ -357,7 +357,7 @@ public final class ResumeSource {
 
         @Override
         public GraphStageLogic createLogic(final Attributes inheritedAttributes) {
-            return new Logic();
+            return new NeverCancelFlow.Logic();
         }
 
         private final class Logic extends GraphStageLogic {

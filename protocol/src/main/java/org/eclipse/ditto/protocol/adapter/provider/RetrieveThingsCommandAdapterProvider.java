@@ -19,12 +19,14 @@
  public interface RetrieveThingsCommandAdapterProvider<Q extends Signal<?>, R extends CommandResponse<?>> {
 
      /**
-      * @return the query command adapter
+      *Returns the query command adapter.
+ 
       */
      Adapter<Q> getRetrieveThingsCommandAdapter();
 
      /**
-      * @return the query command response adapter
+      *Returns the query command response adapter.
+ 
       */
      Adapter<R> getRetrieveThingsCommandResponseAdapter();
  }

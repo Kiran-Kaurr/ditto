@@ -139,14 +139,16 @@ public final class ResponseCollectorActor extends AbstractActor {
         }
 
         /**
-         * @return The list of responses collected.
+         *Returns the list of responses collected.
+ 
          */
         public List<CommandResponse<?>> getCommandResponses() {
             return commandResponses;
         }
 
         /**
-         * @return Whether the expected number of responses arrived.
+         *Returns whether the expected number of responses arrived.
+ 
          */
         public boolean allExpectedResponsesArrived() {
             // always false if expectedCount < 0 (i. e., not set by a SetCount input signal)
@@ -154,7 +156,8 @@ public final class ResponseCollectorActor extends AbstractActor {
         }
 
         /**
-         * @return list of failed responses.
+         *Returns list of failed responses.
+ 
          */
         public List<CommandResponse<?>> getFailedResponses() {
             return commandResponses.stream()
@@ -185,7 +188,7 @@ public final class ResponseCollectorActor extends AbstractActor {
 
         private static boolean isLiveResponse(final CommandResponse<?> response) {
             return response instanceof MessageCommandResponse ||
-                    response instanceof ThingCommandResponse && ProtocolAdapter.isLiveSignal(response);
+                    (response instanceof ThingCommandResponse && ProtocolAdapter.isLiveSignal(response));
         }
     }
 

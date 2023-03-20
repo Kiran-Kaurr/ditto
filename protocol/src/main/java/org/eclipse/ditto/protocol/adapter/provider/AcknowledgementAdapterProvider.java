@@ -22,12 +22,14 @@ import org.eclipse.ditto.base.model.signals.acks.Acknowledgements;
 public interface AcknowledgementAdapterProvider extends AdapterProvider {
 
     /**
-     * @return the acknowledgement adapter.
+     *Returns the acknowledgement adapter.
+ 
      */
     Adapter<Acknowledgement> getAcknowledgementAdapter();
 
     /**
-     * @return the acknowledgements adapter.
+     *Returns the acknowledgements adapter.
+ 
      */
     Adapter<Acknowledgements> getAcknowledgementsAdapter();
 }

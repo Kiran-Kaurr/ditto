@@ -61,7 +61,8 @@ public final class ExponentialBackOff {
     }
 
     /**
-     * @return the restart delay.
+     *Returns the restart delay.
+ 
      */
     public Duration getRestartDelay() {
         return restartDelay;

@@ -107,8 +107,7 @@ final class DefaultDittoJsonHandler extends DittoJsonHandler<List<JsonValue>, Li
     }
 
     private static boolean isDecimal(final String string) {
-        for (final char c : string.toCharArray()) {
-            if ('.' == c || 'e' == c || 'E' == c) {
+        for (int i = 0; i < string.length(); i++) { char c = string.charAt(i);if (c == '.' || c == 'e' || c == 'E') {
                 return true;
             }
         }

@@ -120,7 +120,8 @@ public abstract class DistributedData<R extends ReplicatedData> implements Exten
     protected abstract Key<R> getKey(int shardNumber);
 
     /**
-     * @return initial value of the distributed data.
+     *Returns initial value of the distributed data.
+ 
      */
     protected abstract R getInitialValue();
 
@@ -165,7 +166,8 @@ public abstract class DistributedData<R extends ReplicatedData> implements Exten
     }
 
     /**
-     * @return reference to the distributed data replicator.
+     *Returns reference to the distributed data replicator.
+ 
      */
     public ActorRef getReplicator() {
         return replicator;

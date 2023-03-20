@@ -153,7 +153,8 @@ public final class AggregatedDevOpsCommandResponse
     }
 
     /**
-     * @return the responses type of the responses to expect.
+     *Returns the responses type of the responses to expect.
+ 
      */
     public String getResponsesType() {
         return responsesType;

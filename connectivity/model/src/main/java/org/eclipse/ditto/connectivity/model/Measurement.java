@@ -34,22 +34,26 @@ import org.eclipse.ditto.json.JsonObject;
 public interface Measurement extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the type of the measurement e.g. "consumed" or "mapped"
+     *Returns the type of the measurement e.g. "consumed" or "mapped".
+ 
      */
     MetricType getMetricType();
 
     /**
-     * @return if the measurement represents a successful operation or a failure
+     *Returns if the measurement represents a successful operation or a failure.
+ 
      */
     boolean isSuccess();
 
     /**
-     * @return the actual counter values for different intervals
+     *Returns the actual counter values for different intervals.
+ 
      */
     Map<Duration, Long> getCounts();
 
     /**
-     * @return last instant when the counter was updated - if ever
+     *Returns last instant when the counter was updated - if ever.
+ 
      */
     Optional<Instant> getLastMessageAt();
 

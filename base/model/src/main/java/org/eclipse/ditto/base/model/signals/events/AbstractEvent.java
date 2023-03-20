@@ -124,7 +124,7 @@ public abstract class AbstractEvent<T extends AbstractEvent<T>> implements Event
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractEvent)) {
             return false;
         }
         final AbstractEvent<?> that = (AbstractEvent<?>) o;

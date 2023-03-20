@@ -37,7 +37,8 @@ public final class ConnectionDeletedStrategies
     }
 
     /**
-     * @return the unique instance of this class.
+     *Returns the unique instance of this class.
+ 
      */
     public static ConnectionDeletedStrategies getInstance() {
         return DELETED_STRATEGIES;

@@ -135,8 +135,7 @@ final class ImmutableJsonFieldSelectorFactory {
         final StringBuilder sb = new StringBuilder(toSplit.length());
 
         int waitForClosingParenthesesCnt = 0;
-        for (final Character c : toSplit.toCharArray()) {
-            if (c == '(') {
+        for (int i = 0; i < toSplit.length(); i++) { char c = toSplit.charAt(i);if (c == '(') {
                 waitForClosingParenthesesCnt++;
                 sb.append(c);
                 continue;

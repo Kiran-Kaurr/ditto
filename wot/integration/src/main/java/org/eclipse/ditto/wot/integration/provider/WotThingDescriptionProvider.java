@@ -59,7 +59,7 @@ public interface WotThingDescriptionProvider extends Extension {
 
     /**
      * Provides a {@link ThingDescription} for the given {@code thingDefinition}, {@code thingId} and
-     * {@code featureId} combination.
+     * {@code feature} combination.
      *
      * @param thingId the ThingId to provide the ThingDescription for.
      * @param thing the optional Thing to use to resolve placeholders and metadata from.

@@ -38,7 +38,8 @@ public final class LiteralUpdate implements DDataUpdate<String> {
     }
 
     /**
-     * @return An empty update.
+     *Returns an empty update.
+ 
      */
     public static LiteralUpdate empty() {
         return new LiteralUpdate(new HashSet<>(), new HashSet<>());

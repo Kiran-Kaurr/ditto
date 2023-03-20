@@ -462,12 +462,12 @@ final class ImmutableConnection implements Connection {
                 Objects.equals(connectionStatus, that.connectionStatus) &&
                 Objects.equals(sources, that.sources) &&
                 Objects.equals(targets, that.targets) &&
-                Objects.equals(clientCount, that.clientCount) &&
+                (clientCount == that.clientCount) &&
                 Objects.equals(credentials, that.credentials) &&
                 Objects.equals(trustedCertificates, that.trustedCertificates) &&
                 Objects.equals(uri, that.uri) &&
-                Objects.equals(processorPoolSize, that.processorPoolSize) &&
-                Objects.equals(validateCertificate, that.validateCertificate) &&
+                (processorPoolSize == that.processorPoolSize) &&
+                (validateCertificate == that.validateCertificate) &&
                 Objects.equals(specificConfig, that.specificConfig) &&
                 Objects.equals(payloadMappingDefinition, that.payloadMappingDefinition) &&
                 Objects.equals(lifecycle, that.lifecycle) &&

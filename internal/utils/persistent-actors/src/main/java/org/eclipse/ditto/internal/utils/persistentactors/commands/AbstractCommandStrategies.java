@@ -50,7 +50,8 @@ public abstract class AbstractCommandStrategies<C extends Command<?>, S, K, E ex
     }
 
     /**
-     * @return the empty result.
+     *Returns the empty result.
+ 
      */
     protected abstract Result<E> getEmptyResult();
 

@@ -141,7 +141,8 @@ public final class ConnectivityModelFactory {
     }
 
     /**
-     * @return a new ConnectionMetrics which is empty
+     *Returns a new ConnectionMetrics which is empty.
+ 
      */
     public static ConnectionMetrics emptyConnectionMetrics() {
         return ImmutableConnectionMetrics.of(emptyAddressMetric(), emptyAddressMetric());
@@ -159,7 +160,8 @@ public final class ConnectivityModelFactory {
     }
 
     /**
-     * @return a new SourceMetrics which is empty
+     *Returns a new SourceMetrics which is empty.
+ 
      */
     public static SourceMetrics emptySourceMetrics() {
         return ImmutableSourceMetrics.of(Collections.emptyMap());
@@ -189,7 +191,8 @@ public final class ConnectivityModelFactory {
     }
 
     /**
-     * @return a new TargetMetrics which is empty
+     *Returns a new TargetMetrics which is empty.
+ 
      */
     public static TargetMetrics emptyTargetMetrics() {
         return ImmutableTargetMetrics.of(Collections.emptyMap());
@@ -574,24 +577,27 @@ public final class ConnectivityModelFactory {
     }
 
     /**
-     * @return new empty {@link PayloadMappingDefinition}
+     *Returns new empty {@link PayloadMappingDefinition}.
+ 
      */
     public static PayloadMappingDefinition emptyPayloadMappingDefinition() {
         return ImmutablePayloadMappingDefinition.empty();
     }
 
     /**
-     * @param definitions the existing definitions
-     * @return new instance of {@link PayloadMappingDefinition} initialized with the given definitions
+     *Returns new instance of {@link PayloadMappingDefinition} initialized with the given definitions.
+ @param definitions the existing definitions
+     * 
      */
     public static PayloadMappingDefinition newPayloadMappingDefinition(final Map<String, MappingContext> definitions) {
         return ImmutablePayloadMappingDefinition.from(definitions);
     }
 
     /**
-     * @param id ID of the mapping
+     *Returns new instance of {@link PayloadMappingDefinition} initialized with the given definition.
+ @param id ID of the mapping
      * @param mappingContext config of the mapping
-     * @return new instance of {@link PayloadMappingDefinition} initialized with the given definition
+     * 
      */
     public static PayloadMappingDefinition newPayloadMappingDefinition(final String id,
             final MappingContext mappingContext) {
@@ -601,21 +607,24 @@ public final class ConnectivityModelFactory {
     }
 
     /**
-     * @return new instance of empty {@link PayloadMapping}
+     *Returns new instance of empty {@link PayloadMapping}.
+ 
      */
     public static PayloadMapping emptyPayloadMapping() {
         return ImmutablePayloadMapping.empty();
     }
 
     /**
-     * @return new instance of {@link PayloadMapping} initialized with the given mappings
+     *Returns new instance of {@link PayloadMapping} initialized with the given mappings.
+ 
      */
     public static PayloadMapping newPayloadMapping(final List<String> mappings) {
         return ImmutablePayloadMapping.from(mappings);
     }
 
     /**
-     * @return new instance of {@link PayloadMapping} initialized with the given mappings
+     *Returns new instance of {@link PayloadMapping} initialized with the given mappings.
+ 
      */
     public static PayloadMapping newPayloadMapping(@Nullable final String... mappings) {
         if (mappings == null || mappings.length == 0) {

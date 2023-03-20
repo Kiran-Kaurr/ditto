@@ -69,11 +69,11 @@ public final class DefaultSubjectIssuerConfig implements SubjectIssuerConfig {
         return new DefaultSubjectIssuerConfig(issuer, authSubjectTemplates);
     }
 
-    public final String getIssuer() {
+    @Override public final String getIssuer() {
         return issuer;
     }
 
-    public final List<String> getAuthorizationSubjectTemplates() {
+    @Override public final List<String> getAuthorizationSubjectTemplates() {
         return authSubjectTemplates;
     }
 

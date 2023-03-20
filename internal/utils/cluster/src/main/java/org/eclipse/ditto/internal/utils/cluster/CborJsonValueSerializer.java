@@ -164,7 +164,7 @@ public final class CborJsonValueSerializer extends SerializerWithStringManifest 
     }
 
     private static void validateManifest(final String manifest) {
-        if (!JSON_VALUE_MANIFEST.equals(manifest)) {
+        if (!manifest.equals(JSON_VALUE_MANIFEST)) {
             throw new SerializerExceptions.UnsupportedManifest(manifest);
         }
     }

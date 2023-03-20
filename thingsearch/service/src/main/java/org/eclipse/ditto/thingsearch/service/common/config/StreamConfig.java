@@ -40,7 +40,8 @@ public interface StreamConfig {
     Duration getWriteInterval();
 
     /**
-     * @return the duration before the update actor is stopped after receiving a ThingDeleted event
+     *Returns the duration before the update actor is stopped after receiving a ThingDeleted event.
+ 
      */
     Duration getThingDeletionTimeout();
 

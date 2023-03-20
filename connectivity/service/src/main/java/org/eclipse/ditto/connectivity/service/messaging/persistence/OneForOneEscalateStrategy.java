@@ -14,12 +14,12 @@ package org.eclipse.ditto.connectivity.service.messaging.persistence;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkArgument;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import akka.actor.ActorContext;
 import akka.actor.ActorRef;
 import akka.actor.ChildRestartStats;
 import akka.actor.SupervisorStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.PartialFunction;
 import scala.collection.Iterable;
 
@@ -62,7 +62,7 @@ final class OneForOneEscalateStrategy extends SupervisorStrategy {
     }
 
     @Override
-    public void handleChildTerminated(final akka.actor.ActorContext context, final ActorRef child,
+    public void handleChildTerminated(final ActorContext context, final ActorRef child,
             final Iterable<ActorRef> children) {
         LOGGER.debug("Child <{}> terminated. Ignoring. Remaining children: {}", child, children);
     }
@@ -82,7 +82,7 @@ final class OneForOneEscalateStrategy extends SupervisorStrategy {
     }
 
     @Override
-    public void processFailure(final akka.actor.ActorContext context, final boolean restart,
+    public void processFailure(final ActorContext context, final boolean restart,
             final ActorRef child,
             final Throwable cause, final ChildRestartStats stats, final Iterable<ChildRestartStats> children) {
         // ignoring the arguments, because #decider will either escalate and this code is never reached, or it

@@ -36,7 +36,8 @@ public final class DefaultHiveMqtt3ClientFactory extends AbstractHiveMqttClientF
 
 
     /**
-     * @return the an instance of {@link DefaultHiveMqtt3ClientFactory}
+     *Returns the an instance of {@link DefaultHiveMqtt3ClientFactory}.
+ 
      */
     public static DefaultHiveMqtt3ClientFactory getInstance(final Supplier<SshTunnelState> tunnelConfigSupplier) {
         return new DefaultHiveMqtt3ClientFactory(tunnelConfigSupplier);

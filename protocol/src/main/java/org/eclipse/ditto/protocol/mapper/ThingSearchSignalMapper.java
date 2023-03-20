@@ -56,7 +56,8 @@ final class ThingSearchSignalMapper<T extends Signal<?>> extends AbstractSignalM
     }
 
     /**
-     * @return array of {@link org.eclipse.ditto.protocol.TopicPath.Action}s the implementation supports.
+     *Returns array of {@link org.eclipse.ditto.protocol.TopicPath.Action}s the implementation supports.
+ 
      */
     public TopicPath.SearchAction[] getSupportedActions() {
         return new TopicPath.SearchAction[]{

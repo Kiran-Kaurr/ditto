@@ -25,8 +25,9 @@ import org.eclipse.ditto.base.model.entity.validation.AbstractPatternValidator;
 public final class ConnectionIdPatternValidator extends AbstractPatternValidator {
 
     /**
-     * @param id the char sequence that is validated
-     * @return new instance of {@link ConnectionIdPatternValidator}
+     *Returns new instance of {@link ConnectionIdPatternValidator}.
+ @param id the char sequence that is validated
+     * 
      */
     public static ConnectionIdPatternValidator getInstance(final CharSequence id) {
         return new ConnectionIdPatternValidator(id);

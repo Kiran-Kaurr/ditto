@@ -42,7 +42,7 @@ final class ImmutablePolicyEntryPlaceholder implements PolicyEntryPlaceholder {
 
     @Override
     public List<String> resolveValues(final PolicyEntry policyEntry, final String name) {
-        if (LABEL.equals(name)) {
+        if (name.equals(LABEL)) {
             return Collections.singletonList(policyEntry.getLabel().toString());
         } else {
             return Collections.emptyList();

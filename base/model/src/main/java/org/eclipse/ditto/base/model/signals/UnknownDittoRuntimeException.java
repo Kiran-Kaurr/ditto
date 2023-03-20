@@ -33,7 +33,7 @@ final class UnknownDittoRuntimeException extends DittoRuntimeException {
 
     public static final String FALLBACK_ERROR_CODE = "unknown:unknown";
 
-    protected UnknownDittoRuntimeException(final String errorCode,
+    UnknownDittoRuntimeException(final String errorCode,
             final HttpStatus httpStatus,
             final DittoHeaders dittoHeaders, @Nullable final String message,
             @Nullable final String description, @Nullable final Throwable cause,

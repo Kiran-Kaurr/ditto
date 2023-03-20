@@ -70,9 +70,9 @@ final class ThingEventSignalMapper extends AbstractSignalMapper<ThingEvent<?>> {
             final TopicPath.Channel channel) {
 
         TopicPathBuilder topicPathBuilder = ProtocolFactory.newTopicPathBuilder(event.getEntityId());
-        if (TopicPath.Channel.TWIN == channel) {
+        if (channel == TopicPath.Channel.TWIN) {
             topicPathBuilder = topicPathBuilder.twin();
-        } else if (TopicPath.Channel.LIVE == channel) {
+        } else if (channel == TopicPath.Channel.LIVE) {
             topicPathBuilder = topicPathBuilder.live();
         } else {
             throw UnknownChannelException.newBuilder(channel, event.getType())

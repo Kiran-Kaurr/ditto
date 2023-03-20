@@ -162,8 +162,8 @@ final class FluentPublishingConnectionLogger
     }
 
     private void emitLogEntry(final LogEntry logEntry) {
-        final String correlationId = InfoProviderFactory.FALLBACK_CORRELATION_ID
-                .equals(logEntry.getCorrelationId()) ? null : logEntry.getCorrelationId();
+        final String correlationId = logEntry.getCorrelationId()
+                .equals(InfoProviderFactory.FALLBACK_CORRELATION_ID) ? null : logEntry.getCorrelationId();
         if (logLevels.contains(logEntry.getLogLevel())) {
             try {
                 final Instant timestamp = logEntry.getTimestamp();
@@ -287,7 +287,7 @@ final class FluentPublishingConnectionLogger
          *
          * @param logLevels the log levels to include for the log publishing.
          * @return the builder for method chaining.
-         * @throws NullPointerException if the passed {@code logLevel} was {@code null}.
+         * @throws NullPointerException if the passed {@code logLevels} was {@code null}.
          */
         Builder withLogLevels(final Collection<LogLevel> logLevels) {
             this.logLevels = Set.copyOf(checkNotNull(logLevels, "logLevels"));

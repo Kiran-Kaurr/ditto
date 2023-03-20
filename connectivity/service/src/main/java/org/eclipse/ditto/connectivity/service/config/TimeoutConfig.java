@@ -54,7 +54,7 @@ public interface TimeoutConfig {
         /**
          * See documentation on {@link TimeoutConfig#getMaxTimeout()}.
          */
-        MAX_TIMEOUT("max-timeout", Duration.ofSeconds(600L));
+        MAX_TIMEOUT("max-timeout", Duration.ofMinutes(10));
 
         private final String path;
         private final Object defaultValue;

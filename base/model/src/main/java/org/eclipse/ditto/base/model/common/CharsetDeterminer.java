@@ -53,7 +53,7 @@ public final class CharsetDeterminer implements Function<CharSequence, Charset> 
     public Charset apply(@Nullable final CharSequence contentType) {
         if (null != contentType) {
             final String[] withCharset = CHARSET_PATTERN.split(contentType, 2);
-            if (2 == withCharset.length && Charset.isSupported(withCharset[1])) {
+            if (withCharset.length == 2 && Charset.isSupported(withCharset[1])) {
                 return Charset.forName(withCharset[1]);
             }
         }

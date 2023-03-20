@@ -65,14 +65,16 @@ public final class TopicData {
     }
 
     /**
-     * @return whether there are no subscribers.
+     *Returns whether there are no subscribers.
+ 
      */
     public boolean isEmpty() {
         return subscribers.isEmpty();
     }
 
     /**
-     * @return an unmodifiable copy of the set of subscribers.
+     *Returns an unmodifiable copy of the set of subscribers.
+ 
      */
     public Set<ActorRef> exportSubscribers() {
         return Set.copyOf(subscribers);

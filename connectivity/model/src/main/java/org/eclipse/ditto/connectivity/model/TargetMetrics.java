@@ -31,7 +31,8 @@ import org.eclipse.ditto.json.JsonObject;
 public interface TargetMetrics extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the AddressMetrics for each target
+     *Returns the AddressMetrics for each target.
+ 
      */
     Map<String, AddressMetric> getAddressMetrics();
 

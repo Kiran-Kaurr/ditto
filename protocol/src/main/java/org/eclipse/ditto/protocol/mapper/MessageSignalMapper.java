@@ -47,7 +47,7 @@ final class MessageSignalMapper<T extends Signal<?> & WithThingId & WithMessage<
 
     @Override
     void validate(final T signal, final TopicPath.Channel channel) {
-        if (TopicPath.Channel.LIVE != channel) {
+        if (channel != TopicPath.Channel.LIVE) {
             throw new IllegalArgumentException("Unknown Channel '" + channel + "'");
         }
     }

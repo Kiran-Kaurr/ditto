@@ -14,6 +14,7 @@ package org.eclipse.ditto.internal.utils.persistence.mongo.config;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import com.google.common.base.Splitter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -26,10 +27,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
 import org.eclipse.ditto.internal.utils.config.DittoConfigError;
 
 /**
@@ -209,9 +208,9 @@ final class MongoDbUriSupplier implements Supplier<String> {
             if (null == queryComponent) {
                 return result;
             }
-            for (final String queryParameter : queryComponent.split("&")) {
+            for (final String queryParameter : Splitter.on('&').split(queryComponent)) {
                 final int assignmentDelimiterIndex = queryParameter.indexOf('=');
-                if (-1 != assignmentDelimiterIndex) {
+                if (assignmentDelimiterIndex != -1) {
                     final String parameterName = queryParameter.substring(0, assignmentDelimiterIndex);
                     final String parameterValue = queryParameter.substring(assignmentDelimiterIndex + 1);
                     result.put(parameterName, parameterValue);

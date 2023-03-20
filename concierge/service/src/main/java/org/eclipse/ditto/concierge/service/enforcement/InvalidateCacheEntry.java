@@ -60,7 +60,8 @@ public final class InvalidateCacheEntry implements Jsonifiable<JsonObject> {
     }
 
     /**
-     * @return the EntityId to invalidate caches for.
+     *Returns the EntityId to invalidate caches for.
+ 
      */
     public EnforcementCacheKey getEntityId() {
         return entityId;

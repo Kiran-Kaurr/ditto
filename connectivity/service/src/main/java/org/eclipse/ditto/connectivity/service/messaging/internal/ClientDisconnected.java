@@ -35,7 +35,8 @@ public interface ClientDisconnected extends WithOrigin {
     }
 
     /**
-     * @return whether the client actor should be closed after disconnecting or not.
+     *Returns whether the client actor should be closed after disconnecting or not.
+ 
      */
     boolean shutdownAfterDisconnected();
 }

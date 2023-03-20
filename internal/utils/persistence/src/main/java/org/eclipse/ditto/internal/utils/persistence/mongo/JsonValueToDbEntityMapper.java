@@ -120,36 +120,7 @@ final class JsonValueToDbEntityMapper {
         return result;
     }
 
-    /**
-     * Maps the specified JsonValue to a Java Object which can be stored in MongoDB.
-     *
-     * @param jsonValue the value to be mapped.
-     * @return {@code jsonValue} as Java Object which can be stored in MongoDB or {@code null}.
-     * @throws NullPointerException if {@code jsonValue} is {@code null}.
-     */
-    @Nullable
-    private Object mapJsonValueToJavaObject(final JsonValue jsonValue) {
-        checkNotNull(jsonValue, "JSON value to be mapped");
-
-        final Object result;
-        if (jsonValue.isNull()) {
-            result = null;
-        } else if (jsonValue.isString()) {
-            result = jsonValue.asString();
-        } else if (jsonValue.isNumber()) {
-            result = mapJsonNumberToJavaNumber(jsonValue);
-        } else if (jsonValue.isObject()) {
-            result = mapJsonObjectToBsonDocument(jsonValue.asObject());
-        } else if (jsonValue.isArray()) {
-            result = mapJsonArrayToBsonArray(jsonValue.asArray());
-        } else if (jsonValue.isBoolean()) {
-            result = jsonValue.asBoolean();
-        } else {
-            result = null;
-        }
-
-        return result;
-    }
+    
 
     /**
      * Maps the specified JsonValue to a Java Object which can be stored in MongoDB.

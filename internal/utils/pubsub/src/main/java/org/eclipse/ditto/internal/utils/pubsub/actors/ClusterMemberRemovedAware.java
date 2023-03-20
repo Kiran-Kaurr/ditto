@@ -37,12 +37,14 @@ interface ClusterMemberRemovedAware extends Actor {
     }
 
     /**
-     * @return the logging adapter of this actor.
+     *Returns the logging adapter of this actor.
+ 
      */
     LoggingAdapter log();
 
     /**
-     * @return the distributed data writer of this actor.
+     *Returns the distributed data writer of this actor.
+ 
      */
     DDataWriter<?, ?> getDDataWriter();
 

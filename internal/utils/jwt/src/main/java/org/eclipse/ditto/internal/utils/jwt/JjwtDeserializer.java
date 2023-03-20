@@ -39,7 +39,8 @@ public final class JjwtDeserializer implements Deserializer<Map<String, ?>> {
     private static Deserializer<Map<String, ?>> instance;
 
     /**
-     * @return the instance of {@link JjwtDeserializer}.
+     *Returns the instance of {@link JjwtDeserializer}.
+ 
      */
     public static Deserializer<Map<String, ?>> getInstance() {
         if (instance == null) {

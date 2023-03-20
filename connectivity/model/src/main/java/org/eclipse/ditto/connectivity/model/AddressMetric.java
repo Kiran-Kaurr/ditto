@@ -31,7 +31,8 @@ import org.eclipse.ditto.json.JsonObject;
 public interface AddressMetric extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return set of measurements for this address
+     *Returns set of measurements for this address.
+ 
      */
     Set<Measurement> getMeasurements();
 

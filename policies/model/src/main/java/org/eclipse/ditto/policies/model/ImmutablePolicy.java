@@ -212,7 +212,7 @@ final class ImmutablePolicy implements Policy {
 
     @Override
     public boolean isDeleted() {
-        return PolicyLifecycle.DELETED.equals(lifecycle);
+        return lifecycle.equals(PolicyLifecycle.DELETED);
     }
 
     @Override

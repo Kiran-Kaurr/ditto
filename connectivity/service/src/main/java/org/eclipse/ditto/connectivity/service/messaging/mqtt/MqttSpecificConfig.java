@@ -82,43 +82,49 @@ public final class MqttSpecificConfig {
     }
 
     /**
-     * @return whether subscriber CONN messages should set clean-session or clean-start flag to true.
+     *Returns whether subscriber CONN messages should set clean-session or clean-start flag to true.
+ 
      */
     public boolean cleanSession() {
         return specificConfig.getBoolean(CLEAN_SESSION);
     }
 
     /**
-     * @return whether reconnect-for-redelivery behavior is activated.
+     *Returns whether reconnect-for-redelivery behavior is activated.
+ 
      */
     public boolean reconnectForRedelivery() {
         return specificConfig.getBoolean(RECONNECT_FOR_REDELIVERY);
     }
 
     /**
-     * @return whether to use a separate client for publisher actors so that reconnect-for-redelivery
-     * does not disrupt the publisher.
+     *Returns whether to use a separate client for publisher actors so that reconnect-for-redelivery
+ does not disrupt the publisher.
+ 
      */
     public boolean separatePublisherClient() {
         return specificConfig.getBoolean(SEPARATE_PUBLISHER_CLIENT);
     }
 
     /**
-     * @return how long to wait before reconnect a consumer client for redelivery.
+     *Returns how long to wait before reconnect a consumer client for redelivery.
+ 
      */
     public Duration getReconnectForDeliveryDelay() {
         return specificConfig.getDuration(RECONNECT_FOR_REDELIVERY_DELAY);
     }
 
     /**
-     * @return the optional clientId which should be used by the MQTT client when connecting to the MQTT broker.
+     *Returns the optional clientId which should be used by the MQTT client when connecting to the MQTT broker.
+ 
      */
     public Optional<String> getMqttClientId() {
         return getStringOptional(CLIENT_ID);
     }
 
     /**
-     * @return the optional publisherId which should be used as the client ID of the publisher actor.
+     *Returns the optional publisherId which should be used as the client ID of the publisher actor.
+ 
      */
     public Optional<String> getMqttPublisherId() {
         return getStringOptional(PUBLISHER_ID);
@@ -126,35 +132,40 @@ public final class MqttSpecificConfig {
 
 
     /**
-     * @return the optional topic which should be used on Last Will message.
+     *Returns the optional topic which should be used on Last Will message.
+ 
      */
     public Optional<String> getMqttWillTopic() {
         return getStringOptional(LAST_WILL_TOPIC);
     }
 
     /**
-     * @return the Qos which should be used on Last Will message.
+     *Returns the Qos which should be used on Last Will message.
+ 
      */
     public int getMqttWillQos() {
         return getSafely(() -> specificConfig.getInt(LAST_WILL_QOS), DEFAULT_LAST_WILL_QOS);
     }
 
     /**
-     * @return the optional message which should be used on Last Will message.
+     *Returns the optional message which should be used on Last Will message.
+ 
      */
     public Optional<String> getMqttWillMessage() {
         return getStringOptional(LAST_WILL_MESSAGE);
     }
 
     /**
-     * @return the retain flag which should be used on Last Will message.
+     *Returns the retain flag which should be used on Last Will message.
+ 
      */
     public boolean getMqttWillRetain() {
         return getSafely(() -> specificConfig.getBoolean(LAST_WILL_RETAIN), DEFAULT_LAST_WILL_RETAIN);
     }
 
     /**
-     * @return the interval between keep alive pings.
+     *Returns the interval between keep alive pings.
+ 
      */
     public Optional<Duration> getKeepAliveInterval() {
         return getDurationOptional(KEEP_ALIVE_INTERVAL);

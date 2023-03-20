@@ -157,14 +157,14 @@ final class ThingMergeCommandMappingStrategies extends AbstractThingMappingStrat
                 dittoHeadersFrom(adaptable));
     }
 
-    protected static PolicyId policyIdForMergeFrom(final Adaptable adaptable) {
+    static PolicyId policyIdForMergeFrom(final Adaptable adaptable) {
         if (payloadValueIsNull(adaptable)) {
             throw PolicyIdNotDeletableException.newBuilder().build();
         }
         return policyIdFrom(adaptable);
     }
 
-    protected static ThingDefinition thingDefinitionFromForPatch(final Adaptable adaptable) {
+    static ThingDefinition thingDefinitionFromForPatch(final Adaptable adaptable) {
         if (payloadValueIsNull(adaptable)) {
             return ThingsModelFactory.nullDefinition();
         } else {
@@ -172,7 +172,7 @@ final class ThingMergeCommandMappingStrategies extends AbstractThingMappingStrat
         }
     }
 
-    protected static Thing thingForMergeFrom(final Adaptable adaptable) {
+    static Thing thingForMergeFrom(final Adaptable adaptable) {
         if (payloadValueIsNull(adaptable)
                 && adaptable.getDittoHeaders().getSchemaVersion().filter(JsonSchemaVersion.V_2::equals).isPresent()) {
             throw ThingMergeInvalidException.fromMessage(
@@ -187,7 +187,7 @@ final class ThingMergeCommandMappingStrategies extends AbstractThingMappingStrat
         return thingFrom(adaptable);
     }
 
-    protected static Attributes attributesForMergeFrom(final Adaptable adaptable) {
+    static Attributes attributesForMergeFrom(final Adaptable adaptable) {
         if (fieldIsNull(adaptable, Thing.JsonFields.ATTRIBUTES.getPointer())) {
             return ThingsModelFactory.nullAttributes();
         }

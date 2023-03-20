@@ -14,23 +14,21 @@ package org.eclipse.ditto.gateway.service.security.utils;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.headers.Authorization;
+import akka.http.javadsl.model.headers.BasicHttpCredentials;
+import akka.http.javadsl.model.headers.Cookie;
+import akka.http.javadsl.model.headers.HttpCookiePair;
+import akka.http.javadsl.server.RequestContext;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
-
 import javax.annotation.concurrent.Immutable;
-
-import org.eclipse.ditto.gateway.service.security.parser.RequestHeaders;
 import org.eclipse.ditto.gateway.service.security.HttpHeader;
-
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.headers.Authorization;
-import akka.http.javadsl.model.headers.BasicHttpCredentials;
-import akka.http.javadsl.model.headers.Cookie;
-import akka.http.javadsl.server.RequestContext;
+import org.eclipse.ditto.gateway.service.security.parser.RequestHeaders;
 
 @Immutable
 public final class HttpUtils {
@@ -68,9 +66,9 @@ public final class HttpUtils {
         requestContext.getRequest().getHeaders().forEach(
                 header -> headers.put(header.name().toLowerCase(), header.value()));
 
-        final Iterable<akka.http.javadsl.model.headers.HttpCookiePair> cookies = requestContext.getRequest()
+        final Iterable<HttpCookiePair> cookies = requestContext.getRequest()
                 .getHeader(Cookie.class)
-                .map(akka.http.javadsl.model.headers.Cookie::getCookies)
+                .map(Cookie::getCookies)
                 .orElse(Collections.emptyList());
         final Map<String, String> cookieMap = new HashMap<>();
         cookies.forEach(cookie -> cookieMap.put(cookie.name(), cookie.value()));

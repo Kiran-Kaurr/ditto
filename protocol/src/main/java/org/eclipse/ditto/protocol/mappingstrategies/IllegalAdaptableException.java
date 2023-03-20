@@ -170,7 +170,7 @@ public final class IllegalAdaptableException extends DittoRuntimeException {
     private static String deserializeErrorCode(final JsonObject jsonObject) {
         final JsonFieldDefinition<String> fieldDefinition = JsonFields.ERROR_CODE;
         final String result = jsonObject.getValueOrThrow(fieldDefinition);
-        if (!ERROR_CODE.equals(result)) {
+        if (!result.equals(ERROR_CODE)) {
             throw new JsonParseException(MessageFormat.format(
                     "Error code <{0}> of field <{1}> differs from the expected <{2}>.",
                     result,
@@ -216,7 +216,7 @@ public final class IllegalAdaptableException extends DittoRuntimeException {
     }
 
     private static boolean isBlank(final CharSequence charSequence) {
-        return 0 == charSequence.chars().filter(ch -> !Character.isWhitespace(ch)).count();
+        return charSequence.chars().filter((ch)->!Character.isWhitespace(ch)).count() == 0;
     }
 
     private static Optional<URI> deserializeHref(final JsonObject jsonObject) {

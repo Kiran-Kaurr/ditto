@@ -417,7 +417,7 @@ final class ImmutableJsonArray extends AbstractJsonValue implements JsonArray {
 
         private static List<JsonValue> parseToList(final byte[] cborArrayRepresentation) {
             final JsonValue jsonArray = CBOR_FACTORY.readFrom(cborArrayRepresentation);
-            List<JsonValue> list = new LinkedList<>();
+            List<JsonValue> list = new ArrayList<>();
             for (JsonValue jsonValue : jsonArray.asArray()) {
                 list.add(jsonValue);
             }
@@ -459,7 +459,7 @@ final class ImmutableJsonArray extends AbstractJsonValue implements JsonArray {
         @Override
         public int hashCode() {
             int result = hashCode;
-            if (0 == result) {
+            if (result == 0) {
                 result = values().hashCode();
                 hashCode = result;
             }

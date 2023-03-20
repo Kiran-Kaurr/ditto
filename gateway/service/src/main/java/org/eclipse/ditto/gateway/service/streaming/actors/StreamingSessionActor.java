@@ -594,7 +594,7 @@ final class StreamingSessionActor extends AbstractActorWithTimers {
     private void refreshWebSocketSession(final Jwt jwt) {
         final String jwtConnectionCorrelationId = jwt.getConnectionCorrelationId();
         final var jsonWebToken = ImmutableJsonWebToken.fromToken(jwt.toString());
-        jwtValidator.validate(jsonWebToken).thenAccept(binaryValidationResult -> {
+        var unused = jwtValidator.validate(jsonWebToken).thenAccept(binaryValidationResult -> {
             if (binaryValidationResult.isValid()) {
                 jwtAuthenticationResultProvider.getAuthenticationResult(jsonWebToken, DittoHeaders.empty())
                         .thenAccept(authorizationResult -> {

@@ -59,7 +59,7 @@ final class ImmutableFeaturePlaceholder implements FeaturePlaceholder {
     public List<String> resolveValues(final Signal<?> signal, final String placeholder) {
         checkNotNull(signal, "signal");
         argumentNotEmpty(placeholder, "placeholder");
-        if (ID_PLACEHOLDER.equals(placeholder)) {
+        if (placeholder.equals(ID_PLACEHOLDER)) {
             return resolveIdPlaceholder(signal);
         }
         return List.of();
@@ -68,7 +68,7 @@ final class ImmutableFeaturePlaceholder implements FeaturePlaceholder {
     private static List<String> resolveIdPlaceholder(final Signal<?> signal) {
         final List<String> featureIds;
         if (signal instanceof WithFeatureId withFeatureId) {
-            featureIds = Collections.singletonList((withFeatureId).getFeatureId());
+            featureIds = Collections.singletonList( withFeatureId.getFeatureId());
         } else if (signal instanceof ThingModifyCommand || signal instanceof ThingModifiedEvent ||
                 signal instanceof ThingModifyCommandResponse) {
             featureIds = ((WithOptionalEntity) signal).getEntity()

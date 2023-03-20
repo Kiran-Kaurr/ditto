@@ -46,7 +46,8 @@ public abstract class AbstractStreamingActor<C, E> extends AbstractActor {
     protected final Materializer materializer = Materializer.createMaterializer(this::getContext);
 
     /**
-     * @return Class of the commands.
+     *Returns class of the commands.
+ 
      */
     protected abstract Class<C> getCommandClass();
 

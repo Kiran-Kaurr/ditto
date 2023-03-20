@@ -58,12 +58,14 @@ interface ClusterStateSyncBehavior<T> extends Actor, Timers {
     Address toAddress(T ddataKey);
 
     /**
-     * @return the logging adapter of this actor. Must be thread-safe.
+     *Returns the logging adapter of this actor. Must be thread-safe.
+ 
      */
     ThreadSafeDittoLoggingAdapter log();
 
     /**
-     * @return the distributed data to maintain. Must be thread-safe.
+     *Returns the distributed data to maintain. Must be thread-safe.
+ 
      */
     DData<T, ?, ?> getDData();
 

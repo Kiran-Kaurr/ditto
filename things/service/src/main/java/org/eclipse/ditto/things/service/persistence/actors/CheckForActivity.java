@@ -62,8 +62,8 @@ final class CheckForActivity {
             return false;
         }
         final CheckForActivity that = (CheckForActivity) o;
-        return Objects.equals(currentSequenceNr, that.currentSequenceNr) &&
-                Objects.equals(currentAccessCounter, that.currentAccessCounter);
+        return (currentSequenceNr == that.currentSequenceNr) &&
+                (currentAccessCounter == that.currentAccessCounter);
     }
 
     @Override

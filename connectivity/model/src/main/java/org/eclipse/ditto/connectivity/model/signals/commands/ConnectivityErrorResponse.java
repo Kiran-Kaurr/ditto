@@ -119,7 +119,7 @@ public final class ConnectivityErrorResponse extends AbstractErrorResponse<Conne
      *
      * @return the wrapped exception.
      */
-    public DittoRuntimeException getDittoRuntimeException() {
+    @Override public DittoRuntimeException getDittoRuntimeException() {
         return dittoRuntimeException;
     }
 

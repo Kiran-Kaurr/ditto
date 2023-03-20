@@ -83,7 +83,7 @@ public class DefaultMapperLimitsConfig implements MapperLimitsConfig {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DefaultMapperLimitsConfig)) {
             return false;
         }
         final DefaultMapperLimitsConfig that = (DefaultMapperLimitsConfig) o;

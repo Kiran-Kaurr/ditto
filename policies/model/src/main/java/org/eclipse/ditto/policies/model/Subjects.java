@@ -79,7 +79,7 @@ public interface Subjects extends Iterable<Subject>, Jsonifiable.WithFieldSelect
      * @param issuer the SubjectId's {@code issuer} of the Subject to be retrieved.
      * @param subject the character sequence for the SubjectId's {@code subject} of the Subject to be retrieved.
      * @return the Subject with the given subjectId or an empty optional.
-     * @throws NullPointerException if {@code subjectId} is {@code null}.
+     * @throws NullPointerException if {@code subject} is {@code null}.
      * @throws IllegalArgumentException if {@code subject} is empty.
      */
     default Optional<Subject> getSubject(final SubjectIssuer issuer, final CharSequence subject) {
@@ -110,8 +110,8 @@ public interface Subjects extends Iterable<Subject>, Jsonifiable.WithFieldSelect
      * overwritten.
      *
      * @param subjects the Subjects to be set.
-     * @return a copy of this Subjects with {@code subject} set.
-     * @throws NullPointerException if {@code subject} is {@code null}.
+     * @return a copy of this Subjects with {@code subjects} set.
+     * @throws NullPointerException if {@code subjects} is {@code null}.
      * @since 2.1.0
      */
     Subjects setSubjects(Subjects subjects);
@@ -135,7 +135,7 @@ public interface Subjects extends Iterable<Subject>, Jsonifiable.WithFieldSelect
      * @param issuer the SubjectId's {@code issuer} of the Subject to be removed.
      * @param subject the character sequence for the SubjectId's {@code subject} of the Subject to be removed.
      * @return a copy of this Subjects with {@code subject} removed.
-     * @throws NullPointerException if {@code subjectId} is {@code null}.
+     * @throws NullPointerException if {@code subject} is {@code null}.
      * @throws IllegalArgumentException if {@code subject} is empty.
      */
     default Subjects removeSubject(final SubjectIssuer issuer, final CharSequence subject) {

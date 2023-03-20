@@ -14,6 +14,7 @@ package org.eclipse.ditto.jwt.model;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import com.google.common.base.Splitter;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Arrays;
@@ -22,7 +23,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.eclipse.ditto.json.JsonFactory;
 import org.eclipse.ditto.json.JsonObject;
 import org.eclipse.ditto.json.JsonParseException;
@@ -55,16 +55,16 @@ public abstract class AbstractJsonWebToken implements JsonWebToken {
     protected AbstractJsonWebToken(final String token) {
         this.token = token;
 
-        final String[] tokenParts = this.token.split(JWT_DELIMITER);
+        final List<String> tokenParts = Splitter.onPattern(JWT_DELIMITER).splitToList(this.token);
         final int expectedTokenPartAmount = 3;
-        if (expectedTokenPartAmount != tokenParts.length) {
+        if (tokenParts.length != tokenParts.size()) {
             throw JwtInvalidException.newBuilder()
                     .description("The token is expected to have three parts: header, payload and signature.")
                     .build();
         }
-        header = tryToDecodeJwtPart(tokenParts[0]);
-        body = tryToDecodeJwtPart(tokenParts[1]);
-        signature = tokenParts[2];
+        header = tryToDecodeJwtPart(tokenParts.get(0));
+        body = tryToDecodeJwtPart(tokenParts.get(1));
+        signature = tokenParts.get(2);
     }
 
     private static JsonObject tryToDecodeJwtPart(final String jwtPart) {
@@ -145,7 +145,7 @@ public abstract class AbstractJsonWebToken implements JsonWebToken {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractJsonWebToken)) {
             return false;
         }
         final AbstractJsonWebToken that = (AbstractJsonWebToken) o;

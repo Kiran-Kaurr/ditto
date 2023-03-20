@@ -78,7 +78,7 @@ final class ImmutableJsonPointer implements JsonPointer {
             result = (JsonPointer) slashDelimitedCharSequence;
         } else if (JsonKey.class.isAssignableFrom(slashDelimitedCharSequence.getClass())) {
             result = newInstance(Collections.singletonList(((JsonKey) slashDelimitedCharSequence)));
-        } else if (0 == slashDelimitedCharSequence.length()) {
+        } else if (slashDelimitedCharSequence.length() == 0) {
             result = empty();
         } else if (DOUBLE_SLASH_PATTERN.matcher(slashDelimitedCharSequence).find()) {
             throw JsonPointerInvalidException.newBuilderForConsecutiveSlashes(slashDelimitedCharSequence)

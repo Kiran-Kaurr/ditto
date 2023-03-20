@@ -23,7 +23,8 @@ public final class RetrieveAddressStatus {
     }
 
     /**
-     * @return the singleton instance of this class.
+     *Returns the singleton instance of this class.
+ 
      */
     public static RetrieveAddressStatus getInstance() {
         return INSTANCE;

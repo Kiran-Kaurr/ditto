@@ -103,7 +103,7 @@ public final class MongoClientWrapper implements DittoMongoClient {
      *
      * @param mongoDbConfig provides the initial MongoDB settings of the returned builder.
      * @return the new builder instance.
-     * @throws NullPointerException if {@code mongoConfig} is {@code null}.
+     * @throws NullPointerException if {@code mongoDbConfig} is {@code null}.
      */
     public static DittoMongoClientBuilder.GeneralPropertiesStep getBuilder(final MongoDbConfig mongoDbConfig) {
         return MongoClientWrapperBuilder.newInstance(mongoDbConfig);
@@ -242,7 +242,7 @@ public final class MongoClientWrapper implements DittoMongoClient {
     @Override
     public void close() {
         if (null != eventLoopGroup) {
-            eventLoopGroup.shutdownGracefully();
+            var unused = eventLoopGroup.shutdownGracefully();
         }
         mongoClient.close();
     }
@@ -286,7 +286,7 @@ public final class MongoClientWrapper implements DittoMongoClient {
          *
          * @param mongoDbConfig the config which provides settings for MongoDB.
          * @return the new builder.
-         * @throws NullPointerException if {@code mongoConfig} is {@code null}.
+         * @throws NullPointerException if {@code mongoDbConfig} is {@code null}.
          */
         static GeneralPropertiesStep newInstance(final MongoDbConfig mongoDbConfig) {
             checkNotNull(mongoDbConfig, "MongoDB config");

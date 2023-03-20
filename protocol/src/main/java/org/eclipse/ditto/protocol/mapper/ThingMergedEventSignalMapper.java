@@ -39,9 +39,9 @@ final class ThingMergedEventSignalMapper extends AbstractSignalMapper<ThingMerge
 
         TopicPathBuilder topicPathBuilder = ProtocolFactory.newTopicPathBuilder(signal.getEntityId())
                 .things();
-        if (TopicPath.Channel.TWIN == channel) {
+        if (channel == TopicPath.Channel.TWIN) {
             topicPathBuilder = topicPathBuilder.twin();
-        } else if (TopicPath.Channel.LIVE == channel) {
+        } else if (channel == TopicPath.Channel.LIVE) {
             topicPathBuilder = topicPathBuilder.live();
         } else {
             throw UnknownChannelException.newBuilder(channel, signal.getType())

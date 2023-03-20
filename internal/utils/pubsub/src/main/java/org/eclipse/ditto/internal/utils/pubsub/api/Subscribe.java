@@ -83,7 +83,8 @@ public final class Subscribe extends AbstractRequest {
     }
 
     /**
-     * @return Filter for incoming messages.
+     *Returns filter for incoming messages.
+ 
      */
     @Nullable
     public Predicate<Collection<String>> getFilter() {
@@ -91,14 +92,16 @@ public final class Subscribe extends AbstractRequest {
     }
 
     /**
-     * @return the group the subscriber belongs to, or an empty optional.
+     *Returns the group the subscriber belongs to, or an empty optional.
+ 
      */
     public Optional<String> getGroup() {
         return Optional.ofNullable(group);
     }
 
     /**
-     * @return Whether this is a resubscribe request.
+     *Returns whether this is a resubscribe request.
+ 
      */
     public boolean isResubscribe() {
         return resubscribe;

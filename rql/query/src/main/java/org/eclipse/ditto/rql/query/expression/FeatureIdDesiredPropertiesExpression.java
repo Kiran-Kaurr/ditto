@@ -31,7 +31,8 @@ public interface FeatureIdDesiredPropertiesExpression extends ExistsFieldExpress
     }
 
     /**
-     * @return the feature id.
+     *Returns the feature id.
+ 
      */
     String getFeatureId();
 

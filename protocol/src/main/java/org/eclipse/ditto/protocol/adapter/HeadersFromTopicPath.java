@@ -100,7 +100,7 @@ public final class HeadersFromTopicPath {
         final TopicPath.Group group = topicPath.getGroup();
         final String namespace = topicPath.getNamespace();
         final String entityName = topicPath.getEntityName();
-        if (!TopicPath.ID_PLACEHOLDER.equals(namespace) && !TopicPath.ID_PLACEHOLDER.equals(entityName)) {
+        if (!namespace.equals(TopicPath.ID_PLACEHOLDER) && !entityName.equals(TopicPath.ID_PLACEHOLDER)) {
             return Optional.of(String.join(":", group.getEntityType(), namespace, entityName));
         } else {
             return Optional.empty();

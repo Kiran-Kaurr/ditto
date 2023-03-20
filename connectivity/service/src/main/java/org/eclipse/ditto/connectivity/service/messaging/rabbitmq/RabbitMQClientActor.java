@@ -12,6 +12,27 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.rabbitmq;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.actor.Status;
+import akka.japi.pf.FI;
+import akka.japi.pf.FSMStateFunctionBuilder;
+import akka.pattern.Patterns;
+import com.newmotion.akka.rabbitmq.ChannelActor;
+import com.newmotion.akka.rabbitmq.ChannelCreated;
+import com.newmotion.akka.rabbitmq.ConnectionActor;
+import com.newmotion.akka.rabbitmq.CreateChannel;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.AlreadyClosedException;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DefaultConsumer;
+import com.rabbitmq.client.Delivery;
+import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.ShutdownSignalException;
+import com.rabbitmq.client.impl.DefaultExceptionHandler;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
@@ -27,9 +48,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
 import org.eclipse.ditto.connectivity.api.BaseClientState;
 import org.eclipse.ditto.connectivity.model.Connection;
@@ -47,28 +66,6 @@ import org.eclipse.ditto.connectivity.service.messaging.internal.ConnectionFailu
 import org.eclipse.ditto.connectivity.service.util.ConnectivityMdcEntryKey;
 import org.eclipse.ditto.internal.utils.akka.logging.ThreadSafeDittoLoggingAdapter;
 import org.eclipse.ditto.internal.utils.config.InstanceIdentifierSupplier;
-
-import com.newmotion.akka.rabbitmq.ChannelActor;
-import com.newmotion.akka.rabbitmq.ChannelCreated;
-import com.newmotion.akka.rabbitmq.CreateChannel;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.AlreadyClosedException;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Delivery;
-import com.rabbitmq.client.Envelope;
-import com.rabbitmq.client.ShutdownSignalException;
-import com.rabbitmq.client.impl.DefaultExceptionHandler;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
-
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.actor.Status;
-import akka.japi.pf.FI;
-import akka.japi.pf.FSMStateFunctionBuilder;
-import akka.pattern.Patterns;
 import scala.Option;
 import scala.concurrent.duration.FiniteDuration;
 
@@ -297,7 +294,7 @@ public final class RabbitMQClientActor extends BaseClientActor {
             if (connectionFactoryOpt.isPresent()) {
                 final ConnectionFactory connectionFactory = connectionFactoryOpt.get();
 
-                final Props props = com.newmotion.akka.rabbitmq.ConnectionActor.props(connectionFactory,
+                final Props props = ConnectionActor.props(connectionFactory,
                         FiniteDuration.apply(internalReconnectTimeout.getSeconds(), TimeUnit.SECONDS),
                         (rmqConnection, connectionActorRef) -> {
                             l.info("Established RMQ connection: {}", rmqConnection);

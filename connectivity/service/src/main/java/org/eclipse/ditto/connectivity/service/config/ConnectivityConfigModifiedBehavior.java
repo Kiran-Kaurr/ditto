@@ -47,7 +47,8 @@ public interface ConnectivityConfigModifiedBehavior extends Actor {
     }
 
     /**
-     * @return a {@link ConnectionConfigProvider} required to register this actor for config changes
+     *Returns a {@link ConnectionConfigProvider} required to register this actor for config changes.
+ 
      */
     default ConnectionConfigProvider getConnectivityConfigProvider() {
         return ConnectionConfigProviderFactory.getInstance(context().system());

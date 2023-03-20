@@ -35,42 +35,50 @@ import org.eclipse.ditto.things.model.ThingId;
 public interface LogEntry extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return correlation ID that is associated with the log entry.
+     *Returns correlation ID that is associated with the log entry.
+ 
      */
     String getCorrelationId();
 
     /**
-     * @return timestamp of the log entry.
+     *Returns timestamp of the log entry.
+ 
      */
     Instant getTimestamp();
 
     /**
-     * @return category of the log entry.
+     *Returns category of the log entry.
+ 
      */
     LogCategory getLogCategory();
 
     /**
-     * @return type of the log entry.
+     *Returns type of the log entry.
+ 
      */
     LogType getLogType();
 
     /**
-     * @return the log level.
+     *Returns the log level.
+ 
      */
     LogLevel getLogLevel();
 
     /**
-     * @return the log message.
+     *Returns the log message.
+ 
      */
     String getMessage();
 
     /**
-     * @return address if the log can be correlated to a known source or target, empty otherwise.
+     *Returns address if the log can be correlated to a known source or target, empty otherwise.
+ 
      */
     Optional<String> getAddress();
 
     /**
-     * @return entity ID if the log can be correlated to a known entity (e.g. a Thing), empty otherwise.
+     *Returns entity ID if the log can be correlated to a known entity (e.g. a Thing), empty otherwise.
+ 
      */
     Optional<EntityId> getEntityId();
 

@@ -83,7 +83,7 @@ final class DefaultMetadataHeaderKey implements MetadataHeaderKey {
         if (path.isEmpty()) {
             throw new IllegalArgumentException("The path of a metadata header key must not be empty!");
         }
-        if (appliesToAllLeaves() && 2 != path.getLevelCount()) {
+        if (appliesToAllLeaves() && path.getLevelCount() != 2) {
             throw new IllegalArgumentException(MessageFormat.format(
                     "A wildcard path of a metadata header key must have exactly two levels but it had <{0}>!",
                     path.getLevelCount()));

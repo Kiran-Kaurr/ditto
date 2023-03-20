@@ -23,7 +23,7 @@ import org.eclipse.ditto.things.model.signals.events.AttributeModified;
 @Immutable
 final class AttributeModifiedStrategy extends AbstractThingEventStrategy<AttributeModified> {
 
-    protected AttributeModifiedStrategy() {
+    AttributeModifiedStrategy() {
         super();
     }
 

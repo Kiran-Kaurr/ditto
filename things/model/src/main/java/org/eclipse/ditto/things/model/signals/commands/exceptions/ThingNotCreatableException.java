@@ -137,7 +137,7 @@ public final class ThingNotCreatableException extends DittoRuntimeException impl
 
         if (null == description) {
             final String derivedDescription;
-            if (MESSAGE_WRONG_CHANNEL.equals(message)) {
+            if (message.equals(MESSAGE_WRONG_CHANNEL)) {
                 derivedDescription = DEFAULT_DESCRIPTION_WRONG_CHANNEL;
             } else {
                 derivedDescription = DEFAULT_DESCRIPTION_GENERIC;

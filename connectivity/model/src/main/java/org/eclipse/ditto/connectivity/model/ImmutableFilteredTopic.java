@@ -226,15 +226,15 @@ final class ImmutableFilteredTopic implements FilteredTopic {
         }
 
         private boolean supportsNamespaces() {
-            return Topic.CONNECTION_ANNOUNCEMENTS != topic;
+            return topic != Topic.CONNECTION_ANNOUNCEMENTS;
         }
 
         private boolean supportsFilters() {
-            return Topic.POLICY_ANNOUNCEMENTS != topic && Topic.CONNECTION_ANNOUNCEMENTS != topic;
+            return topic != Topic.POLICY_ANNOUNCEMENTS && topic != Topic.CONNECTION_ANNOUNCEMENTS;
         }
 
         private boolean supportsExtraFields() {
-            return Topic.POLICY_ANNOUNCEMENTS != topic && Topic.CONNECTION_ANNOUNCEMENTS != topic;
+            return topic != Topic.POLICY_ANNOUNCEMENTS && topic != Topic.CONNECTION_ANNOUNCEMENTS;
         }
 
     }
@@ -277,7 +277,7 @@ final class ImmutableFilteredTopic implements FilteredTopic {
             }
             return Arrays.stream(queryParamsString.split(QUERY_ARG_DELIMITER))
                     .map(paramString -> paramString.split(QUERY_ARG_VALUE_DELIMITER, 2))
-                    .filter(queryParamPair -> 2 == queryParamPair.length)
+                    .filter(queryParamPair -> queryParamPair.length == 2)
                     .collect(Collectors.toMap(queryParamPair -> urlDecode(queryParamPair[0]), av -> urlDecode(av[1])));
         }
 

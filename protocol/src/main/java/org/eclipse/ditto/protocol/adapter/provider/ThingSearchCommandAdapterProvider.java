@@ -23,7 +23,8 @@ import org.eclipse.ditto.base.model.signals.Signal;
 interface ThingSearchCommandAdapterProvider<M extends Signal<?>> {
 
     /**
-     * @return the modify command adapter
+     *Returns the modify command adapter.
+ 
      */
     Adapter<M> getSearchCommandAdapter();
 

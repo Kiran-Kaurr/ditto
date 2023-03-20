@@ -48,7 +48,7 @@ public final class LikeHelper {
         // simplify expression by replacing repeating wildcard with a single one
         final String valueString = replaceRepeatingWildcards(expression);
         // shortcut for single * wildcard
-        if ("*".equals(valueString)) {
+        if (valueString.equals("*")) {
             return ".*";
         }
 

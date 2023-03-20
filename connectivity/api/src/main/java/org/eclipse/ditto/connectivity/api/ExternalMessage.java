@@ -44,110 +44,130 @@ public interface ExternalMessage {
     String REPLY_TO_HEADER = DittoHeaderDefinition.REPLY_TO.getKey();
 
     /**
-     * @return the headers of the ExternalMessage
+     *Returns the headers of the ExternalMessage.
+ 
      */
     Map<String, String> getHeaders();
 
     /**
-     * @param key the header key
+     *Returns new instance of {@link ExternalMessage} including the provided header.
+ @param key the header key
      * @param value the header value
-     * @return new instance of {@link ExternalMessage} including the provided header
+     * 
      */
     ExternalMessage withHeader(String key, String value);
 
     /**
-     * @param additionalHeaders headers added to message headers
-     * @return new instance of {@link ExternalMessage} including the provided headers
+     *Returns new instance of {@link ExternalMessage} including the provided headers.
+ @param additionalHeaders headers added to message headers
+     * 
      */
     ExternalMessage withHeaders(Map<String, String> additionalHeaders);
 
     /**
-     * @param topicPath the {@link TopicPath} to set in the new built ExternalMessage
-     * @return new instance of {@link ExternalMessage} including the provided TopicPath
+     *Returns new instance of {@link ExternalMessage} including the provided TopicPath.
+ @param topicPath the {@link TopicPath} to set in the new built ExternalMessage
+     * 
      */
     ExternalMessage withTopicPath(TopicPath topicPath);
 
     /**
-     * @return the optional value of the Content-Type header
+     *Returns the optional value of the Content-Type header.
+ 
      */
     default Optional<String> findContentType() {
         return findHeaderIgnoreCase(CONTENT_TYPE_HEADER);
     }
 
     /**
-     * @param key the key to look up in the headers
-     * @return the optional value of the specified header {@code key}
+     *Returns the optional value of the specified header {@code key}.
+ @param key the key to look up in the headers
+     * 
      */
     Optional<String> findHeader(String key);
 
     /**
-     * @param key the key to look up in the headers case insensitively
-     * @return the optional value of the specified header {@code key}
+     *Returns the optional value of the specified header {@code key}.
+ @param key the key to look up in the headers case insensitively
+     * 
      */
     Optional<String> findHeaderIgnoreCase(String key);
 
     /**
-     * @return whether this ExternalMessage is a text message
+     *Returns whether this ExternalMessage is a text message.
+ 
      */
     boolean isTextMessage();
 
     /**
-     * @return whether this ExternalMessage is a bytes message
+     *Returns whether this ExternalMessage is a bytes message.
+ 
      */
     boolean isBytesMessage();
 
     /**
-     * @return the text payload
+     *Returns the text payload.
+ 
      */
     Optional<String> getTextPayload();
 
     /**
-     * @return the bytes payload
+     *Returns the bytes payload.
+ 
      */
     Optional<ByteBuffer> getBytePayload();
 
     /**
-     * @return the PayloadType of this ExternalMessage
+     *Returns the PayloadType of this ExternalMessage.
+ 
      */
     PayloadType getPayloadType();
 
     /**
-     * @return {@code true} if this message is a response
+     *Returns {@code true} if this message is a response.
+ 
      */
     boolean isResponse();
 
     /**
-     * @return {@code true} if this message is an error
+     *Returns {@code true} if this message is an error.
+ 
      */
     boolean isError();
 
     /**
-     * @return the {@link AuthorizationContext} assigned to this message
+     *Returns the {@link AuthorizationContext} assigned to this message.
+ 
      */
     Optional<AuthorizationContext> getAuthorizationContext();
 
     /**
-     * @return the {@link TopicPath} assigned to this message
+     *Returns the {@link TopicPath} assigned to this message.
+ 
      */
     Optional<TopicPath> getTopicPath();
 
     /**
-     * @return the required data to apply the enforcement (if enforcement is enabled), empty otherwise
+     *Returns the required data to apply the enforcement (if enforcement is enabled), empty otherwise.
+ 
      */
     Optional<EnforcementFilter<Signal<?>>> getEnforcementFilter();
 
     /**
-     * @return the optional header mapping
+     *Returns the optional header mapping.
+ 
      */
     Optional<HeaderMapping> getHeaderMapping();
 
     /**
-     * @return the payload mapping that is applied for this message
+     *Returns the payload mapping that is applied for this message.
+ 
      */
     Optional<PayloadMapping> getPayloadMapping();
 
     /**
-     * @return optional source address, where this message was received
+     *Returns optional source address, where this message was received.
+ 
      */
     Optional<String> getSourceAddress();
 
@@ -158,8 +178,9 @@ public interface ExternalMessage {
     Optional<Source> getSource();
 
     /**
-     * @return Ditto headers of the signal that created this external message if any.
-     * Use those headers when sending error back into the Ditto cluster.
+     *Returns ditto headers of the signal that created this external message if any.
+ Use those headers when sending error back into the Ditto cluster.
+ 
      */
     DittoHeaders getInternalHeaders();
 

@@ -149,7 +149,8 @@ public final class BackOffActor extends AbstractActorWithTimers {
         }
 
         /**
-         * @return {@code true} if currently backing off a message, {@code false} otherwise.
+         *Returns {@code true} if currently backing off a message, {@code false} otherwise.
+ 
          */
         public boolean isInBackOff() {
             return this.isInBackOff;

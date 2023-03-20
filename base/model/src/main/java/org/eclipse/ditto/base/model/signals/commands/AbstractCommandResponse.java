@@ -117,7 +117,7 @@ public abstract class AbstractCommandResponse<T extends AbstractCommandResponse<
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractCommandResponse)) {
             return false;
         }
         final AbstractCommandResponse<?> that = (AbstractCommandResponse<?>) o;

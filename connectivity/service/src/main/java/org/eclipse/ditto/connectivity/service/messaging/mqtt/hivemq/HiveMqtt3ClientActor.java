@@ -115,7 +115,7 @@ public final class HiveMqtt3ClientActor
             @Nullable final Duration keepAliveInterval) {
         final Mqtt3ConnectBuilder.Send<CompletableFuture<Mqtt3ConnAck>> connectWith = client.connectWith();
         if (keepAliveInterval != null) {
-            connectWith.keepAlive((int) keepAliveInterval.getSeconds());
+            connectWith = connectWith.keepAlive((int) keepAliveInterval.getSeconds());
         }
         return connectWith.cleanSession(cleanSession).send();
     }

@@ -12,6 +12,8 @@
  */
 package org.eclipse.ditto.internal.utils.pubsub.ddata;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletionException;
-
 import scala.util.hashing.MurmurHash3$;
 
 /**
@@ -58,7 +59,7 @@ public interface Hashes {
      */
     default Long hashAsLong(final String topic) {
         final List<Integer> hashes = getHashes(topic);
-        return ((long) hashes.get(0)) << 32 | hashes.get(1) & 0xffffffffL;
+        return ((long) hashes.get(0)) << 32 | (hashes.get(1) & 0xffffffffL);
     }
 
     /**
@@ -85,7 +86,7 @@ public interface Hashes {
         final int batchSize = 256 / 32;
         final List<Integer> arrayList = new ArrayList<>(howManyIntegers);
         final MessageDigest sha256 = getSha256();
-        byte[] nextInput = input.getBytes();
+        byte[] nextInput = input.getBytes(UTF_8);
         for (int remainingSize = howManyIntegers; remainingSize > 0; remainingSize -= batchSize) {
             final int thisBatchSize = Math.min(remainingSize, batchSize);
             final byte[] digest = sha256.digest(nextInput);

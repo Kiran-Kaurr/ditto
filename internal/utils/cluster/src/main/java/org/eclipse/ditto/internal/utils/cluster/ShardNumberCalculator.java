@@ -63,7 +63,7 @@ public final class ShardNumberCalculator {
 
     // Make sure not to negate Integer.MIN_VALUE because -Integer.MIN_VALUE == Integer.MIN_VALUE < 0.
     private static int ensureNonNegative(final int hashCode) {
-        return Integer.MIN_VALUE == hashCode ? 0 : Math.abs(hashCode);
+        return hashCode == Integer.MIN_VALUE ? 0 : Math.abs(hashCode);
     }
 
     @Override

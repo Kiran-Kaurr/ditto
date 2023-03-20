@@ -90,7 +90,7 @@ abstract class AbstractDevOpsCommandResponse<T extends AbstractDevOpsCommandResp
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractDevOpsCommandResponse)) {
             return false;
         }
         final AbstractDevOpsCommandResponse<?> that = (AbstractDevOpsCommandResponse<?>) o;

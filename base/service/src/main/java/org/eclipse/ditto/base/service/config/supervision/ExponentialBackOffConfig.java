@@ -76,7 +76,7 @@ public interface ExponentialBackOffConfig {
         /**
          * How long to wait before stopping an idle corrupted supervisor actor.
          */
-        CORRUPTED_RECEIVE_TIMEOUT("corrupted-receive-timeout", Duration.ofSeconds(600L));
+        CORRUPTED_RECEIVE_TIMEOUT("corrupted-receive-timeout", Duration.ofMinutes(10));
 
         private final String path;
         private final Object defaultValue;

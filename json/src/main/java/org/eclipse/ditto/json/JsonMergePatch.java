@@ -186,7 +186,8 @@ public final class JsonMergePatch {
     }
 
     /**
-     * @return the merge patch json value
+     *Returns the merge patch json value.
+ 
      */
     public JsonValue asJsonValue() {
         return mergePatch;

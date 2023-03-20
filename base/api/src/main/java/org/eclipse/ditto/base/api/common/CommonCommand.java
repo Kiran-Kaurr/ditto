@@ -90,7 +90,7 @@ public abstract class CommonCommand<T extends CommonCommand<T>> extends Abstract
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CommonCommand)) {
             return false;
         }
         if (!super.equals(o)) {

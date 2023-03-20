@@ -31,7 +31,8 @@ public final class SubscriptionsReader {
     }
 
     /**
-     * @return An empty subscription-reader.
+     *Returns an empty subscription-reader.
+ 
      */
     public static SubscriptionsReader empty() {
         return new SubscriptionsReader(Map.of());
@@ -48,7 +49,8 @@ public final class SubscriptionsReader {
     }
 
     /**
-     * @return the ternary relation between subscribers, groups and topics.
+     *Returns the ternary relation between subscribers, groups and topics.
+ 
      */
     public Map<ActorRef, SubscriberData> getSubscriberDataMap() {
         return subscriberDataMap;

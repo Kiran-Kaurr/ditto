@@ -90,7 +90,7 @@ final class ImmutableTopicPath implements TopicPath {
 
     static JsonPointer newTopicOrPathPointer(final String path) {
         final String slash = TopicPath.PATH_DELIMITER;
-        if (path.isEmpty() || slash.equals(path)) {
+        if (path.isEmpty() || path.equals(slash)) {
             return JsonPointer.empty();
         }
         final List<JsonKey> jsonKeys = new ArrayList<>();
@@ -155,7 +155,7 @@ final class ImmutableTopicPath implements TopicPath {
                 .add(namespace)
                 .add(name)
                 .add(group.getName())
-                .add(Channel.NONE != channel ? channel.getName() : null)
+                .add(channel != Channel.NONE ? channel.getName() : null)
                 .add(criterion.getName())
                 .add(getStringOrNull(action))
                 .add(getStringOrNull(searchAction))
@@ -475,8 +475,8 @@ final class ImmutableTopicPath implements TopicPath {
         }
 
         private void validateChannel() {
-            if ((Group.POLICIES == group || Group.CONNECTIONS == group) &&
-                    Channel.NONE != channel) {
+            if ((group == Group.POLICIES || group == Group.CONNECTIONS) &&
+                    channel != Channel.NONE) {
                 throw new IllegalStateException("The policies and connection groups require no channel.");
             }
         }
@@ -578,7 +578,7 @@ final class ImmutableTopicPath implements TopicPath {
 
         private Channel tryToGetChannelForGroup(final Group group) {
             final Channel result;
-            if (Group.POLICIES == group || Group.CONNECTIONS == group) {
+            if (group == Group.POLICIES || group == Group.CONNECTIONS) {
                 result = Channel.NONE;
             } else {
                 result = tryToGetChannelForName(tryToGetChannelName());

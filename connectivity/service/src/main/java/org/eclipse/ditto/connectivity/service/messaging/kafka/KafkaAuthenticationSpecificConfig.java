@@ -32,8 +32,7 @@ final class KafkaAuthenticationSpecificConfig implements KafkaSpecificConfig {
 
     private static final String SPECIFIC_CONFIG_SASL_MECHANISM_KEY = "saslMechanism";
 
-    @SuppressWarnings("squid:S2068")
-    private static final String JAAS_CONFIG_TEMPLATE = "%s required username=\"%s\" password=\"%s\";";
+    
     private static final String PLAIN_SASL_MECHANISM = "PLAIN";
     private static final String DEFAULT_SASL_MECHANISM = PLAIN_SASL_MECHANISM;
     private static final Map<String, String> SASL_MECHANISMS_WITH_LOGIN_MODULE = new HashMap<>();
@@ -106,7 +105,7 @@ final class KafkaAuthenticationSpecificConfig implements KafkaSpecificConfig {
     }
 
     private static String getJaasConfig(final String loginModule, final String username, final String password) {
-        return String.format(JAAS_CONFIG_TEMPLATE, loginModule, username, password);
+        return String.format("%s required username=\"%s\" password=\"%s\";", loginModule, username, password);
     }
 
     private static String getSaslMechanismOrDefault(final Connection connection) {

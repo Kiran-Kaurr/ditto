@@ -43,7 +43,8 @@ public interface Target extends Jsonifiable.WithFieldSelectorAndPredicate<JsonFi
 
 
     /**
-     * @return the original address (before placeholders were resolved)
+     *Returns the original address (before placeholders were resolved).
+ 
      */
     String getOriginalAddress();
 
@@ -51,7 +52,8 @@ public interface Target extends Jsonifiable.WithFieldSelectorAndPredicate<JsonFi
     Target withAddress(String newAddress);
 
     /**
-     * @return set of topics that should be published via this target
+     *Returns set of topics that should be published via this target.
+ 
      */
     Set<FilteredTopic> getTopics();
 

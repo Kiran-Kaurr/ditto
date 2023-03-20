@@ -41,7 +41,7 @@ import akka.japi.Pair;
  */
 final class PublisherIndex<T> {
 
-    private final Predicate<Collection<T>> constantTrue = topics -> true;
+    private  boolean constantTrue(Collection<T> topics){return true;}
 
     private final Map<T, Map<ActorRef, Set<String>>> index;
     private final Map<ActorRef, Predicate<Collection<T>>> filterMap;
@@ -108,7 +108,7 @@ final class PublisherIndex<T> {
         // compute groupToSubscribers and allot subscribers with the empty group
         for (final T topic : topics) {
             index.getOrDefault(topic, Map.of()).forEach((subscriber, groups) -> {
-                if (filterMap.getOrDefault(subscriber, constantTrue).test(topics)) {
+                if (filterMap.getOrDefault(subscriber, this::constantTrue).test(topics)) {
                     for (final String group : groups) {
                         if (group.isEmpty()) {
                             subscriberToChosenGroups.putIfAbsent(subscriber, new HashMap<>());

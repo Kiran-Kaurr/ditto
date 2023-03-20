@@ -12,9 +12,6 @@
  */
 package org.eclipse.ditto.internal.utils.akka.controlflow;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import akka.stream.Attributes;
 import akka.stream.FanInShape2;
 import akka.stream.Inlet;
@@ -24,6 +21,9 @@ import akka.stream.stage.AbstractOutHandler;
 import akka.stream.stage.GraphStage;
 import akka.stream.stage.GraphStageLogic;
 import akka.stream.stage.GraphStageLogicWithLogging;
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Flow of elements regulated by credits arriving at a side channel.
@@ -96,7 +96,7 @@ public final class Transistor<T> extends GraphStage<FanInShape2<T, Integer, T>> 
         private int demand = 0;
 
         // elements in flight
-        private Queue<T> inflight = new LinkedList<>();
+        private Queue<T> inflight = new ArrayDeque<>();
 
         private TransistorLogic() {
             super(shape);

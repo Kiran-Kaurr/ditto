@@ -109,7 +109,8 @@ public final class QueryFilterCriteriaFactory {
     }
 
     /**
-     * @return the criteria factory.
+     *Returns the criteria factory.
+ 
      */
     public CriteriaFactory toCriteriaFactory() {
         return criteriaFactory;

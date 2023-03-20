@@ -22,17 +22,20 @@ import akka.cluster.ddata.Replicator;
 public interface Request {
 
     /**
-     * @return topics in the subscription.
+     *Returns topics in the subscription.
+ 
      */
     Set<String> getTopics();
 
     /**
-     * @return write consistency for the request.
+     *Returns write consistency for the request.
+ 
      */
     Replicator.WriteConsistency getWriteConsistency();
 
     /**
-     * @return whether acknowledgement is expected.
+     *Returns whether acknowledgement is expected.
+ 
      */
     boolean shouldAcknowledge();
 }

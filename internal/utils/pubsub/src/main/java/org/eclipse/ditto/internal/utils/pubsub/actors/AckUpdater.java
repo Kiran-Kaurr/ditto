@@ -74,8 +74,8 @@ public final class AckUpdater extends AbstractActorWithTimers implements Cluster
     private final GroupedRelation<ActorRef, String> localAckLabels;
     private final Address ownAddress;
     private final DData<Address, String, LiteralUpdate> ackDData;
-    private final java.util.Set<ActorRef> ddataChangeRecipients;
-    private final java.util.Set<ActorRef> localChangeRecipients;
+    private final Set<ActorRef> ddataChangeRecipients;
+    private final Set<ActorRef> localChangeRecipients;
     private final Gauge ackSizeMetric;
     private final Map<Key<?>, Map<Address, List<Grouped<String>>>> cachedRemoteAcks;
     private final Cluster cluster;
@@ -346,11 +346,7 @@ public final class AckUpdater extends AbstractActorWithTimers implements Cluster
         return diff;
     }
 
-    private LiteralUpdate createAndResetDDataUpdate() {
-        final var nextUpdate = exportNextUpdate();
-        previousUpdate = nextUpdate;
-        return nextUpdate;
-    }
+    
 
     private LiteralUpdate exportNextUpdate() {
         final Set<String> groupedAckLabels = localAckLabels.exportValuesByGroup()
@@ -404,7 +400,7 @@ public final class AckUpdater extends AbstractActorWithTimers implements Cluster
         } else {
             return topic -> {
                 final Set<String> groups = topicToGroup.getOrDefault(topic, Set.of());
-                return !(groups.isEmpty() || groups.size() == 1 && groups.contains(group));
+                return !(groups.isEmpty() || (groups.size() == 1 && groups.contains(group)));
             };
         }
     }

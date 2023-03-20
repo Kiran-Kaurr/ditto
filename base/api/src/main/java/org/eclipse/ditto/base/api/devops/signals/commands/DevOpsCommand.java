@@ -44,7 +44,7 @@ public interface DevOpsCommand<T extends DevOpsCommand<T>> extends Command<T> {
      *
      * @return the type of this command
      */
-    String getType();
+    @Override String getType();
 
     @Override
     T setDittoHeaders(DittoHeaders dittoHeaders);
@@ -65,12 +65,14 @@ public interface DevOpsCommand<T extends DevOpsCommand<T>> extends Command<T> {
     }
 
     /**
-     * @return the service name to which to send the DevOpsCommand.
+     *Returns the service name to which to send the DevOpsCommand.
+ 
      */
     Optional<String> getServiceName();
 
     /**
-     * @return the instance index of the serviceName to which to send the DevOpsCommand.
+     *Returns the instance index of the serviceName to which to send the DevOpsCommand.
+ 
      */
     Optional<String> getInstance();
 

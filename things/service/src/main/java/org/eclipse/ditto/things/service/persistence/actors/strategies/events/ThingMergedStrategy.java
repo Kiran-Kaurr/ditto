@@ -29,7 +29,7 @@ import org.eclipse.ditto.things.model.signals.events.ThingMerged;
 @Immutable
 final class ThingMergedStrategy extends AbstractThingEventStrategy<ThingMerged> {
 
-    protected ThingMergedStrategy() {
+    ThingMergedStrategy() {
         super();
     }
 

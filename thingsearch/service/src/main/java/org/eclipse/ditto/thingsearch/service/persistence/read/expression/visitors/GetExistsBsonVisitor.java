@@ -71,7 +71,7 @@ public final class GetExistsBsonVisitor extends AbstractFieldBsonCreator impleme
 
     @Override
     public Bson visitFeature(final String featureId) {
-        if (FEATURE_ID_WILDCARD.equals(featureId)) {
+        if (FEATURE_ID_WILDCARD.toString().equals(featureId)) {
             // any feature exists
             return Filters.exists(toDottedPath(FIELD_F_ARRAY, List.of(JsonKey.of(FIELD_FEATURE_ID))));
         } else {
@@ -100,7 +100,7 @@ public final class GetExistsBsonVisitor extends AbstractFieldBsonCreator impleme
 
     @Override
     public Bson visitFeatureIdProperty(final String featureId, final String property) {
-        if (FEATURE_ID_WILDCARD.equals(featureId)) {
+        if (FEATURE_ID_WILDCARD.toString().equals(featureId)) {
             return matchWildcardFeatureKey(PROPERTIES + property);
         } else {
             return matchKey(FIELD_FEATURES_PATH + featureId + PROPERTIES + property);

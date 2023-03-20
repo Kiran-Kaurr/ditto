@@ -163,7 +163,7 @@ public final class SemanticSignalType {
 
         private int getIndexOfNameDelimiterOrThrow() throws SignalTypeFormatException {
             final var result = signalTypeString.lastIndexOf(SIGNAL_NAME_DELIMITER);
-            if (-1 == result || signalTypeString.length() - 1 == result) {
+            if (result == -1 || signalTypeString.length() - 1 == result) {
                 final var pattern = "Signal type <{0}> has wrong index of name delimiter <{1}>: {2,number}";
                 throw new SignalTypeFormatException(MessageFormat.format(pattern,
                         signalTypeString,

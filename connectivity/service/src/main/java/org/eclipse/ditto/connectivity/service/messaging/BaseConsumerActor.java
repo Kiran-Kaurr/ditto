@@ -109,7 +109,8 @@ public abstract class BaseConsumerActor extends AbstractActorWithTimers {
     }
 
     /**
-     * @return the logging adapter of this actor.
+     *Returns the logging adapter of this actor.
+ 
      */
     protected abstract ThreadSafeDittoLoggingAdapter log();
 

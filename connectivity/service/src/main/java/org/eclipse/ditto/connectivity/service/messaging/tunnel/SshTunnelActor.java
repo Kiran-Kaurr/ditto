@@ -347,7 +347,8 @@ public final class SshTunnelActor extends AbstractActorWithTimers implements Cre
         }
 
         /**
-         * @return the local port of the ssh tunnel
+         *Returns the local port of the ssh tunnel.
+ 
          */
         public int getLocalPort() {
             return localPort;
@@ -374,14 +375,16 @@ public final class SshTunnelActor extends AbstractActorWithTimers implements Cre
         }
 
         /**
-         * @return the reason why the tunnel was closed
+         *Returns the reason why the tunnel was closed.
+ 
          */
         public String getMessage() {
             return message;
         }
 
         /**
-         * @return an optional error why the tunnel was closed
+         *Returns an optional error why the tunnel was closed.
+ 
          */
         @Nullable
         public Throwable getError() {

@@ -164,7 +164,7 @@ final class EvaluatedPolicy {
     private static Map<JsonPointer, Boolean> getPaths(final Resources resources) {
         final Map<JsonPointer, Boolean> map = new HashMap<>();
         resources.stream()
-                .filter(resource -> PoliciesResourceType.THING.equals(resource.getResourceKey().getResourceType()))
+                .filter(resource -> resource.getResourceKey().getResourceType().equals(PoliciesResourceType.THING))
                 .forEach(resource -> {
                     final var permissions = resource.getEffectedPermissions();
                     if (permissions.getRevokedPermissions().contains(Permission.READ)) {
@@ -203,7 +203,7 @@ final class EvaluatedPolicy {
             final boolean isGrant,
             final Set<String> subjects) {
 
-        final var isFeaturesPath = path.getRoot().filter(key -> FIELD_FEATURES.equals(key.toString())).isPresent();
+        final var isFeaturesPath = path.getRoot().filter(key -> key.toString().equals(FIELD_FEATURES)).isPresent();
         final var featureIdOptional = path.get(1);
         if (isFeaturesPath && featureIdOptional.isPresent()) {
             final var featureId = featureIdOptional.get().toString();

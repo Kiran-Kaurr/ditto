@@ -121,7 +121,8 @@ public final class DevOpsErrorResponse extends AbstractCommandResponse<DevOpsErr
     }
 
     /**
-     * @return the DittoRuntimeException as JSON.
+     *Returns the DittoRuntimeException as JSON.
+ 
      */
     public JsonObject getDittoRuntimeException() {
         return dittoRuntimeException;

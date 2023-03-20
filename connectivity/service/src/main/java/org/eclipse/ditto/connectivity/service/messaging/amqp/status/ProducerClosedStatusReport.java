@@ -34,14 +34,16 @@ public final class ProducerClosedStatusReport {
     }
 
     /**
-     * @return the closed message producer
+     *Returns the closed message producer.
+ 
      */
     public MessageProducer getMessageProducer() {
         return messageProducer;
     }
 
     /**
-     * @return the cause why the producer was closed
+     *Returns the cause why the producer was closed.
+ 
      */
     public Throwable getCause() {
         return cause;

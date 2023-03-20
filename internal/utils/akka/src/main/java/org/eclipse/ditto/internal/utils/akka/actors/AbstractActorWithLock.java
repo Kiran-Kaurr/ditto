@@ -37,7 +37,8 @@ public abstract class AbstractActorWithLock extends AbstractActorWithStashWithTi
     }
 
     /**
-     * @return Actor's usual message handler. It will always be invoked in the actor's thread.
+     *Returns actor's usual message handler. It will always be invoked in the actor's thread.
+ 
      */
     protected abstract Receive handleMessage();
 

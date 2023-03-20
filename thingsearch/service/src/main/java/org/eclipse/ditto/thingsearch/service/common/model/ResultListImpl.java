@@ -199,7 +199,7 @@ public final class ResultListImpl<E> implements ResultList<E> {
         } else {
             final ResultListImpl<?> that = (ResultListImpl<?>) obj;
             return Objects.equals(items, that.items) &&
-                    Objects.equals(nextPageOffset, that.nextPageOffset) &&
+                    (nextPageOffset == that.nextPageOffset) &&
                     Objects.equals(lastResultSortValues, that.lastResultSortValues);
         }
     }

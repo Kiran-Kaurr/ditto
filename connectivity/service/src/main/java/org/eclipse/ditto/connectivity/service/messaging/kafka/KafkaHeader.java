@@ -52,7 +52,8 @@ enum KafkaHeader implements Function<ConsumerRecord<String, ByteBuffer>, Optiona
     }
 
     /**
-     * @return the header name
+     *Returns the header name.
+ 
      */
     public String getName() {
         return name;

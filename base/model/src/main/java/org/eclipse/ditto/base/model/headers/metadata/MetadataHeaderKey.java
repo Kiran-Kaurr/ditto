@@ -85,7 +85,7 @@ public interface MetadataHeaderKey extends Comparable<MetadataHeaderKey> {
      *
      * @return the string representation of this key.
      */
-    String toString();
+    @Override String toString();
 
     /**
      * Compares the given given key with this key.

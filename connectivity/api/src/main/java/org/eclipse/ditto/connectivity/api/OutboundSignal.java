@@ -40,17 +40,20 @@ import akka.actor.ActorRef;
 public interface OutboundSignal extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the originating signal.
+     *Returns the originating signal.
+ 
      */
     Signal<?> getSource();
 
     /**
-     * @return the targets that are authorized to read and subscribed for the outbound signal.
+     *Returns the targets that are authorized to read and subscribed for the outbound signal.
+ 
      */
     List<Target> getTargets();
 
     /**
-     * @return extra fields of an enriched signal. Only relevant during message mapping.
+     *Returns extra fields of an enriched signal. Only relevant during message mapping.
+ 
      */
     default Optional<JsonObject> getExtra() {
         return Optional.empty();
@@ -77,7 +80,8 @@ public interface OutboundSignal extends Jsonifiable.WithFieldSelectorAndPredicat
     interface Mappable extends OutboundSignal {
 
         /**
-         * @return the {@link PayloadMapping} common to all {@link Target}s.
+         *Returns the {@link PayloadMapping} common to all {@link Target}s.
+ 
          */
         PayloadMapping getPayloadMapping();
 
@@ -89,12 +93,14 @@ public interface OutboundSignal extends Jsonifiable.WithFieldSelectorAndPredicat
     interface Mapped extends OutboundSignal {
 
         /**
-         * @return the {@link ExternalMessage} that was mapped from the outbound signal.
+         *Returns the {@link ExternalMessage} that was mapped from the outbound signal.
+ 
          */
         ExternalMessage getExternalMessage();
 
         /**
-         * @return the Ditto protocol message after adaptation.
+         *Returns the Ditto protocol message after adaptation.
+ 
          */
         Adaptable getAdaptable();
     }
@@ -105,17 +111,20 @@ public interface OutboundSignal extends Jsonifiable.WithFieldSelectorAndPredicat
     interface MultiMapped extends OutboundSignal {
 
         /**
-         * @return the first mapped signal.
+         *Returns the first mapped signal.
+ 
          */
         Mapped first();
 
         /**
-         * @return a list of outbound signals mapped from mapping 1 signal.
+         *Returns a list of outbound signals mapped from mapping 1 signal.
+ 
          */
         List<Mapped> getMappedOutboundSignals();
 
         /**
-         * @return sender of the original signal.
+         *Returns sender of the original signal.
+ 
          */
         Optional<ActorRef> getSender();
     }

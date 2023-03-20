@@ -54,10 +54,10 @@ final class CheckUnrestrictedPermissionsVisitor extends CheckPermissionsVisitor 
         final Permissions revokedPermissions = effectedPermissions.getRevokedPermissions();
 
         final PointerLocation pointerLocation = getLocationInRelationToTargetPointer(resourceNode);
-        if (PointerLocation.ABOVE == pointerLocation || PointerLocation.SAME == pointerLocation) {
+        if (pointerLocation == PointerLocation.ABOVE || pointerLocation == PointerLocation.SAME) {
             weightedPermissions.addGranted(grantedPermissions, resourceNode.getLevel());
             weightedPermissions.addRevoked(revokedPermissions, resourceNode.getLevel());
-        } else if (PointerLocation.BELOW == pointerLocation) {
+        } else if (pointerLocation == PointerLocation.BELOW) {
             weightedPermissions.addRevoked(revokedPermissions, resourceNode.getLevel());
         }
     }

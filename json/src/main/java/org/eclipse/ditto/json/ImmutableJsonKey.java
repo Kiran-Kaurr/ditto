@@ -44,7 +44,7 @@ final class ImmutableJsonKey implements JsonKey {
 
         if (JsonKey.class.isAssignableFrom(keyValue.getClass())) {
             return ((JsonKey) keyValue);
-        } else  if (0 == keyValue.length()) {
+        } else  if (keyValue.length() == 0) {
             throw new IllegalArgumentException("The key string must not be empty!");
         }
 

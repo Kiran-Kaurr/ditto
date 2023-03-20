@@ -35,37 +35,44 @@ import org.eclipse.ditto.json.JsonObject;
 public interface ResourceStatus extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return type of the resource
+     *Returns type of the resource.
+ 
      */
     ResourceType getResourceType();
 
     /**
-     * @return the resource client identifier
+     *Returns the resource client identifier.
+ 
      */
     String getClient();
 
     /**
-     * @return the resource address
+     *Returns the resource address.
+ 
      */
     Optional<String> getAddress();
 
     /**
-     * @return the current status of the resource
+     *Returns the current status of the resource.
+ 
      */
     ConnectivityStatus getStatus();
 
     /**
-     * @return the current recovery status of the resource (only applicable for the {@code CLIENT} resource).
+     *Returns the current recovery status of the resource (only applicable for the {@code CLIENT} resource).
+ 
      */
     Optional<RecoveryStatus> getRecoveryStatus();
 
     /**
-     * @return the optional status details
+     *Returns the optional status details.
+ 
      */
     Optional<String> getStatusDetails();
 
     /**
-     * @return the instant since the resource is in this state
+     *Returns the instant since the resource is in this state.
+ 
      */
     Optional<Instant> getInStateSince();
 

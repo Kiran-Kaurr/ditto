@@ -214,7 +214,7 @@ public abstract class SnapshotTaken<T extends SnapshotTaken<T>>
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof SnapshotTaken)) {
             return false;
         }
         final var that = (SnapshotTaken<?>) o;

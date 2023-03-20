@@ -12,6 +12,24 @@
  */
 package org.eclipse.ditto.thingsearch.service.updater.actors;
 
+import akka.Done;
+import akka.NotUsed;
+import akka.actor.AbstractFSMWithStash;
+import akka.actor.ActorRef;
+import akka.actor.FSM;
+import akka.actor.Props;
+import akka.cluster.pubsub.DistributedPubSubMediator;
+import akka.japi.pf.FSMStateFunctionBuilder;
+import akka.japi.pf.PFBuilder;
+import akka.pattern.Patterns;
+import akka.stream.KillSwitches;
+import akka.stream.Materializer;
+import akka.stream.UniqueKillSwitch;
+import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Sink;
+import akka.stream.javadsl.Source;
+import com.mongodb.client.model.DeleteOneModel;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -22,10 +40,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
-
 import javax.annotation.Nullable;
-
 import org.bson.BsonDocument;
+import org.eclipse.ditto.base.api.common.Shutdown;
 import org.eclipse.ditto.base.api.common.ShutdownReasonType;
 import org.eclipse.ditto.base.model.acks.AcknowledgementRequest;
 import org.eclipse.ditto.base.model.acks.DittoAcknowledgementLabel;
@@ -56,26 +73,6 @@ import org.eclipse.ditto.thingsearch.service.persistence.write.model.WriteResult
 import org.eclipse.ditto.thingsearch.service.persistence.write.streaming.BulkWriteResultAckFlow;
 import org.eclipse.ditto.thingsearch.service.persistence.write.streaming.ConsistencyLag;
 
-import com.mongodb.client.model.DeleteOneModel;
-
-import akka.Done;
-import akka.NotUsed;
-import akka.actor.AbstractFSMWithStash;
-import akka.actor.ActorRef;
-import akka.actor.FSM;
-import akka.actor.Props;
-import akka.cluster.pubsub.DistributedPubSubMediator;
-import akka.japi.pf.FSMStateFunctionBuilder;
-import akka.japi.pf.PFBuilder;
-import akka.pattern.Patterns;
-import akka.stream.KillSwitches;
-import akka.stream.Materializer;
-import akka.stream.UniqueKillSwitch;
-import akka.stream.javadsl.Flow;
-import akka.stream.javadsl.Keep;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
-
 /**
  * This Actor initiates persistence updates related to 1 thing.
  */
@@ -88,8 +85,8 @@ public final class ThingUpdater extends AbstractFSMWithStash<ThingUpdater.State,
     private static final Duration BLOCK_NAMESPACE_SHUTDOWN_DELAY = Duration.ofMinutes(2);
 
     // alias Ditto Shutdown class because FSM shadows it
-    private static final Class<org.eclipse.ditto.base.api.common.Shutdown> SHUTDOWN_CLASS =
-            org.eclipse.ditto.base.api.common.Shutdown.class;
+    private static final Class<Shutdown> SHUTDOWN_CLASS =
+            Shutdown.class;
 
     // logger for "trace" statements
     private static final DittoLogger LOGGER = DittoLoggerFactory.getLogger(ThingUpdater.class);
@@ -259,7 +256,7 @@ public final class ThingUpdater extends AbstractFSMWithStash<ThingUpdater.State,
         return stay();
     }
 
-    private FSM.State<State, Data> shutdownNow(final org.eclipse.ditto.base.api.common.Shutdown shutdown,
+    private FSM.State<State, Data> shutdownNow(final Shutdown shutdown,
             final Data data) {
         final var shutdownReason = shutdown.getReason();
         if (shutdownReason.isRelevantFor(thingId.getNamespace()) || shutdownReason.isRelevantFor(thingId)) {
@@ -586,7 +583,7 @@ public final class ThingUpdater extends AbstractFSMWithStash<ThingUpdater.State,
         return new Data(deletedMetadata, ThingDeleteModel.of(deletedMetadata));
     }
 
-    private static JsonValue getDescription(final org.eclipse.ditto.base.api.common.Shutdown shutdown) {
+    private static JsonValue getDescription(final Shutdown shutdown) {
         final var type = shutdown.getReason().getType();
         if (type instanceof ShutdownReasonType.Known knownType) {
             return JsonValue.of(switch (knownType) {

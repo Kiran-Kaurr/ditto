@@ -97,7 +97,7 @@ public final class DefaultBackgroundSyncConfig implements BackgroundSyncConfig {
      *
      * @return the tolerance window.
      */
-    public Duration getToleranceWindow() {
+    @Override public Duration getToleranceWindow() {
         return toleranceWindow;
     }
 
@@ -106,7 +106,7 @@ public final class DefaultBackgroundSyncConfig implements BackgroundSyncConfig {
      *
      * @return the number of things to update per  throttle period.
      */
-    public int getThrottleThroughput() {
+    @Override public int getThrottleThroughput() {
         return throttleThroughput;
     }
 
@@ -115,7 +115,7 @@ public final class DefaultBackgroundSyncConfig implements BackgroundSyncConfig {
      *
      * @return the throttle period.
      */
-    public Duration getThrottlePeriod() {
+    @Override public Duration getThrottlePeriod() {
         return throttlePeriod;
     }
 
@@ -123,7 +123,7 @@ public final class DefaultBackgroundSyncConfig implements BackgroundSyncConfig {
      * How long to wait before failing the background sync stream when no element passed through for a while.
      * The stream stalls when other services are slow.
      */
-    public Duration getIdleTimeout() {
+    @Override public Duration getIdleTimeout() {
         return idleTimeout;
     }
 
@@ -132,7 +132,7 @@ public final class DefaultBackgroundSyncConfig implements BackgroundSyncConfig {
      *
      * @return ask timeout for the policy shard region.
      */
-    public Duration getPolicyAskTimeout() {
+    @Override public Duration getPolicyAskTimeout() {
         return policyAskTimeout;
     }
 

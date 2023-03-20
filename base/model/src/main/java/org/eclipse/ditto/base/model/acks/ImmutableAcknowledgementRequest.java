@@ -36,7 +36,7 @@ final class ImmutableAcknowledgementRequest implements AcknowledgementRequest {
      *
      * @param acknowledgementLabel the label of the returned acknowledgement request.
      * @return the instance.
-     * @throws NullPointerException if {@code acknowledgmentLabel} is {@code null}.
+     * @throws NullPointerException if {@code acknowledgementLabel} is {@code null}.
      */
     public static ImmutableAcknowledgementRequest getInstance(final AcknowledgementLabel acknowledgementLabel) {
         return new ImmutableAcknowledgementRequest(checkNotNull(acknowledgementLabel, "acknowledgementLabel"));

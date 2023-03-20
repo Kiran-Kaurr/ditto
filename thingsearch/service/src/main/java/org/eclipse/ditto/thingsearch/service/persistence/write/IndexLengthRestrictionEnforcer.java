@@ -84,8 +84,8 @@ public final class IndexLengthRestrictionEnforcer {
     }
 
     private static boolean isNonEmptyComposite(final JsonValue value) {
-        return value.isObject() && !value.asObject().isEmpty() ||
-                value.isArray() && !value.asArray().isEmpty();
+        return (value.isObject() && !value.asObject().isEmpty()) ||
+                (value.isArray() && !value.asArray().isEmpty());
     }
 
     // precondition: value.isString()

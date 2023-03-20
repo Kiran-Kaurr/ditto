@@ -24,12 +24,14 @@ import org.eclipse.ditto.things.model.signals.commands.modify.MergeThingResponse
 interface MergeCommandAdapterProvider {
 
     /**
-     * @return the modify command adapter
+     *Returns the modify command adapter.
+ 
      */
     Adapter<MergeThing> getMergeCommandAdapter();
 
     /**
-     * @return the modify command response adapter
+     *Returns the modify command response adapter.
+ 
      */
     Adapter<MergeThingResponse> getMergeCommandResponseAdapter();
 

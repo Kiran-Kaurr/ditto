@@ -65,7 +65,8 @@ public enum StreamingType {
     }
 
     /**
-     * @return the key used for distributed pub/sub in the Akka cluster for this StreamingType.
+     *Returns the key used for distributed pub/sub in the Akka cluster for this StreamingType.
+ 
      */
     public String getDistributedPubSubTopic() {
         return distributedPubSubTopic;

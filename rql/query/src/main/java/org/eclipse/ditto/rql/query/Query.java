@@ -22,22 +22,26 @@ import org.eclipse.ditto.rql.query.criteria.Criteria;
 public interface Query {
 
     /**
-     * @return the Criteria
+     *Returns the Criteria.
+ 
      */
     Criteria getCriteria();
 
     /**
-     * @return the SortOptions
+     *Returns the SortOptions.
+ 
      */
     List<SortOption> getSortOptions();
 
     /**
-     * @return the number of results to which this query is limited.
+     *Returns the number of results to which this query is limited.
+ 
      */
     int getLimit();
 
     /**
-     * @return the number of results which are discarded from the beginning of this query.
+     *Returns the number of results which are discarded from the beginning of this query.
+ 
      */
     int getSkip();
 

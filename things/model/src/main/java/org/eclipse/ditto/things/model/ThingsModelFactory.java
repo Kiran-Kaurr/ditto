@@ -501,7 +501,7 @@ public final class ThingsModelFactory {
             final Set<Feature> features = jsonObject.stream()
                     .filter(field -> !Objects.equals(field.getKey(), JsonSchemaVersion.getJsonKey()))
                     .peek(field -> {
-                        if (!(field.getValue().isObject())) {
+                        if (! field.getValue().isObject()) {
                             final String errorMsgTemplate =
                                     "The Feature value is not an object for Feature with ID ''{0}'': {1}";
                             final String errorMsg =

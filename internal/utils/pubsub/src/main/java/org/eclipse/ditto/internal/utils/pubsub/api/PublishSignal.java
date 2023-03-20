@@ -99,7 +99,8 @@ public final class PublishSignal extends AbstractCommand<PublishSignal> {
     }
 
     /**
-     * @return the signal to be published.
+     *Returns the signal to be published.
+ 
      */
     public Signal<?> getSignal() {
         return signal;

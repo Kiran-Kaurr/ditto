@@ -37,7 +37,8 @@ public final class ConnectionEventStrategies extends AbstractEventStrategies<Con
     }
 
     /**
-     * @return the unique instance of this class.
+     *Returns the unique instance of this class.
+ 
      */
     public static ConnectionEventStrategies getInstance() {
         return INSTANCE;

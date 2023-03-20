@@ -181,22 +181,10 @@ final class PropertiesFactory {
     }
 
     private boolean isConnectionSecure() {
-        return "ssl".equals(connection.getProtocol());
+        return connection.getProtocol().equals("ssl");
     }
 
-    /**
-     * Convert a structured Config into flat map from config paths to values.
-     * Replicates Alpakka Kafka client's interpretation of client Config.
-     *
-     * @param config the Config object.
-     * @return flat map from config paths to values.
-     */
-    private static HashMap<String, Object> configToProperties(final Config config) {
-        final HashMap<String, Object> flattened = new HashMap<>();
-        final Map<String, Object> unwrapped = config.root().unwrapped();
-        flattenUnwrappedConfig(unwrapped, "", flattened);
-        return flattened;
-    }
+    
 
     /**
      * Convert an unwrapped config into a flat properties map.

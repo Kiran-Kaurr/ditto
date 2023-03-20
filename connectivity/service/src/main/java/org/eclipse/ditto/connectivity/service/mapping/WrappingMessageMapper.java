@@ -83,7 +83,8 @@ final class WrappingMessageMapper implements MessageMapper {
     }
 
     /**
-     * @return the MessageMapper delegate this instance wraps.
+     *Returns the MessageMapper delegate this instance wraps.
+ 
      */
     public MessageMapper getDelegate() {
         return delegate;

@@ -12,13 +12,21 @@
  */
 package org.eclipse.ditto.concierge.service.starter.actors;
 
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.japi.pf.ReceiveBuilder;
+import akka.stream.SourceRef;
+import akka.stream.SystemMaterializer;
+import akka.stream.javadsl.Source;
+import akka.stream.javadsl.StreamRefs;
+import akka.util.Timeout;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
 import org.eclipse.ditto.base.model.json.Jsonifiable;
 import org.eclipse.ditto.base.model.signals.SignalWithEntityId;
@@ -36,16 +44,6 @@ import org.eclipse.ditto.things.model.ThingId;
 import org.eclipse.ditto.things.model.signals.commands.query.RetrieveThing;
 import org.eclipse.ditto.things.model.signals.commands.query.RetrieveThings;
 
-import akka.actor.AbstractActor;
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.japi.pf.ReceiveBuilder;
-import akka.stream.SourceRef;
-import akka.stream.SystemMaterializer;
-import akka.stream.javadsl.Source;
-import akka.stream.javadsl.StreamRefs;
-import akka.util.Timeout;
-
 /**
  * Actor to aggregate the retrieved Things from persistence.
  */
@@ -58,7 +56,7 @@ public final class ThingsAggregatorActor extends AbstractActor {
 
     private final ThreadSafeDittoLoggingAdapter log = DittoLoggerFactory.getThreadSafeDittoLoggingAdapter(this);
     private final ActorRef targetActor;
-    private final java.time.Duration retrieveSingleThingTimeout;
+    private final Duration retrieveSingleThingTimeout;
     private final int maxParallelism;
 
     @SuppressWarnings("unused")

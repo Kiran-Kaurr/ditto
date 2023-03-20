@@ -233,7 +233,7 @@ public final class AmqpClientActor extends BaseClientActor implements ExceptionL
 
     @Override
     public void postStop() {
-        ensureJmsConnectionClosed();
+        var unused = ensureJmsConnectionClosed();
         super.postStop();
     }
 
@@ -324,7 +324,7 @@ public final class AmqpClientActor extends BaseClientActor implements ExceptionL
     protected void allocateResourcesOnConnection(final ClientConnected clientConnected) {
         if (clientConnected instanceof JmsConnected client) {
             logger.info("Received JmsConnected");
-            ensureJmsConnectionClosed();
+            var unused = ensureJmsConnectionClosed();
             jmsConnection = client.connection;
             jmsConnection.addConnectionListener(connectionListener);
             jmsSession = client.session;
@@ -380,7 +380,7 @@ public final class AmqpClientActor extends BaseClientActor implements ExceptionL
         stopCommandConsumers();
         stopChildActor(amqpPublisherActor);
         // closing JMS connection closes all sessions and consumers
-        ensureJmsConnectionClosed();
+        var unused = ensureJmsConnectionClosed();
         jmsConnection = null;
         jmsSession = null;
     }
@@ -663,7 +663,7 @@ public final class AmqpClientActor extends BaseClientActor implements ExceptionL
             return Optional.ofNullable(connection);
         }
 
-        Optional<javax.jms.Session> getSession() {
+        Optional<Session> getSession() {
             return Optional.ofNullable(session);
         }
 
@@ -688,7 +688,7 @@ public final class AmqpClientActor extends BaseClientActor implements ExceptionL
             this.session = session;
         }
 
-        javax.jms.Session getSession() {
+        Session getSession() {
             return session;
         }
 

@@ -87,7 +87,8 @@ public final class DefaultConnectionMetricsCounter implements ConnectionMetricsC
     }
 
     /**
-     * @return the metricDirection this collector measures.
+     *Returns the metricDirection this collector measures.
+ 
      */
     MetricDirection getMetricDirection() {
         return metricDirection;

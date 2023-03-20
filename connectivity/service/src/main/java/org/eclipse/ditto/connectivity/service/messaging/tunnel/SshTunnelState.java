@@ -50,42 +50,48 @@ public final class SshTunnelState {
     }
 
     /**
-     * @return enabled ssh tunnel state
+     *Returns enabled ssh tunnel state.
+ 
      */
     public static SshTunnelState enabled() {
         return new SshTunnelState(true, 0, null);
     }
 
     /**
-     * @return disabled ssh tunnel state
+     *Returns disabled ssh tunnel state.
+ 
      */
     public static SshTunnelState disabled() {
         return new SshTunnelState(false, 0, null);
     }
 
     /**
-     * @return whether tunnel is enabled according to the connection configuration
+     *Returns whether tunnel is enabled according to the connection configuration.
+ 
      */
     public boolean isEnabled() {
         return enabled;
     }
 
     /**
-     * @return whether the tunnel has failed
+     *Returns whether the tunnel has failed.
+ 
      */
     public boolean isFailed() {
         return reason != null;
     }
 
     /**
-     * @return whether the tunnel is actually established
+     *Returns whether the tunnel is actually established.
+ 
      */
     public boolean isEstablished() {
         return port > 0;
     }
 
     /**
-     * @return the local ssh tunnel port
+     *Returns the local ssh tunnel port.
+ 
      */
     public int getLocalPort() {
         return port;

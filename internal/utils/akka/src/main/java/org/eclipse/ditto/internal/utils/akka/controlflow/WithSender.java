@@ -24,12 +24,14 @@ import akka.actor.ActorRef;
 public interface WithSender<T> {
 
     /**
-     * @return the message.
+     *Returns the message.
+ 
      */
     T getMessage();
 
     /**
-     * @return the sender.
+     *Returns the sender.
+ 
      */
     ActorRef getSender();
 

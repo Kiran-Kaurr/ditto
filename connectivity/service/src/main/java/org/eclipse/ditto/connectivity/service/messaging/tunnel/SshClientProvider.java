@@ -97,7 +97,8 @@ public final class SshClientProvider implements Extension {
     }
 
     /**
-     * @return th {@link SshClient} instance
+     *Returns th {@link SshClient} instance.
+ 
      */
     public SshClient getSshClient() {
         return sshClient;

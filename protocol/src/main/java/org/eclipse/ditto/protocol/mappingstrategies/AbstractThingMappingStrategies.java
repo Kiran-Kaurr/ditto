@@ -55,7 +55,7 @@ abstract class AbstractThingMappingStrategies<T extends Jsonifiable.WithPredicat
     @Nullable
     protected static String namespaceFrom(final Adaptable adaptable) {
         final String namespace = adaptable.getTopicPath().getNamespace();
-        return TopicPath.ID_PLACEHOLDER.equals(namespace) ? null : namespace;
+        return namespace.equals(TopicPath.ID_PLACEHOLDER) ? null : namespace;
     }
 
     protected static JsonObject payloadValueAsJsonObjectFrom(final Adaptable adaptable) {

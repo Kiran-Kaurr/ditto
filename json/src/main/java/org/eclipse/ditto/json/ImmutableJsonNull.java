@@ -70,7 +70,7 @@ final class ImmutableJsonNull extends AbstractJsonValue implements JsonNull {
 
     @Override
     public boolean equals(@Nullable final Object o) {
-        return this == o || null != o && (super.equals(o) || o instanceof JsonNull);
+        return this == o || (null != o && (super.equals(o) || o instanceof JsonNull));
     }
 
     @Override

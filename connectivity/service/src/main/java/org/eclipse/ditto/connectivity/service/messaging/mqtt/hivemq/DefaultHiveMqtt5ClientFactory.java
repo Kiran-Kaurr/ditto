@@ -35,7 +35,8 @@ public final class DefaultHiveMqtt5ClientFactory extends AbstractHiveMqttClientF
         implements HiveMqtt5ClientFactory {
 
     /**
-     * @return the an instance of {@link DefaultHiveMqtt5ClientFactory}
+     *Returns the an instance of {@link DefaultHiveMqtt5ClientFactory}.
+ 
      */
     public static DefaultHiveMqtt5ClientFactory getInstance(final Supplier<SshTunnelState> tunnelConfigSupplier) {
         return new DefaultHiveMqtt5ClientFactory(tunnelConfigSupplier);

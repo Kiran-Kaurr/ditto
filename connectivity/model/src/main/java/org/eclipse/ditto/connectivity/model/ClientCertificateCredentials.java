@@ -54,14 +54,16 @@ public final class ClientCertificateCredentials implements Credentials {
     }
 
     /**
-     * @return the client certificate
+     *Returns the client certificate.
+ 
      */
     public Optional<String> getClientCertificate() {
         return Optional.ofNullable(clientCertificate);
     }
 
     /**
-     * @return the client key
+     *Returns the client key.
+ 
      */
     public Optional<String> getClientKey() {
         return Optional.ofNullable(clientKey);

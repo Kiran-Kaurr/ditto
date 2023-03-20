@@ -63,7 +63,7 @@ final class DittoTrustManager implements X509TrustManager {
      */
     static TrustManager[] wrapTrustManagers(final TrustManager[] trustManagerWithRevocationCheck,
             final TrustManager[] trustManagerWithoutRevocationCheck,
-            final String hostnameOrIP,
+            final String hostnameOrIp,
             final ConnectionLogger connectionLogger) {
 
         if (trustManagerWithRevocationCheck.length != 1 || trustManagerWithoutRevocationCheck.length != 1) {
@@ -73,7 +73,7 @@ final class DittoTrustManager implements X509TrustManager {
         return new TrustManager[]{
                 new DittoTrustManager((X509TrustManager) trustManagerWithRevocationCheck[0],
                         (X509TrustManager) trustManagerWithoutRevocationCheck[0],
-                        hostnameOrIP,
+                        hostnameOrIp,
                         connectionLogger)
         };
     }

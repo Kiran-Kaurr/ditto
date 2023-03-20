@@ -131,7 +131,8 @@ public final class RetrieveConnectionResponse extends AbstractCommandResponse<Re
     }
 
     /**
-     * @return the {@code JsonObject} of the connection.
+     *Returns the {@code JsonObject} of the connection.
+ 
      */
     public JsonObject getJsonObject() {
         return connection;

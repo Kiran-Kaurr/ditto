@@ -32,15 +32,17 @@ public final class PublicKeyAuthenticationFactory implements CredentialsVisitor<
     private final ExceptionMapper exceptionMapper;
 
     /**
-     * @return new instance with empty {@link org.eclipse.ditto.base.model.headers.DittoHeaders}
+     *Returns new instance with empty {@link org.eclipse.ditto.base.model.headers.DittoHeaders}.
+ 
      */
     public static PublicKeyAuthenticationFactory getInstance() {
         return getInstance(DittoHeaders.empty());
     }
 
     /**
-     * @param dittoHeaders the ditto headers
-     * @return new instance of {@link KeyManagerFactoryFactory}
+     *Returns new instance of {@link KeyManagerFactoryFactory}.
+ @param dittoHeaders the ditto headers
+     * 
      */
     public static PublicKeyAuthenticationFactory getInstance(final DittoHeaders dittoHeaders) {
         return new PublicKeyAuthenticationFactory(dittoHeaders);

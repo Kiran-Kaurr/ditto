@@ -196,7 +196,7 @@ final class JMSPropertyMapper {
         // do nothing---not supported by Qpid client.
     }
 
-    private static Optional<String> getContentEncoding(final Message message) {
+    private static Optional<String> getContentEncoding() {
         // return nothing---not supported by Qpid client.
         return Optional.empty();
     }
@@ -311,7 +311,7 @@ final class JMSPropertyMapper {
         getReplyTo(message).ifPresent(set(headers, AMQP.REPLY_TO));
         getCorrelationId(message).ifPresent(set(headers, AMQP.CORRELATION_ID));
         getContentType(message).ifPresent(set(headers, AMQP.CONTENT_TYPE));
-        getContentEncoding(message).ifPresent(set(headers, AMQP.CONTENT_ENCODING));
+        getContentEncoding().ifPresent(set(headers, AMQP.CONTENT_ENCODING));
         getAbsoluteExpiryTime(message).ifPresent(set(headers, AMQP.ABSOLUTE_EXPIRY_TIME));
         getCreationTime(message).ifPresent(set(headers, AMQP.CREATION_TIME));
         getGroupId(message).ifPresent(set(headers, AMQP.GROUP_ID));

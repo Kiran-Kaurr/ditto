@@ -109,7 +109,7 @@ public interface JsonPointer extends CharSequence, Iterable<JsonKey> {
      *
      * @return {@code true} if this pointer does <em>not</em> contain any elements, {@code false} else.
      */
-    boolean isEmpty();
+    @Override boolean isEmpty();
 
     /**
      * Returns the JSON key at the specified level within this JSON pointer.

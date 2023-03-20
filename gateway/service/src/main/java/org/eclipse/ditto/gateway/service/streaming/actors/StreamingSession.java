@@ -82,14 +82,16 @@ public final class StreamingSession {
     }
 
     /**
-     * @return namespaces of the session.
+     *Returns namespaces of the session.
+ 
      */
     public List<String> getNamespaces() {
         return namespaces;
     }
 
     /**
-     * @return extra fields of the session if any is given.
+     *Returns extra fields of the session if any is given.
+ 
      */
     public Optional<ThingFieldSelector> getExtraFields() {
         return Optional.ofNullable(extraFields);
@@ -125,7 +127,8 @@ public final class StreamingSession {
     }
 
     /**
-     * @return the underlying logger of this session.
+     *Returns the underlying logger of this session.
+ 
      */
     public ThreadSafeDittoLoggingAdapter getLogger() {
         return logger;

@@ -501,7 +501,8 @@ public abstract class BaseClientActor extends AbstractFSMWithStash<BaseClientSta
     }
 
     /**
-     * @return the inbound mapping sink defined by {@link InboundMappingSink}.
+     *Returns the inbound mapping sink defined by {@link InboundMappingSink}.
+ 
      */
     protected final Sink<Object, NotUsed> getInboundMappingSink() {
         return inboundMappingSink;
@@ -595,28 +596,32 @@ public abstract class BaseClientActor extends AbstractFSMWithStash<BaseClientSta
     }
 
     /**
-     * @return whether this client is consuming at all
+     *Returns whether this client is consuming at all.
+ 
      */
     protected final boolean isConsuming() {
         return !connection().getSources().isEmpty();
     }
 
     /**
-     * @return the currently managed Connection
+     *Returns the currently managed Connection.
+ 
      */
     protected final Connection connection() {
         return stateData().getConnection();
     }
 
     /**
-     * @return the Connection Id
+     *Returns the Connection Id.
+ 
      */
     protected final ConnectionId connectionId() {
         return stateData().getConnectionId();
     }
 
     /**
-     * @return the sources configured for this connection or an empty list if no sources were configured.
+     *Returns the sources configured for this connection or an empty list if no sources were configured.
+ 
      */
     protected final List<Source> getSourcesOrEmptyList() {
         return connection().getSources();
@@ -1023,7 +1028,7 @@ public abstract class BaseClientActor extends AbstractFSMWithStash<BaseClientSta
 
         final String timeoutMessage = "Connection timed out at " + Instant.now() + " while " + stateName() + ".";
 
-        if (ConnectivityStatus.OPEN.equals(data.getDesiredConnectionStatus())) {
+        if (data.getDesiredConnectionStatus().equals(ConnectivityStatus.OPEN)) {
             if (reconnectTimeoutStrategy.canReconnect()) {
                 if (stateData().getSshTunnelState().isEnabled()) {
                     logger.info("Connection requires SSH tunnel, start tunnel.");
@@ -1310,7 +1315,7 @@ public abstract class BaseClientActor extends AbstractFSMWithStash<BaseClientSta
             final BaseClientData data) {
 
         dittoProtocolSub.removeSubscriber(getSelf());
-        if (ConnectivityStatus.OPEN.equals(data.getDesiredConnectionStatus())) {
+        if (data.getDesiredConnectionStatus().equals(ConnectivityStatus.OPEN)) {
             if (reconnectTimeoutStrategy.canReconnect()) {
                 if (data.getFailureCount() > 1) {
                     connectionLogger.failure(
@@ -1769,16 +1774,14 @@ public abstract class BaseClientActor extends AbstractFSMWithStash<BaseClientSta
                 getSelf(),
                 getContext(),
                 connectivityConfig,
-                getResponseValidationFailureConsumer());
+                this::getResponseValidationFailureConsumer);
     }
 
-    private Consumer<MatchingValidationResult.Failure> getResponseValidationFailureConsumer() {
-        return failure -> connectionLogger.logEntry(
+    private  void getResponseValidationFailureConsumer(MatchingValidationResult.Failure failure){connectionLogger.logEntry(
                 LogEntryFactory.getLogEntryForFailedCommandResponseRoundTrip(failure.getCommand(),
                         failure.getCommandResponse(),
                         failure.getDetailMessage())
-        );
-    }
+        );}
 
     /**
      * Gets the {@link InboundMappingSink} responsible for payload transformation/mapping.

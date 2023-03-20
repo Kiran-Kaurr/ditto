@@ -105,8 +105,8 @@ public final class TreeBasedPolicyEnforcer implements Enforcer {
     private static void addResourceSubTree(final ResourceNode parentNode, final Resource resource,
             final JsonPointer path) {
 
-        if (path.getLevelCount() == 1 || ROOT_RESOURCE.equals(path.toString())) {
-            final String usedPath = ROOT_RESOURCE.equals(path.toString()) ? ROOT_RESOURCE : path.getRoot()
+        if (path.getLevelCount() == 1 || path.toString().equals(ROOT_RESOURCE)) {
+            final String usedPath = path.toString().equals(ROOT_RESOURCE) ? ROOT_RESOURCE : path.getRoot()
                     .map(JsonKey::toString)
                     .orElseThrow(() -> new NullPointerException("Path did not contain a root!"));
 
@@ -431,7 +431,7 @@ public final class TreeBasedPolicyEnforcer implements Enforcer {
         }
         if (policyTreeNode instanceof SubjectNode) {
             final Optional<PolicyTreeNode> nodeChildOptional = policyTreeNode.getChild(type);
-            if (ROOT_RESOURCE.equals(resource.toString())) {
+            if (resource.toString().equals(ROOT_RESOURCE)) {
                 nodeChildOptional.ifPresent(
                         policyTreeNode1 -> traverseSubtreeForPermissionAccess(permission, resource, type,
                                 policyTreeNode1, grantedResources, revokedResources, level, false));
@@ -469,7 +469,7 @@ public final class TreeBasedPolicyEnforcer implements Enforcer {
             final int level,
             final ResourceNode resourceNode) {
 
-        final JsonPointer resourceToAdd = ROOT_RESOURCE.equals(resource.toString())
+        final JsonPointer resourceToAdd = resource.toString().equals(ROOT_RESOURCE)
                 ? JsonFactory.newPointer(ROOT_RESOURCE)
                 : getPrefixPointerOrThrow(resource, level);
         final EffectedPermissions effectedPermissions = resourceNode.getPermissions();

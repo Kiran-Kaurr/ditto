@@ -38,7 +38,8 @@ public interface MessageMapperConfiguration {
     String CONTENT_TYPE_BLOCKLIST = "content-type-blocklist";
 
     /**
-     * @return the ID of the mapping
+     *Returns the ID of the mapping.
+ 
      */
     String getId();
 
@@ -138,7 +139,8 @@ public interface MessageMapperConfiguration {
     interface Builder<T extends MessageMapperConfiguration> {
 
         /**
-         * @return the configuration properties as mutable map.
+         *Returns the configuration properties as mutable map.
+ 
          */
         Map<String, JsonValue> getProperties();
 

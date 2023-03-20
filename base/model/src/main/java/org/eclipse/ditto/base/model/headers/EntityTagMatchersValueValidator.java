@@ -14,8 +14,8 @@ package org.eclipse.ditto.base.model.headers;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import com.google.common.base.Splitter;
 import javax.annotation.concurrent.Immutable;
-
 import org.eclipse.ditto.base.model.headers.entitytag.EntityTagMatchers;
 
 /**
@@ -47,7 +47,7 @@ final class EntityTagMatchersValueValidator extends AbstractHeaderValueValidator
 
     @Override
     protected void validateValue(final HeaderDefinition definition, final CharSequence value) {
-        final String[] entityTagMatchers = EntityTagMatchers.ENTITY_TAG_MATCHERS_PATTERN.split(String.valueOf(value));
+        final Iterable<String> entityTagMatchers = Splitter.on(EntityTagMatchers.ENTITY_TAG_MATCHERS_PATTERN).split(String.valueOf(value));
         for (final String entityTagMatcher : entityTagMatchers) {
             entityTagMatcherValueValidator.accept(definition, entityTagMatcher);
         }

@@ -22,7 +22,7 @@ import org.eclipse.ditto.things.model.signals.events.AttributesCreated;
  */
 @Immutable
 final class AttributesCreatedStrategy extends AbstractThingEventStrategy<AttributesCreated> {
-    protected AttributesCreatedStrategy() {
+    AttributesCreatedStrategy() {
         super();
     }
 

@@ -38,7 +38,8 @@ public final class KeyManagerFactoryFactory implements CredentialsVisitor<KeyMan
     private final ExceptionMapper exceptionMapper;
 
     /**
-     * @return new instance with empty {@link DittoHeaders}
+     *Returns new instance with empty {@link DittoHeaders}.
+ 
      */
     public static KeyManagerFactoryFactory getInstance() {
         return new KeyManagerFactoryFactory(ExceptionMapper.forClientCertificateCredentials());
@@ -55,9 +56,10 @@ public final class KeyManagerFactoryFactory implements CredentialsVisitor<KeyMan
     }
 
     /**
-     * @param clientKeyPem the client key in PEM format
+     *Returns the new {@link KeyManagerFactory}.
+ @param clientKeyPem the client key in PEM format
      * @param clientCertificatePem the client certificate in PEM
-     * @return the new {@link KeyManagerFactory}
+     * 
      */
     KeyManagerFactory newKeyManagerFactory(final String clientKeyPem, final String clientCertificatePem) {
         checkNotNull(clientKeyPem, "clientKeyPem");

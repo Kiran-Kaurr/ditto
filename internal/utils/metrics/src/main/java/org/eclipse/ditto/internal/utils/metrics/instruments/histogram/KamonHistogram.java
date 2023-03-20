@@ -18,16 +18,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import kamon.Kamon;
 import kamon.metric.Distribution;
+import kamon.metric.Histogram.Atomic;
 import kamon.tag.TagSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.collection.Seq;
 import scala.jdk.javaapi.CollectionConverters;
 
@@ -114,8 +112,8 @@ public class KamonHistogram implements Histogram {
     private Optional<Distribution> getSnapshot(final boolean reset) {
         final kamon.metric.Histogram histogram = getKamonInternalHistogram();
 
-        if (histogram instanceof kamon.metric.Histogram.Atomic) {
-            return Optional.of(((kamon.metric.Histogram.Atomic) histogram).snapshot(reset));
+        if (histogram instanceof Atomic) {
+            return Optional.of(((Atomic) histogram).snapshot(reset));
         }
         LOGGER.warn("Could not get snapshot of kamon internal histogram");
         return Optional.empty();

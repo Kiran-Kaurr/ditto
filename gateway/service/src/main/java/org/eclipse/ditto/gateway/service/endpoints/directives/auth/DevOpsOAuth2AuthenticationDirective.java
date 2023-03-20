@@ -99,7 +99,7 @@ public final class DevOpsOAuth2AuthenticationDirective implements DevopsAuthenti
      * @param inner the inner route, which will be performed on successful authentication.
      * @return the inner route wrapped with authentication.
      */
-    public Route authenticateDevOps(final String realm, final Route inner) {
+    @Override public Route authenticateDevOps(final String realm, final Route inner) {
         LOGGER.debug("DevOps OAuth authentication is enabled for {}.", realm);
         return extractRequestContext(requestContext -> {
             final String authorizationHeaderValue = requestContext.getRequest()

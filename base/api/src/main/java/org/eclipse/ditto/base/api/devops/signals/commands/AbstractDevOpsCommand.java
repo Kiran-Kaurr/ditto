@@ -53,11 +53,11 @@ abstract class AbstractDevOpsCommand<T extends AbstractDevOpsCommand<T>> extends
         this.instance = instance;
     }
 
-    public Optional<String> getServiceName() {
+    @Override public Optional<String> getServiceName() {
         return Optional.ofNullable(serviceName);
     }
 
-    public Optional<String> getInstance() {
+    @Override public Optional<String> getInstance() {
         return Optional.ofNullable(instance);
     }
 
@@ -81,7 +81,7 @@ abstract class AbstractDevOpsCommand<T extends AbstractDevOpsCommand<T>> extends
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractDevOpsCommand)) {
             return false;
         }
         final AbstractDevOpsCommand<?> that = (AbstractDevOpsCommand<?>) o;

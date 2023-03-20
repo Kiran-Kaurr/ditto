@@ -12,10 +12,14 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.httppush;
 
+import akka.actor.AbstractExtensionId;
+import akka.actor.ActorSystem;
+import akka.actor.ExtendedActorSystem;
+import akka.actor.Extension;
+import com.typesafe.config.Config;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.eclipse.ditto.connectivity.model.ClientCertificateCredentials;
 import org.eclipse.ditto.connectivity.model.CredentialsVisitor;
 import org.eclipse.ditto.connectivity.model.HmacCredentials;
@@ -26,15 +30,9 @@ import org.eclipse.ditto.connectivity.model.UserPasswordCredentials;
 import org.eclipse.ditto.connectivity.service.config.DittoConnectivityConfig;
 import org.eclipse.ditto.connectivity.service.messaging.signing.NoOpSigning;
 import org.eclipse.ditto.internal.utils.config.DefaultScopedConfig;
-
-import com.typesafe.config.Config;
-
-import akka.actor.AbstractExtensionId;
-import akka.actor.ActorSystem;
-import akka.actor.ExtendedActorSystem;
-import akka.actor.Extension;
 import scala.collection.immutable.List$;
 import scala.reflect.ClassTag;
+import scala.reflect.ClassTag$;
 
 /**
  * Actor system extension to load the configured request signing algorithms.
@@ -103,7 +101,7 @@ public final class HttpRequestSigningExtension implements Extension, Credentials
 
         private static HttpRequestSigningFactory instantiate(final ExtendedActorSystem system, final String className) {
             final ClassTag<HttpRequestSigningFactory> tag =
-                    scala.reflect.ClassTag$.MODULE$.apply(HttpRequestSigningFactory.class);
+                    ClassTag$.MODULE$.apply(HttpRequestSigningFactory.class);
             return system.dynamicAccess().createInstanceFor(className, List$.MODULE$.empty(), tag).get();
         }
 

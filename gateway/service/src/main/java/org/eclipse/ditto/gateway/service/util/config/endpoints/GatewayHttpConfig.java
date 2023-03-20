@@ -131,7 +131,7 @@ public final class GatewayHttpConfig implements HttpConfig {
         final int unknownHeaderKeysSize = unknownHeaderKeys.size();
         if (0 < unknownHeaderKeysSize) {
             final String msgPattern;
-            if (1 == unknownHeaderKeysSize) {
+            if (unknownHeaderKeysSize == 1) {
                 msgPattern = "The query parameter name <{0}> does not denote a known header key!";
             } else {
                 msgPattern = "The query parameter names <{0}> do not denote known header keys!";

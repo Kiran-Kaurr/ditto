@@ -118,7 +118,7 @@ abstract class AbstractMessageCommand<T, C extends AbstractMessageCommand<T, C>>
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (!(obj instanceof AbstractMessageCommand)) {
             return false;
         }
         final AbstractMessageCommand<?, ?> other = (AbstractMessageCommand<?, ?>) obj;

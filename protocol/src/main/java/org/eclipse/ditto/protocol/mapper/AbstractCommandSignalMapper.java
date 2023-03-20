@@ -39,13 +39,15 @@ abstract class AbstractCommandSignalMapper<T extends Signal<?>> extends Abstract
     }
 
     /**
-     * @param command the command that is processed
-     * @return a {@link TopicPathBuilder} for the given command.
+     *Returns a {@link TopicPathBuilder} for the given command.
+ @param command the command that is processed
+     * 
      */
     abstract TopicPathBuilder getTopicPathBuilder(final T command);
 
     /**
-     * @return array of {@link org.eclipse.ditto.protocol.TopicPath.Action}s the implementation supports.
+     *Returns array of {@link org.eclipse.ditto.protocol.TopicPath.Action}s the implementation supports.
+ 
      */
     abstract TopicPath.Action[] getSupportedActions();
 

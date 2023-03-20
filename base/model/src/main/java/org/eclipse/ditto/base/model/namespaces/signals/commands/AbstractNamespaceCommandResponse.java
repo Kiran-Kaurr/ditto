@@ -86,7 +86,7 @@ abstract class AbstractNamespaceCommandResponse<T extends AbstractNamespaceComma
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractNamespaceCommandResponse)) {
             return false;
         }
         final AbstractNamespaceCommandResponse<?> that = (AbstractNamespaceCommandResponse<?>) o;

@@ -12,6 +12,13 @@
  */
 package org.eclipse.ditto.thingsearch.service.starter.actors;
 
+import akka.NotUsed;
+import akka.actor.ActorSystem;
+import akka.http.javadsl.coding.Coder;
+import akka.japi.pf.PFBuilder;
+import akka.stream.SystemMaterializer;
+import akka.stream.javadsl.Source;
+import akka.util.ByteString;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,13 +32,18 @@ import java.util.OptionalInt;
 import java.util.Set;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
 import javax.annotation.Nullable;
-
+import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
+import org.eclipse.ditto.base.model.exceptions.DittoRuntimeExceptionBuilder;
+import org.eclipse.ditto.base.model.exceptions.InvalidRqlExpressionException;
+import org.eclipse.ditto.base.model.headers.DittoHeaders;
+import org.eclipse.ditto.base.model.headers.WithDittoHeaders;
+import org.eclipse.ditto.internal.utils.akka.logging.ThreadSafeDittoLoggingAdapter;
 import org.eclipse.ditto.json.JsonArray;
 import org.eclipse.ditto.json.JsonCollectors;
 import org.eclipse.ditto.json.JsonFactory;
@@ -40,16 +52,12 @@ import org.eclipse.ditto.json.JsonFieldDefinition;
 import org.eclipse.ditto.json.JsonObject;
 import org.eclipse.ditto.json.JsonPointer;
 import org.eclipse.ditto.json.JsonValue;
-import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
-import org.eclipse.ditto.base.model.exceptions.DittoRuntimeExceptionBuilder;
-import org.eclipse.ditto.base.model.exceptions.InvalidRqlExpressionException;
-import org.eclipse.ditto.base.model.headers.DittoHeaders;
-import org.eclipse.ditto.base.model.headers.WithDittoHeaders;
+import org.eclipse.ditto.rql.model.ParserException;
+import org.eclipse.ditto.rql.parser.thingsearch.RqlOptionParser;
 import org.eclipse.ditto.rql.query.Query;
 import org.eclipse.ditto.rql.query.SortDirection;
 import org.eclipse.ditto.rql.query.criteria.Criteria;
 import org.eclipse.ditto.rql.query.criteria.CriteriaFactory;
-import org.eclipse.ditto.rql.model.ParserException;
 import org.eclipse.ditto.things.model.Thing;
 import org.eclipse.ditto.things.model.ThingId;
 import org.eclipse.ditto.thingsearch.model.CursorOption;
@@ -60,24 +68,14 @@ import org.eclipse.ditto.thingsearch.model.SearchResultBuilder;
 import org.eclipse.ditto.thingsearch.model.SizeOption;
 import org.eclipse.ditto.thingsearch.model.SortOption;
 import org.eclipse.ditto.thingsearch.model.SortOptionEntry;
-import org.eclipse.ditto.rql.parser.thingsearch.RqlOptionParser;
-import org.eclipse.ditto.thingsearch.service.common.model.ResultList;
-import org.eclipse.ditto.thingsearch.service.common.model.TimestampedThingId;
-import org.eclipse.ditto.thingsearch.service.persistence.write.mapping.JsonToBson;
-import org.eclipse.ditto.internal.utils.akka.logging.ThreadSafeDittoLoggingAdapter;
 import org.eclipse.ditto.thingsearch.model.signals.commands.exceptions.InvalidOptionException;
 import org.eclipse.ditto.thingsearch.model.signals.commands.query.QueryThings;
 import org.eclipse.ditto.thingsearch.model.signals.commands.query.StreamThings;
+import org.eclipse.ditto.thingsearch.service.common.model.ResultList;
+import org.eclipse.ditto.thingsearch.service.common.model.TimestampedThingId;
+import org.eclipse.ditto.thingsearch.service.persistence.write.mapping.JsonToBson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import akka.NotUsed;
-import akka.actor.ActorSystem;
-import akka.http.javadsl.coding.Coder;
-import akka.japi.pf.PFBuilder;
-import akka.stream.SystemMaterializer;
-import akka.stream.javadsl.Source;
-import akka.util.ByteString;
 import scala.PartialFunction;
 
 /**
@@ -283,7 +281,7 @@ final class ThingsSearchCursor {
      * @return Secret JSON representation of this cursor.
      */
     private JsonObject toJson() {
-        final java.util.function.Predicate<JsonField> notNull = field -> !field.getValue().isNull();
+        final Predicate<JsonField> notNull = field -> !field.getValue().isNull();
         return JsonFactory.newObjectBuilder()
                 .set(FILTER, filter, notNull)
                 .set(NAMESPACES, renderNamespaces(), notNull)
@@ -306,7 +304,8 @@ final class ThingsSearchCursor {
     }
 
     /**
-     * @return Coded string representation of this cursor.
+     *Returns coded string representation of this cursor.
+ 
      */
     String encode() {
         final ByteString byteString = ByteString.fromString(toJson().toString(), StandardCharsets.UTF_8);

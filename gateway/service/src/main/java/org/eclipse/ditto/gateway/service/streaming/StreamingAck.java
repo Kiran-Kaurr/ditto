@@ -61,15 +61,17 @@ public final class StreamingAck implements Jsonifiable.WithPredicate<JsonObject,
     }
 
     /**
-     * @return the StreamingType of this StreamingAck message.
+     *Returns the StreamingType of this StreamingAck message.
+ 
      */
     public StreamingType getStreamingType() {
         return streamingType;
     }
 
     /**
-     * @return whether it is acknowledged if a subscription was added ({@link #subscribed} is {@code true}) or removed
-     * ({@link #subscribed} is {@code false}).
+     *Returns whether it is acknowledged if a subscription was added ({@link #subscribed} is {@code true}) or removed
+ ({@link #subscribed} is {@code false}).
+ 
      */
     public boolean isSubscribed() {
         return subscribed;

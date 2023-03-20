@@ -44,7 +44,8 @@ public final class JjwtSerializer implements Serializer<Map<String, ?>> {
     private static Serializer<Map<String, ?>> instance;
 
     /**
-     * @return the instance of {@link JjwtSerializer}.
+     *Returns the instance of {@link JjwtSerializer}.
+ 
      */
     public static Serializer<Map<String, ?>> getInstance() {
         if (instance == null) {

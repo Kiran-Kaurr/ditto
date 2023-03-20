@@ -119,7 +119,7 @@ final class PreparedKamonTimer implements PreparedTimer {
      *
      * @return The started {@link StartedTimer}
      */
-    public StartedTimer start() {
+    @Override public StartedTimer start() {
         final StartedTimer timer = StartedKamonTimer.fromPreparedTimer(this);
         final ScheduledFuture<?> expirationFuture = scheduler.schedule(
                 () -> defaultExpirationHandling(timer.getName(), timer, additionalExpirationHandling),
@@ -181,7 +181,7 @@ final class PreparedKamonTimer implements PreparedTimer {
         }
     }
 
-    private kamon.metric.Timer getKamonInternalTimer() {
+    private Timer getKamonInternalTimer() {
         return Kamon.timer(name).withTags(TagSet.from(new HashMap<>(this.tags)));
     }
 

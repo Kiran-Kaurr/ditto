@@ -30,7 +30,8 @@ interface HttpPushContext {
     void onResponse(Try<HttpResponse> response);
 
     /**
-     * @return the {@code InfoProvider} to e.g. extract a {@code correlation-id} from during connection logging.
+     *Returns the {@code InfoProvider} to e.g. extract a {@code correlation-id} from during connection logging.
+ 
      */
     ConnectionMonitor.InfoProvider getInfoProvider();
 }

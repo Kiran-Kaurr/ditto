@@ -286,7 +286,7 @@ public final class RetrieveLoggerConfig extends AbstractDevOpsCommand<RetrieveLo
             return false;
         }
         final RetrieveLoggerConfig that = (RetrieveLoggerConfig) o;
-        return that.canEqual(this) && Objects.equals(allKnownLoggers, that.allKnownLoggers) && Objects
+        return that.canEqual(this) && (allKnownLoggers == that.allKnownLoggers) && Objects
                 .equals(specificLoggers, that.specificLoggers) && super.equals(that);
     }
 

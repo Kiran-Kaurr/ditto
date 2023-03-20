@@ -14,6 +14,18 @@ package org.eclipse.ditto.gateway.service.endpoints.routes.things;
 
 import static org.eclipse.ditto.base.model.exceptions.DittoJsonException.wrapJsonRuntimeException;
 
+import akka.http.javadsl.model.ContentType.NonBinary;
+import akka.http.javadsl.model.ContentTypes;
+import akka.http.javadsl.model.HttpCharsets;
+import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.model.MediaTypes;
+import akka.http.javadsl.model.headers.Accept;
+import akka.http.javadsl.model.headers.Link;
+import akka.http.javadsl.model.headers.LinkParams;
+import akka.http.javadsl.model.headers.LinkValue;
+import akka.http.javadsl.server.PathMatchers;
+import akka.http.javadsl.server.RequestContext;
+import akka.http.javadsl.server.Route;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Optional;
@@ -21,9 +33,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.exceptions.DittoJsonException;
 import org.eclipse.ditto.base.model.headers.DittoHeaderDefinition;
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
@@ -69,18 +79,6 @@ import org.eclipse.ditto.things.model.signals.commands.query.RetrieveThingDefini
 import org.eclipse.ditto.things.model.signals.commands.query.RetrieveThings;
 import org.eclipse.ditto.thingsearch.model.SearchResult;
 import org.eclipse.ditto.thingsearch.model.signals.commands.query.QueryThings;
-
-import akka.http.javadsl.model.ContentTypes;
-import akka.http.javadsl.model.HttpCharsets;
-import akka.http.javadsl.model.HttpResponse;
-import akka.http.javadsl.model.MediaTypes;
-import akka.http.javadsl.model.headers.Accept;
-import akka.http.javadsl.model.headers.Link;
-import akka.http.javadsl.model.headers.LinkParams;
-import akka.http.javadsl.model.headers.LinkValue;
-import akka.http.javadsl.server.PathMatchers;
-import akka.http.javadsl.server.RequestContext;
-import akka.http.javadsl.server.Route;
 
 /**
  * Builder for creating Akka HTTP routes for {@code /things}.
@@ -259,9 +257,9 @@ public final class ThingsRoute extends AbstractRoute {
         return theResponse.withEntity(determineResponseContentType(ctx), resultArray.toString());
     }
 
-    private static akka.http.javadsl.model.ContentType.NonBinary determineResponseContentType(
+    private static NonBinary determineResponseContentType(
             final RequestContext ctx) {
-        final akka.http.javadsl.model.ContentType.NonBinary contentType;
+        final NonBinary contentType;
         if (ctx.getRequest().getHeader(Accept.class)
                 .filter(accept -> accept.value().equals(ContentType.APPLICATION_TD_JSON.getValue()))
                 .isPresent()) {

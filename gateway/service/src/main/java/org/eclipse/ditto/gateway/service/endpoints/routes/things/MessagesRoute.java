@@ -12,15 +12,28 @@
  */
 package org.eclipse.ditto.gateway.service.endpoints.routes.things;
 
+import akka.http.javadsl.model.ContentType;
+import akka.http.javadsl.model.ContentTypes;
+import akka.http.javadsl.model.HttpCharset;
+import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.model.RequestEntity;
+import akka.http.javadsl.server.PathMatchers;
+import akka.http.javadsl.server.RequestContext;
+import akka.http.javadsl.server.Route;
+import akka.japi.function.Function;
+import akka.stream.javadsl.Sink;
+import akka.stream.javadsl.Source;
+import akka.util.ByteString;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.OptionalLong;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
-
 import org.eclipse.ditto.base.model.exceptions.TimeoutInvalidException;
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
 import org.eclipse.ditto.base.model.headers.DittoHeadersBuilder;
@@ -41,20 +54,6 @@ import org.eclipse.ditto.messages.model.signals.commands.SendFeatureMessage;
 import org.eclipse.ditto.messages.model.signals.commands.SendThingMessage;
 import org.eclipse.ditto.protocol.TopicPath;
 import org.eclipse.ditto.things.model.ThingId;
-
-import akka.http.javadsl.model.ContentType;
-import akka.http.javadsl.model.ContentTypes;
-import akka.http.javadsl.model.HttpCharset;
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
-import akka.http.javadsl.model.RequestEntity;
-import akka.http.javadsl.server.PathMatchers;
-import akka.http.javadsl.server.RequestContext;
-import akka.http.javadsl.server.Route;
-import akka.japi.function.Function;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
-import akka.util.ByteString;
 
 /**
  * Builder for creating Akka HTTP routes for MessagesService.
@@ -241,7 +240,7 @@ final class MessagesRoute extends AbstractRoute {
             final MessageHeaders headers = MessageHeaders.newBuilder(direction, thingId, normalizeSubject(msgSubject))
                     .correlationId(dittoHeaders.getCorrelationId().orElse(null))
                     .contentType(contentType.toString())
-                    .timestamp(OffsetDateTime.now())
+                    .timestamp(OffsetDateTime.now(ZoneId.systemDefault()))
                     .build();
 
             final MessageBuilder<Object> messageBuilder = initMessageBuilder(payload, contentType, headers, httpRequest);
@@ -267,7 +266,7 @@ final class MessagesRoute extends AbstractRoute {
                     .featureId(featureId)
                     .correlationId(dittoHeaders.getCorrelationId().orElse(null))
                     .contentType(contentType.toString())
-                    .timestamp(OffsetDateTime.now())
+                    .timestamp(OffsetDateTime.now(ZoneId.systemDefault()))
                     .build();
 
             final MessageBuilder<Object> messageBuilder = initMessageBuilder(payload, contentType, headers, httpRequest);
@@ -277,7 +276,7 @@ final class MessagesRoute extends AbstractRoute {
     }
 
     private static String normalizeSubject(final String msgSubject) {
-        if (msgSubject.isEmpty() || "/".equals(msgSubject)) {
+        if (msgSubject.isEmpty() || msgSubject.equals("/")) {
             throw SubjectInvalidException.newBuilder(msgSubject).build();
         }
 
@@ -297,7 +296,7 @@ final class MessagesRoute extends AbstractRoute {
             final MessageHeaders headers = MessageHeaders.newBuilderForClaiming(thingId)
                     .correlationId(dittoHeaders.getCorrelationId().orElse(null))
                     .contentType(contentType.toString())
-                    .timestamp(OffsetDateTime.now())
+                    .timestamp(OffsetDateTime.now(ZoneId.systemDefault()))
                     .build();
 
             final MessageBuilder<Object> messageBuilder =
@@ -405,7 +404,7 @@ final class MessagesRoute extends AbstractRoute {
     private static boolean hasZeroContentLength(final HttpRequest request) {
         final OptionalLong contentLengthOption = request.entity().getContentLengthOption();
 
-        return contentLengthOption.isPresent() && 0 == contentLengthOption.getAsLong();
+        return contentLengthOption.isPresent() && contentLengthOption.getAsLong() == 0;
     }
 
 }

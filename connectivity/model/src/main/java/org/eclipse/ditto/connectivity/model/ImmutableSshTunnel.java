@@ -176,9 +176,9 @@ final class ImmutableSshTunnel implements SshTunnel {
             return false;
         }
         final ImmutableSshTunnel that = (ImmutableSshTunnel) o;
-        return Objects.equals(enabled, that.enabled) &&
+        return (enabled == that.enabled) &&
                 Objects.equals(credentials, that.credentials) &&
-                Objects.equals(validateHost, that.validateHost) &&
+                (validateHost == that.validateHost) &&
                 Objects.equals(knownHosts, that.knownHosts) &&
                 Objects.equals(uri, that.uri);
     }

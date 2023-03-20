@@ -33,12 +33,14 @@ public interface FeatureIdDesiredPropertyExpression extends SortFieldExpression,
     }
 
     /**
-     * @return the feature id.
+     *Returns the feature id.
+ 
      */
     String getFeatureId();
 
     /**
-     * @return the desiredProperty path.
+     *Returns the desiredProperty path.
+ 
      */
     String getDesiredProperty();
 

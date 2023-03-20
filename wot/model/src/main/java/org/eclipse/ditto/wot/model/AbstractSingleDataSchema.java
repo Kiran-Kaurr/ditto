@@ -144,7 +144,7 @@ abstract class AbstractSingleDataSchema implements SingleDataSchema {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractSingleDataSchema)) {
             return false;
         }
         final AbstractSingleDataSchema that = (AbstractSingleDataSchema) o;

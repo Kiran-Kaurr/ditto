@@ -50,14 +50,16 @@ public final class UserPasswordCredentials implements Credentials {
     }
 
     /**
-     * @return the username
+     *Returns the username.
+ 
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * @return the password
+     *Returns the password.
+ 
      */
     public String getPassword() {
         return password;

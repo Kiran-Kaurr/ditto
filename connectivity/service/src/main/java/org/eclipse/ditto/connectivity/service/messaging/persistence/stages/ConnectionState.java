@@ -49,21 +49,24 @@ public final class ConnectionState {
     }
 
     /**
-     * @return the connection ID.
+     *Returns the connection ID.
+ 
      */
     public ConnectionId id() {
         return connectionId;
     }
 
     /**
-     * @return the public logger.
+     *Returns the public logger.
+ 
      */
     public ConnectionLogger getConnectionLogger() {
         return connectionLogger;
     }
 
     /**
-     * @return the command validator.
+     *Returns the command validator.
+ 
      */
     public ConnectivityCommandInterceptor getValidator() {
         return validator;

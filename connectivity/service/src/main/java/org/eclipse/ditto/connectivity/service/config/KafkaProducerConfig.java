@@ -27,37 +27,44 @@ import com.typesafe.config.Config;
 public interface KafkaProducerConfig {
 
     /**
-     * @return number of maximum buffered messages before dropping them.
+     *Returns number of maximum buffered messages before dropping them.
+ 
      */
     int getQueueSize();
 
     /**
-     * @return number of maximum parallel message publications.
+     *Returns number of maximum parallel message publications.
+ 
      */
     int getParallelism();
 
     /**
-     * @return minimum duration before restarting the producer stream after a failure.
+     *Returns minimum duration before restarting the producer stream after a failure.
+ 
      */
     Duration getMinBackoff();
 
     /**
-     * @return maximum duration before restarting the producer stream after a failure.
+     *Returns maximum duration before restarting the producer stream after a failure.
+ 
      */
     Duration getMaxBackoff();
 
     /**
-     * @return random value to vary the restart interval.
+     *Returns random value to vary the restart interval.
+ 
      */
     double getRandomFactor();
 
     /**
-     * @return maximum restarts count before failing the producer stream.
+     *Returns maximum restarts count before failing the producer stream.
+ 
      */
     int getMaxRestartsCount();
 
     /**
-     * @return duration during within maximum restarts may happen before failing the producer stream.
+     *Returns duration during within maximum restarts may happen before failing the producer stream.
+ 
      */
     Duration getMaxRestartsWithin();
 
@@ -69,7 +76,8 @@ public interface KafkaProducerConfig {
     Config getAlpakkaConfig();
 
     /**
-     * @return timeout before the producer is initialized and considered "ready".
+     *Returns timeout before the producer is initialized and considered "ready".
+ 
      */
     long getInitTimeoutSeconds();
 

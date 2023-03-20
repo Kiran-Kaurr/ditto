@@ -37,15 +37,17 @@ public enum LogLevel {
     }
 
     /**
-     * @return the label which can be used in a JSON representation.
+     *Returns the label which can be used in a JSON representation.
+ 
      */
     public String getLevel() {
         return level;
     }
 
     /**
-     * @param level level of the LogLevel.
-     * @return the LogLevel matching the given level.
+     *Returns the LogLevel matching the given level.
+ @param level level of the LogLevel.
+     * 
      */
     public static Optional<LogLevel> forLevel(final CharSequence level) {
         checkNotNull(level, "Level");

@@ -84,15 +84,17 @@ public enum LogType {
     }
 
     /**
-     * @return the label which can be used in a JSON representation.
+     *Returns the label which can be used in a JSON representation.
+ 
      */
     public String getType() {
         return type;
     }
 
     /**
-     * @param type type of the LogType.
-     * @return the LogType matching the given type
+     *Returns the LogType matching the given type.
+ @param type type of the LogType.
+     * 
      */
     public static Optional<LogType> forType(final CharSequence type) {
         checkNotNull(type, "Type");

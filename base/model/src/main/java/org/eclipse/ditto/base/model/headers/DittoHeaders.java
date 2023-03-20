@@ -273,7 +273,8 @@ public interface DittoHeaders extends Jsonifiable<JsonObject>, Map<String, Strin
     Optional<String> getInboundPayloadMapper();
 
     /**
-     * @return the reply target of a command-response.
+     *Returns the reply target of a command-response.
+ 
      */
     Optional<Integer> getReplyTarget();
 

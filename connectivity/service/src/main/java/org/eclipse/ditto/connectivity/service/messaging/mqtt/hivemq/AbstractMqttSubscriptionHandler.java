@@ -68,7 +68,8 @@ abstract class AbstractMqttSubscriptionHandler<S, P, R> {
     abstract Optional<S> toMqttSubscribe(final Source source);
 
     /**
-     * @return all source/consumer-actor pairs known to this subscription handler as a stream.
+     *Returns all source/consumer-actor pairs known to this subscription handler as a stream.
+ 
      */
     Stream<MqttConsumer> stream() {
         return consumerActors.entrySet().stream().map(entry -> MqttConsumer.of(entry.getKey(), entry.getValue()));

@@ -87,7 +87,8 @@ public interface StartedTrace extends TaggableMetricsInstrument<StartedTrace>, T
     StartedTrace mark(String key, Instant at);
 
     /**
-     * @return the current trace context associated with this {@code StartedTrace}
+     *Returns the current trace context associated with this {@code StartedTrace}.
+ 
      */
     Context getContext();
 

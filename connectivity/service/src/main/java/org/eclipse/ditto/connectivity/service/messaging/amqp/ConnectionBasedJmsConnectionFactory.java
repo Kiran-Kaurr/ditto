@@ -14,26 +14,24 @@ package org.eclipse.ditto.connectivity.service.messaging.amqp;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import akka.actor.ActorSystem;
 import java.net.URI;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.function.Supplier;
-
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.jms.ExceptionListener;
 import javax.jms.JMSException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
 import org.apache.qpid.jms.JmsConnection;
 import org.eclipse.ditto.connectivity.model.Connection;
 import org.eclipse.ditto.connectivity.service.messaging.internal.ssl.SSLContextCreator;
 import org.eclipse.ditto.connectivity.service.messaging.monitoring.logs.ConnectionLogger;
 import org.eclipse.ditto.connectivity.service.messaging.tunnel.SshTunnelState;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import akka.actor.ActorSystem;
 
 /**
  * Factory for creating a {@link javax.jms.Connection} based on a {@link Connection}.
@@ -41,7 +39,7 @@ import akka.actor.ActorSystem;
 @NotThreadSafe
 public final class ConnectionBasedJmsConnectionFactory implements JmsConnectionFactory {
 
-    private static final org.slf4j.Logger LOGGER =
+    private static final Logger LOGGER =
             LoggerFactory.getLogger(ConnectionBasedJmsConnectionFactory.class);
 
     private static final String SECURE_AMQP_SCHEME = "amqps";

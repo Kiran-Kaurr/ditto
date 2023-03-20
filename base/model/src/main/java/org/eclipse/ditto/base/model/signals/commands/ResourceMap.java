@@ -165,7 +165,8 @@ public final class ResourceMap<T> extends HashMap<JsonKey, ResourceMap<T>> {
         }
 
         /**
-         * @return the final ResourceMap
+         *Returns the final ResourceMap.
+ 
          */
         public ResourceMap<T> end() {
             return map;

@@ -22,12 +22,14 @@ import org.eclipse.ditto.messages.model.signals.commands.MessageCommandResponse;
 interface MessageCommandAdapterProvider {
 
     /**
-     * @return the message command adapter
+     *Returns the message command adapter.
+ 
      */
     Adapter<MessageCommand<?, ?>> getMessageCommandAdapter();
 
     /**
-     * @return the message command response adapter
+     *Returns the message command response adapter.
+ 
      */
     Adapter<MessageCommandResponse<?, ?>> getMessageCommandResponseAdapter();
 

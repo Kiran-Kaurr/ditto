@@ -133,7 +133,8 @@ public final class RetrieveAllConnectionIdsResponse extends AbstractCommandRespo
     }
 
     /**
-     * @return set of all connection ids.
+     *Returns set of all connection ids.
+ 
      */
     public Set<String> getAllConnectionIds() {
         return connectionIds;

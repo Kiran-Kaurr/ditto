@@ -136,9 +136,9 @@ public final class LogEntryFactory {
     private static Optional<EntityId> getEntityIdFromTopicPath(final TopicPath topicPath) {
         final Optional<EntityId> result;
         final var group = topicPath.getGroup();
-        if (TopicPath.Group.THINGS == group) {
+        if (group == TopicPath.Group.THINGS) {
             result = Optional.of(ThingId.of(topicPath.getNamespace(), topicPath.getEntityName()));
-        } else if (TopicPath.Group.POLICIES == group) {
+        } else if (group == TopicPath.Group.POLICIES) {
             result = Optional.of(PolicyId.of(topicPath.getNamespace(), topicPath.getEntityName()));
         } else {
             result = Optional.empty();

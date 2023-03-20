@@ -28,70 +28,80 @@ public final class ConnectivityPlaceholders {
     }
 
     /**
-     * @return the singleton instance of {@link ThingPlaceholder}
+     *Returns the singleton instance of {@link ThingPlaceholder}.
+ 
      */
     public static ThingPlaceholder newThingPlaceholder() {
         return ThingPlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of  {@link PolicyPlaceholder}
+     *Returns the singleton instance of  {@link PolicyPlaceholder}.
+ 
      */
     public static PolicyPlaceholder newPolicyPlaceholder() {
         return PolicyPlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of {@link FeaturePlaceholder}
+     *Returns the singleton instance of {@link FeaturePlaceholder}.
+ 
      */
     public static FeaturePlaceholder newFeaturePlaceholder() {
         return FeaturePlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of {@link EntityIdPlaceholder}
+     *Returns the singleton instance of {@link EntityIdPlaceholder}.
+ 
      */
     public static EntityIdPlaceholder newEntityPlaceholder() {
         return EntityIdPlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of the placeholder with prefix {@code request}.
+     *Returns the singleton instance of the placeholder with prefix {@code request}.
+ 
      */
     public static RequestPlaceholder newRequestPlaceholder() {
         return RequestPlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of {@link TopicPathPlaceholder}
+     *Returns the singleton instance of {@link TopicPathPlaceholder}.
+ 
      */
     public static TopicPathPlaceholder newTopicPathPlaceholder() {
         return TopicPathPlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of {@link ResourcePlaceholder}
+     *Returns the singleton instance of {@link ResourcePlaceholder}.
+ 
      */
     public static ResourcePlaceholder newResourcePlaceholder() {
         return ResourcePlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of {@link TimePlaceholder}
+     *Returns the singleton instance of {@link TimePlaceholder}.
+ 
      */
     public static TimePlaceholder newTimePlaceholder() {
         return TimePlaceholder.getInstance();
     }
 
     /**
-     * @return the singleton instance of {@link ConnectionIdPlaceholder}.
+     *Returns the singleton instance of {@link ConnectionIdPlaceholder}.
+ 
      */
     public static ConnectionIdPlaceholder newConnectionIdPlaceholder() {
         return ImmutableConnectionIdPlaceholder.INSTANCE;
     }
 
     /**
-     * @return the singleton instance of {@link SourceAddressPlaceholder}
+     *Returns the singleton instance of {@link SourceAddressPlaceholder}.
+ 
      */
     public static SourceAddressPlaceholder newSourceAddressPlaceholder() {
         return ImmutableSourceAddressPlaceholder.INSTANCE;

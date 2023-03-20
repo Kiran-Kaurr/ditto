@@ -34,14 +34,16 @@ public final class ConsumerClosedStatusReport {
     }
 
     /**
-     * @return the closed message consumer
+     *Returns the closed message consumer.
+ 
      */
     public MessageConsumer getMessageConsumer() {
         return messageConsumer;
     }
 
     /**
-     * @return the cause why the consumer was closed
+     *Returns the cause why the consumer was closed.
+ 
      */
     public Throwable getCause() {
         return cause;

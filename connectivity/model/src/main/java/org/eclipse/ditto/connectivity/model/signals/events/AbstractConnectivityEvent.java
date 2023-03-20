@@ -71,7 +71,7 @@ public abstract class AbstractConnectivityEvent<T extends AbstractConnectivityEv
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractConnectivityEvent)) {
             return false;
         }
         if (!super.equals(o)) {

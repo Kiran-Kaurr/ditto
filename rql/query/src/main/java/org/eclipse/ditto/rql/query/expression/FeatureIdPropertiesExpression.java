@@ -31,7 +31,8 @@ public interface FeatureIdPropertiesExpression extends ExistsFieldExpression {
     }
 
     /**
-     * @return the feature id.
+     *Returns the feature id.
+ 
      */
     String getFeatureId();
 

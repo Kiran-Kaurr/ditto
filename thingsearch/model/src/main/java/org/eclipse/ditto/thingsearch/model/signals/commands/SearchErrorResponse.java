@@ -107,7 +107,7 @@ public final class SearchErrorResponse extends AbstractErrorResponse<SearchError
      *
      * @return the wrapped exception.
      */
-    public DittoRuntimeException getDittoRuntimeException() {
+    @Override public DittoRuntimeException getDittoRuntimeException() {
         return dittoRuntimeException;
     }
 

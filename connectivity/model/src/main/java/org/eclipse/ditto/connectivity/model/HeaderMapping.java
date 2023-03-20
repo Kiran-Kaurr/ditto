@@ -28,7 +28,8 @@ import org.eclipse.ditto.base.model.json.Jsonifiable;
 public interface HeaderMapping extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the header mapping definition
+     *Returns the header mapping definition.
+ 
      */
     Map<String, String> getMapping();
 

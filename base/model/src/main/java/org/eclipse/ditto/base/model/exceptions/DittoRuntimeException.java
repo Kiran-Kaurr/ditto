@@ -175,7 +175,7 @@ public abstract class DittoRuntimeException extends RuntimeException
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DittoRuntimeException)) {
             return false;
         }
         final DittoRuntimeException that = (DittoRuntimeException) o;
@@ -304,7 +304,7 @@ public abstract class DittoRuntimeException extends RuntimeException
     }
 
     @Override
-    public String toString() {
+    public String getMessage() {
         return getClass().getName() + " [" +
                 "message='" + getMessage() + '\'' +
                 ", errorCode=" + errorCode +

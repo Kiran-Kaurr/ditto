@@ -12,10 +12,14 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.amqp;
 
+import akka.actor.AbstractExtensionId;
+import akka.actor.ActorSystem;
+import akka.actor.ExtendedActorSystem;
+import akka.actor.Extension;
+import com.typesafe.config.Config;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.eclipse.ditto.connectivity.model.ClientCertificateCredentials;
 import org.eclipse.ditto.connectivity.model.CredentialsVisitor;
 import org.eclipse.ditto.connectivity.model.HmacCredentials;
@@ -27,15 +31,9 @@ import org.eclipse.ditto.connectivity.service.config.Amqp10Config;
 import org.eclipse.ditto.connectivity.service.config.DittoConnectivityConfig;
 import org.eclipse.ditto.connectivity.service.messaging.signing.NoOpSigning;
 import org.eclipse.ditto.internal.utils.config.DefaultScopedConfig;
-
-import com.typesafe.config.Config;
-
-import akka.actor.AbstractExtensionId;
-import akka.actor.ActorSystem;
-import akka.actor.ExtendedActorSystem;
-import akka.actor.Extension;
 import scala.collection.immutable.List$;
 import scala.reflect.ClassTag;
+import scala.reflect.ClassTag$;
 
 /**
  * Actor system extension to load the configured connection signing algorithms.
@@ -103,7 +101,7 @@ public final class AmqpConnectionSigningExtension implements Extension, Credenti
         private static AmqpConnectionSigningFactory instantiate(final ExtendedActorSystem system,
                 final String className) {
             final ClassTag<AmqpConnectionSigningFactory> tag =
-                    scala.reflect.ClassTag$.MODULE$.apply(AmqpConnectionSigningFactory.class);
+                    ClassTag$.MODULE$.apply(AmqpConnectionSigningFactory.class);
             return system.dynamicAccess().createInstanceFor(className, List$.MODULE$.empty(), tag).get();
         }
 

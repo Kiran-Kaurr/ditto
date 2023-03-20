@@ -54,14 +54,16 @@ public final class HmacCredentials implements Credentials {
     }
 
     /**
-     * @return the signing algorithm.
+     *Returns the signing algorithm.
+ 
      */
     public String getAlgorithm() {
         return algorithm;
     }
 
     /**
-     * @return the parameters.
+     *Returns the parameters.
+ 
      */
     public JsonObject getParameters() {
         return parameters;

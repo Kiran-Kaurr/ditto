@@ -34,27 +34,32 @@ import org.eclipse.ditto.json.JsonObject;
 public interface SshTunnel extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return {@code true} if the ssh tunnel is enabhled
+     *Returns {@code true} if the ssh tunnel is enabhled.
+ 
      */
     boolean isEnabled();
 
     /**
-     * @return the credentials for the ssh tunnel
+     *Returns the credentials for the ssh tunnel.
+ 
      */
     Credentials getCredentials();
 
     /**
-     * @return {@code true} if host should be validated
+     *Returns {@code true} if host should be validated.
+ 
      */
     boolean isValidateHost();
 
     /**
-     * @return the known hosts for the ssh tunnel
+     *Returns the known hosts for the ssh tunnel.
+ 
      */
     List<String> getKnownHosts();
 
     /**
-     * @return the uri for the ssh tunnel
+     *Returns the uri for the ssh tunnel.
+ 
      */
     String getUri();
 

@@ -370,7 +370,7 @@ public final class InboundDispatchingSink
     }
 
     private static boolean isIllegalAdaptableException(final DittoRuntimeException dittoRuntimeException) {
-        return IllegalAdaptableException.ERROR_CODE.equals(dittoRuntimeException.getErrorCode());
+        return dittoRuntimeException.getErrorCode().equals(IllegalAdaptableException.ERROR_CODE);
     }
 
     private boolean isAboutInvalidLiveResponse(final IllegalAdaptableException illegalAdaptableException) {
@@ -572,7 +572,7 @@ public final class InboundDispatchingSink
 
     private static boolean isLive(final Signal<?> signal) {
         return SignalInformationPoint.isMessageCommand(signal) ||
-                SignalInformationPoint.isThingCommand(signal) && SignalInformationPoint.isChannelLive(signal);
+                (SignalInformationPoint.isThingCommand(signal) && SignalInformationPoint.isChannelLive(signal));
     }
 
     private void startAckregatorAndForwardSignal(final EntityId entityId,

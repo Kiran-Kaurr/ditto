@@ -237,14 +237,16 @@ public final class CreateThing extends AbstractCommand<CreateThing> implements T
     }
 
     /**
-     * @return the initial {@code Policy} if there should be one applied when creating the Thing.
+     *Returns the initial {@code Policy} if there should be one applied when creating the Thing.
+ 
      */
     public Optional<JsonObject> getInitialPolicy() {
         return Optional.ofNullable(initialPolicy);
     }
 
     /**
-     * @return the policyIdOrPlaceholder that should be used to copy an existing policy when creating the Thing.
+     *Returns the policyIdOrPlaceholder that should be used to copy an existing policy when creating the Thing.
+ 
      */
     public Optional<String> getPolicyIdOrPlaceholder() { return Optional.ofNullable(policyIdOrPlaceholder);}
 

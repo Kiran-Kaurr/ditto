@@ -71,7 +71,7 @@ final class Cleanup {
         return readJournal.getNewestSnapshotsAbove(lowerBound, readBatchSize, true, materializer)
                 .map(document -> new SnapshotRevision(document.getString(S_ID),
                         document.getLong(S_SN),
-                        "DELETED".equals(document.getString(LIFECYCLE))))
+                        document.getString(LIFECYCLE).equals("DELETED")))
                 .filter(this::isMyResponsibility);
     }
 

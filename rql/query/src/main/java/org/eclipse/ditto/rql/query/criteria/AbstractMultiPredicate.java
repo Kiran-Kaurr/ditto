@@ -36,7 +36,8 @@ abstract class AbstractMultiPredicate implements Predicate {
     }
 
     /**
-     * @return the values
+     *Returns the values.
+ 
      */
     public List<Object> getValues() {
         return values;
@@ -47,7 +48,7 @@ abstract class AbstractMultiPredicate implements Predicate {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractMultiPredicate)) {
             return false;
         }
         final AbstractMultiPredicate that = (AbstractMultiPredicate) o;

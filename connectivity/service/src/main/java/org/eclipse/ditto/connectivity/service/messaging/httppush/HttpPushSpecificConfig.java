@@ -70,28 +70,31 @@ public final class HttpPushSpecificConfig {
     }
 
     /**
-     * @return the idle timeout applied for HTTP push requests.
+     *Returns the idle timeout applied for HTTP push requests.
+ 
      */
     public Duration idleTimeout() {
         return specificConfig.getDuration(IDLE_TIMEOUT);
     }
 
     /**
-     * @return the parallelism applied to HTTP publishing.
+     *Returns the parallelism applied to HTTP publishing.
+ 
      */
     public Integer parallelism() {
         return specificConfig.getInt(PARALLELISM);
     }
 
     /**
-     * @return for which HTTP methods request bodies should be omitted.
+     *Returns for which HTTP methods request bodies should be omitted.
+ 
      */
     public List<String> omitRequestBody() {
         try {
             return specificConfig.getStringList(OMIT_REQUEST_BODY);
         } catch (final ConfigException.WrongType e) {
             final var configValue = specificConfig.getValue(OMIT_REQUEST_BODY);
-            if (ConfigValueType.STRING == configValue.valueType()) {
+            if (configValue.valueType() == ConfigValueType.STRING) {
                 return List.of(specificConfig.getString(OMIT_REQUEST_BODY).split(","));
             }
             throw e;

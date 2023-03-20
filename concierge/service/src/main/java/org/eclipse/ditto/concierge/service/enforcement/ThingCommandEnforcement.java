@@ -264,7 +264,7 @@ public final class ThingCommandEnforcement
         return enforcerKeyEntry.exists() && enforcerKeyEntry.getValueOrThrow()
                 .getCacheLookupContext()
                 .flatMap(EnforcementContext::getPersistenceLifecycle)
-                .map(x -> PersistenceLifecycle.DELETED == x)
+                .map(x -> x == PersistenceLifecycle.DELETED)
                 .orElse(false);
     }
 
@@ -497,7 +497,7 @@ public final class ThingCommandEnforcement
     private static boolean isTwinFallbackEnabled(final Signal<?> signal) {
         final var liveChannelFallbackStrategy =
                 signal.getDittoHeaders().getLiveChannelTimeoutStrategy().orElse(LiveChannelTimeoutStrategy.FAIL);
-        return LiveChannelTimeoutStrategy.USE_TWIN == liveChannelFallbackStrategy;
+        return liveChannelFallbackStrategy == LiveChannelTimeoutStrategy.USE_TWIN;
     }
 
     private static ThingQueryCommand<?> toLiveCommand(final ThingQueryCommand<?> command, final Enforcer enforcer) {
@@ -1143,7 +1143,7 @@ public final class ThingCommandEnforcement
                 .filter(selector -> selector.getPointers()
                         .stream()
                         .anyMatch(jsonPointer -> jsonPointer.getRoot()
-                                .filter(jsonKey -> Policy.INLINED_FIELD_NAME.equals(jsonKey.toString()))
+                                .filter(jsonKey -> jsonKey.toString().equals(Policy.INLINED_FIELD_NAME))
                                 .isPresent()))
                 .isPresent();
     }

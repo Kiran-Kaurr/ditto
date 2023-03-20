@@ -23,7 +23,8 @@ import org.eclipse.ditto.things.model.signals.events.ThingMerged;
 interface MergeEventAdapterProvider {
 
     /**
-     * @return the merged event adapter
+     *Returns the merged event adapter.
+ 
      */
     Adapter<ThingMerged> getMergedEventAdapter();
 

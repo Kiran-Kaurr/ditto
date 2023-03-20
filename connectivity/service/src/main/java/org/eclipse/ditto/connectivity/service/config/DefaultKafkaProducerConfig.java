@@ -114,15 +114,15 @@ final class DefaultKafkaProducerConfig implements KafkaProducerConfig {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final DefaultKafkaProducerConfig that = (DefaultKafkaProducerConfig) o;
-        return Objects.equals(queueSize, that.queueSize) &&
-                Objects.equals(parallelism, that.parallelism) &&
+        return (queueSize == that.queueSize) &&
+                (parallelism == that.parallelism) &&
                 Objects.equals(minBackoff, that.minBackoff) &&
                 Objects.equals(maxBackoff, that.maxBackoff) &&
-                Objects.equals(randomFactor, that.randomFactor) &&
-                Objects.equals(maxRestartsCount, that.maxRestartsCount) &&
+                (randomFactor == that.randomFactor) &&
+                (maxRestartsCount == that.maxRestartsCount) &&
                 Objects.equals(maxRestartsWithin, that.maxRestartsWithin) &&
                 Objects.equals(alpakkaConfig, that.alpakkaConfig) &&
-                Objects.equals(initTimeoutSeconds, that.initTimeoutSeconds);
+                (initTimeoutSeconds == that.initTimeoutSeconds);
     }
 
     @Override
