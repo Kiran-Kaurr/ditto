@@ -12,21 +12,21 @@
 cd ../../
 
 mvn dependency:list -DexcludeGroupIds=org.eclipse.ditto,rubygems -Dsort=true -DoutputFile=dependencies.txt
-find . -name dependencies.txt|while read i; do cat $i;done|grep '.*:.*:compile'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:compile.*/:compile/'|sort|uniq > legal/3rd-party-dependencies//compile.txt
-find . -name dependencies.txt|while read i; do cat $i;done|grep '.*:.*:runtime'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:runtime.*/:runtime/'|sort|uniq > legal/3rd-party-dependencies//runtime.txt
-find . -name dependencies.txt|while read i; do cat $i;done|grep '.*:.*:test'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:test.*/:test/'|sort|uniq > legal/3rd-party-dependencies//test.txt
-find . -name dependencies.txt|while read i; do cat $i;done|grep '.*:.*:provided'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:provided.*/:provided/'|sort|uniq > legal/3rd-party-dependencies//provided.txt
+find . -name dependencies.txt|while read i; do cat "$i";done|grep '.*:.*:compile'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:compile.*/:compile/'|sort|uniq > legal/3rd-party-dependencies//compile.txt
+find . -name dependencies.txt|while read i; do cat "$i";done|grep '.*:.*:runtime'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:runtime.*/:runtime/'|sort|uniq > legal/3rd-party-dependencies//runtime.txt
+find . -name dependencies.txt|while read i; do cat "$i";done|grep '.*:.*:test'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:test.*/:test/'|sort|uniq > legal/3rd-party-dependencies//test.txt
+find . -name dependencies.txt|while read i; do cat "$i";done|grep '.*:.*:provided'| tr -d '[:blank:]'| sed -e 's/(optional)//' -e 's/:provided.*/:provided/'|sort|uniq > legal/3rd-party-dependencies//provided.txt
 
 # Cleanup temp files
-find . -name dependencies.txt|while read i; do rm $i;done
+find . -name dependencies.txt|while read i; do rm "$i";done
 
-cd legal/3rd-party-dependencies/
+cd legal/3rd-party-dependencies/ || exit
 
 # exclude compile dependencies from provided.txt + sort + remove duplicates
-cat compile.txt runtime.txt|cut -d':' -f1-4|while read i; do grep -h $i provided.txt;done|sort|uniq|while read x; do sed -i.bak -e s/$x// provided.txt ;done
+cat compile.txt runtime.txt|cut -d':' -f1-4|while read i; do grep -h "$i" provided.txt;done|sort|uniq|while read x; do sed -i.bak -e s/"$x"// provided.txt ;done
 sed -i.bak '/^[[:space:]]*$/d' provided.txt
 # exclude compile+provided dependencies from test.txt + sort + remove duplicates
-cat compile.txt provided.txt runtime.txt|cut -d':' -f1-4|while read i; do grep -h $i test.txt;done|sort|uniq|while read x; do sed -i.bak -e s/$x// test.txt ;done
+cat compile.txt provided.txt runtime.txt|cut -d':' -f1-4|while read i; do grep -h "$i" test.txt;done|sort|uniq|while read x; do sed -i.bak -e s/"$x"// test.txt ;done
 sed -i.bak '/^[[:space:]]*$/d' test.txt
 rm *.bak
 
