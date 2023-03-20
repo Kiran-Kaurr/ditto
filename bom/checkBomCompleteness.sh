@@ -14,12 +14,12 @@
 cd ../
 
 mvn dependency:list -DincludeGroupIds=org.eclipse.ditto -Dsort=true -DoutputFile=dependencies.txt
-find . -name dependencies.txt|while read i; do cat $i;done|grep 'org.eclipse.ditto:' |tr -d '[:blank:]'|sed -e 's/(optional)//' -e 's/:compile.*/:compile/'|awk -F ':' '{print $2}'|sort|uniq > bom/ditto-modules.txt
+find . -name dependencies.txt|while read i; do cat "$i";done|grep 'org.eclipse.ditto:' |tr -d '[:blank:]'|sed -e 's/(optional)//' -e 's/:compile.*/:compile/'|awk -F ':' '{print $2}'|sort|uniq > bom/ditto-modules.txt
 
 # Cleanup temp files
-find . -name dependencies.txt|while read i; do rm $i;done
+find . -name dependencies.txt|while read i; do rm "$i";done
 
-cd bom/
+cd bom/ || exit
 echo "Checking for missing dependencies from BOM. If no lines appear below, all dependencies were included. Missing from BOM are:"
 
 while read p; do

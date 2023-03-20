@@ -58,7 +58,7 @@ build_docker_image() {
     "$module_name" \
     "$jvm_args"
 
-    $DOCKER_BIN build --pull -f $SCRIPTDIR/$DOCKERFILE \
+    $DOCKER_BIN build --pull -f "$SCRIPTDIR"/$DOCKERFILE \
       --build-arg HTTP_PROXY="$HTTP_PROXY_LOCAL" \
       --build-arg HTTPS_PROXY="$HTTPS_PROXY_LOCAL" \
       --build-arg TARGET_DIR="$module_name_base"/service/target \
