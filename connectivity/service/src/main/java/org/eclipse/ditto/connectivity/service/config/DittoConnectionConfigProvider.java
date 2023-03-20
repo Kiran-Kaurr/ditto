@@ -31,10 +31,10 @@ import akka.actor.ActorSystem;
  */
 public class DittoConnectionConfigProvider implements ConnectionConfigProvider {
 
-    private final ActorSystem actorSystem;
+    
 
     public DittoConnectionConfigProvider(final ActorSystem actorSystem) {
-        this.actorSystem = actorSystem;
+        
     }
 
     @Override

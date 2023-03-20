@@ -45,15 +45,17 @@ public enum LogCategory {
     }
 
     /**
-     * @return the label which can be used in a JSON representation.
+     *Returns the label which can be used in a JSON representation.
+ 
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name name of the LogCategory.
-     * @return the LogCategory matching the given name.
+     *Returns the LogCategory matching the given name.
+ @param name name of the LogCategory.
+     * 
      */
     public static Optional<LogCategory> forName(final CharSequence name) {
         checkNotNull(name, "Name");

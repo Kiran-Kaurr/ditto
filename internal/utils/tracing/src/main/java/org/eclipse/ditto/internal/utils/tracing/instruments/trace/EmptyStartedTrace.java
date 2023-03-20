@@ -29,7 +29,8 @@ final class EmptyStartedTrace implements StartedTrace {
     }
 
     /**
-     * @return the {@code NoopStartedTrace}.
+     *Returns the {@code NoopStartedTrace}.
+ 
      */
     static StartedTrace getInstance() {
         return INSTANCE;

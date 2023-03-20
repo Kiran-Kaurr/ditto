@@ -601,7 +601,8 @@ public final class ConnectionLoggerRegistry implements ConnectionMonitorRegistry
         }
 
         /**
-         * @return since when the logs are enabled.
+         *Returns since when the logs are enabled.
+ 
          */
         @Nullable
         public Instant getEnabledSince() {
@@ -609,7 +610,8 @@ public final class ConnectionLoggerRegistry implements ConnectionMonitorRegistry
         }
 
         /**
-         * @return until when the logs will stay enabled.
+         *Returns until when the logs will stay enabled.
+ 
          */
         @Nullable
         public Instant getEnabledUntil() {
@@ -617,7 +619,8 @@ public final class ConnectionLoggerRegistry implements ConnectionMonitorRegistry
         }
 
         /**
-         * @return the log entries.
+         *Returns the log entries.
+ 
          */
         public Collection<LogEntry> getLogs() {
             return logs;

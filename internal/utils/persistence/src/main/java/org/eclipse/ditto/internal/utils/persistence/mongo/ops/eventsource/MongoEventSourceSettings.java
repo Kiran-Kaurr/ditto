@@ -98,35 +98,40 @@ public final class MongoEventSourceSettings {
     }
 
     /**
-     * @return the prefix of the persistence id
+     *Returns the prefix of the persistence id.
+ 
      */
     public String getPersistenceIdPrefix() {
         return persistenceIdPrefix;
     }
 
     /**
-     * @return the name of the metadata collection
+     *Returns the name of the metadata collection.
+ 
      */
     public String getMetadataCollectionName() {
         return metadataCollectionName;
     }
 
     /**
-     * @return the name of the journal collection
+     *Returns the name of the journal collection.
+ 
      */
     public String getJournalCollectionName() {
         return journalCollectionName;
     }
 
     /**
-     * @return the name of the snapshot collection
+     *Returns the name of the snapshot collection.
+ 
      */
     public String getSnapshotCollectionName() {
         return snapshotCollectionName;
     }
 
     /**
-     * @return whether the underlying EventSource supports namespaces
+     *Returns whether the underlying EventSource supports namespaces.
+ 
      */
     public boolean isSupportsNamespaces() {
         return supportsNamespaces;

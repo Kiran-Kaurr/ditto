@@ -70,7 +70,7 @@ public class DefaultEntityCreationConfig implements EntityCreationConfig {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DefaultEntityCreationConfig)) {
             return false;
         }
         DefaultEntityCreationConfig that = (DefaultEntityCreationConfig) o;

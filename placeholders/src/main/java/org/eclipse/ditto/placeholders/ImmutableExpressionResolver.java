@@ -58,8 +58,7 @@ final class ImmutableExpressionResolver implements ExpressionResolver {
 
     private static final Pattern PIPE_PATTERN = Pattern.compile(PIPE_PATTERN_STR);
 
-    private static final Function<String, DittoRuntimeException> UNRESOLVED_INPUT_HANDLER = unresolvedInput ->
-            UnresolvedPlaceholderException.newBuilder(unresolvedInput).build();
+    private static  DittoRuntimeException unresolvedInputHandler(String unresolvedInput){return UnresolvedPlaceholderException.newBuilder(unresolvedInput).build();}
 
     @Nullable private final String placeholderReplacementInValidation;
 
@@ -117,7 +116,7 @@ final class ImmutableExpressionResolver implements ExpressionResolver {
     private List<String> getPipelineStagesExpressions(final String template) {
 
         if (!PIPE_PATTERN.matcher(template).matches()) {
-            throw UNRESOLVED_INPUT_HANDLER.apply(template);
+            throw unresolvedInputHandler(template);
         }
 
         final List<String> pipelineStagesExpressions = new ArrayList<>();

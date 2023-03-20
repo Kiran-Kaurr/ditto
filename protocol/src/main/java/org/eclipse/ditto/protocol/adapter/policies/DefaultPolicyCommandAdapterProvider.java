@@ -51,27 +51,27 @@ public final class DefaultPolicyCommandAdapterProvider implements PolicyCommandA
         policyAnnouncementAdapter = PolicyAnnouncementAdapter.of(headerTranslator);
     }
 
-    public Adapter<PolicyErrorResponse> getErrorResponseAdapter() {
+    @Override public Adapter<PolicyErrorResponse> getErrorResponseAdapter() {
         return policyErrorResponseAdapter;
     }
 
-    public Adapter<PolicyModifyCommand<?>> getModifyCommandAdapter() {
+    @Override public Adapter<PolicyModifyCommand<?>> getModifyCommandAdapter() {
         return policyModifyCommandAdapter;
     }
 
-    public Adapter<PolicyModifyCommandResponse<?>> getModifyCommandResponseAdapter() {
+    @Override public Adapter<PolicyModifyCommandResponse<?>> getModifyCommandResponseAdapter() {
         return policyModifyCommandResponseAdapter;
     }
 
-    public Adapter<PolicyQueryCommand<?>> getQueryCommandAdapter() {
+    @Override public Adapter<PolicyQueryCommand<?>> getQueryCommandAdapter() {
         return policyQueryCommandAdapter;
     }
 
-    public Adapter<PolicyQueryCommandResponse<?>> getQueryCommandResponseAdapter() {
+    @Override public Adapter<PolicyQueryCommandResponse<?>> getQueryCommandResponseAdapter() {
         return policyQueryCommandResponseAdapter;
     }
 
-    public Adapter<PolicyAnnouncement<?>> getAnnouncementAdapter() {
+    @Override public Adapter<PolicyAnnouncement<?>> getAnnouncementAdapter() {
         return policyAnnouncementAdapter;
     }
 

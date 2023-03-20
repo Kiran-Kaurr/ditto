@@ -63,13 +63,14 @@ public final class EntityTagMatcher {
     private static boolean isAsterisk(@Nullable final CharSequence entityTagMatcher) {
         boolean result = false;
         if (null != entityTagMatcher) {
-            result = ASTERISK.equals(entityTagMatcher.toString());
+            result = entityTagMatcher.toString().equals(ASTERISK);
         }
         return result;
     }
 
     /**
-     * @return the {@code *} entity-tag value.
+     *Returns the {@code *} entity-tag value.
+ 
      */
     public static EntityTagMatcher asterisk() {
         return ASTERISK_INSTANCE;

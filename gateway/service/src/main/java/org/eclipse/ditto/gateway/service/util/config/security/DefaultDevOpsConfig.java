@@ -131,7 +131,7 @@ public final class DefaultDevOpsConfig implements DevOpsConfig {
             return false;
         }
         final DefaultDevOpsConfig that = (DefaultDevOpsConfig) o;
-        return Objects.equals(secureStatus, that.secureStatus) &&
+        return (secureStatus == that.secureStatus) &&
                 Objects.equals(devopsAuthenticationMethod, that.devopsAuthenticationMethod) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(devopsOAuth2Subjects, that.devopsOAuth2Subjects) &&

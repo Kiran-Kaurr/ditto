@@ -79,7 +79,7 @@ public enum FieldType implements JsonFieldMarker, Predicate<JsonField> {
      * @return the Predicate.
      */
     public static Predicate<JsonField> all() {
-        return (unused -> true);
+        return  unused -> true;
     }
 
     @Override

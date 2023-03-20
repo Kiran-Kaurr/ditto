@@ -78,11 +78,10 @@ public abstract class AbstractEnforcement<C extends Signal<?>> {
      * @return future after enforcement was performed.
      */
     public CompletionStage<Contextual<WithDittoHeaders>> enforceSafely() {
-        return enforce().handle(handleEnforcementCompletion());
+        return enforce().handle(this::handleEnforcementCompletion);
     }
 
-    private BiFunction<Contextual<WithDittoHeaders>, Throwable, Contextual<WithDittoHeaders>> handleEnforcementCompletion() {
-        return (result, throwable) -> {
+    private  Contextual<WithDittoHeaders> handleEnforcementCompletion(Contextual<WithDittoHeaders> result, Throwable throwable){
             if (null != result) {
                 final ThreadSafeDittoLoggingAdapter l = result.getLog().withCorrelationId(result);
                 final String typeHint = result.getMessageOptional()
@@ -99,8 +98,7 @@ public abstract class AbstractEnforcement<C extends Signal<?>> {
             }
             return Objects.requireNonNullElseGet(result,
                     () -> withMessageToReceiver(reportError("Error thrown during enforcement", throwable), sender()));
-        };
-    }
+        }
 
     /**
      * Report unexpected error or unknown response.
@@ -193,23 +191,26 @@ public abstract class AbstractEnforcement<C extends Signal<?>> {
     }
 
     /**
-     * @return the configuration of "ask with retry" pattern during enforcement.
+     *Returns the configuration of "ask with retry" pattern during enforcement.
+ 
      */
     protected AskWithRetryConfig getAskWithRetryConfig() {
         return context.getAskWithRetryConfig();
     }
 
     /**
-     * @return the entity ID.
+     *Returns the entity ID.
+ 
      */
     protected EnforcementCacheKey entityId() {
         return context.getCacheKey();
     }
 
     /**
-     * @param withPotentialDittoHeaders the object which potentially contains DittoHeaders from which a
+     *Returns the diagnostic logging adapter.
+ @param withPotentialDittoHeaders the object which potentially contains DittoHeaders from which a
      * {@code correlation-id} can be extracted in order to enhance the returned DiagnosticLoggingAdapter
-     * @return the diagnostic logging adapter.
+     * 
      */
     protected ThreadSafeDittoLoggingAdapter log(final Object withPotentialDittoHeaders) {
         if (withPotentialDittoHeaders instanceof WithDittoHeaders) {
@@ -222,35 +223,40 @@ public abstract class AbstractEnforcement<C extends Signal<?>> {
     }
 
     /**
-     * @return the diagnostic logging adapter.
+     *Returns the diagnostic logging adapter.
+ 
      */
     protected ThreadSafeDittoLoggingAdapter log() {
         return context.getLog().withCorrelationId(dittoHeaders());
     }
 
     /**
-     * @return Akka pubsub mediator.
+     *Returns akka pubsub mediator.
+ 
      */
     protected ActorRef pubSubMediator() {
         return context.getPubSubMediator();
     }
 
     /**
-     * @return actor reference of the enforcer actor this object belongs to.
+     *Returns actor reference of the enforcer actor this object belongs to.
+ 
      */
     protected ActorRef self() {
         return context.getSelf();
     }
 
     /**
-     * @return the sender of the sent {@link #signal()}
+     *Returns the sender of the sent {@link #signal()}.
+ 
      */
     protected ActorRef sender() {
         return context.getSender();
     }
 
     /**
-     * @return the sent Signal of subtype {@code <T>}
+     *Returns the sent Signal of subtype {@code <T>}.
+ 
      */
     protected C signal() {
         return context.getMessage();
@@ -312,14 +318,16 @@ public abstract class AbstractEnforcement<C extends Signal<?>> {
     }
 
     /**
-     * @return the DittoHeaders of the sent {@link #signal()}
+     *Returns the DittoHeaders of the sent {@link #signal()}.
+ 
      */
     protected DittoHeaders dittoHeaders() {
         return signal().getDittoHeaders();
     }
 
     /**
-     * @return the {@link org.eclipse.ditto.concierge.api.actors.ConciergeForwarderActor} reference
+     *Returns the {@link org.eclipse.ditto.concierge.api.actors.ConciergeForwarderActor} reference.
+ 
      */
     protected ActorRef conciergeForwarder() {
         return context.getConciergeForwarder();

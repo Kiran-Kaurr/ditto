@@ -23,12 +23,14 @@ import org.eclipse.ditto.internal.utils.config.KnownConfigValue;
 public interface Amqp10PublisherConfig {
 
     /**
-     * @return maximum number of messages buffered at the publisher actor before dropping them.
+     *Returns maximum number of messages buffered at the publisher actor before dropping them.
+ 
      */
     int getMaxQueueSize();
 
     /**
-     * @return the number of possible parallel message publications per publisher actor.
+     *Returns the number of possible parallel message publications per publisher actor.
+ 
      */
     int getParallelism();
 

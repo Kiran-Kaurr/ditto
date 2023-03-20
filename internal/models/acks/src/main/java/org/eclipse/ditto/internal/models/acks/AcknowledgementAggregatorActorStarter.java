@@ -285,7 +285,7 @@ public final class AcknowledgementAggregatorActorStarter {
         if (signal instanceof ThingModifyCommand && !isLiveSignal) {
             result = ackRequests.stream().anyMatch(AcknowledgementForwarderActorStarter::isNotLiveResponse);
         } else if (SignalInformationPoint.isMessageCommand(signal) ||
-                isLiveSignal && SignalInformationPoint.isThingCommand(signal)) {
+                (isLiveSignal && SignalInformationPoint.isThingCommand(signal))) {
 
             result = ackRequests.stream().anyMatch(AcknowledgementForwarderActorStarter::isNotTwinPersisted);
         } else {

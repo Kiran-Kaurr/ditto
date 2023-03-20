@@ -253,7 +253,7 @@ public final class RabbitMQPublisherActor extends BasePublisherActor<RabbitMQTar
 
         // index the outstanding ack by delivery tag
         outstandingAcks.put(seqNo, outstandingAck);
-        resultFuture.completeOnTimeout(timeoutResponse,
+        resultFuture = resultFuture.completeOnTimeout(timeoutResponse,
                 timeoutDuration.toMillis(), TimeUnit.MILLISECONDS)
                 // Only remove future from cache. Actual logging/reporting done elsewhere.
                 .whenComplete((ack, error) -> outstandingAcks.remove(seqNo));
@@ -266,7 +266,7 @@ public final class RabbitMQPublisherActor extends BasePublisherActor<RabbitMQTar
         });
         // maintain outstanding-acks-by-target. It need not be accurate because outstandingAcksByTarget is only used
         // on basic.return, which affects all messages published to 1 target but is not precise.
-        resultFuture.whenComplete(
+        resultFuture = resultFuture.whenComplete(
                 (ignoredAck, ignoredError) -> outstandingAcksByTarget.computeIfPresent(publishTarget, (key, queue) -> {
                     queue.poll();
                     return queue.isEmpty() ? null : queue;

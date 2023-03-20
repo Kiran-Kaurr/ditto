@@ -47,7 +47,8 @@ public interface MappingConfig {
     int getMaxPoolSize();
 
     /**
-     * @return whether messages with failed enrichments should be published.
+     *Returns whether messages with failed enrichments should be published.
+ 
      */
     boolean getPublishFailedEnrichments();
 

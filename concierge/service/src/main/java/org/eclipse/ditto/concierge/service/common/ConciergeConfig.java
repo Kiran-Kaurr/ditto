@@ -54,7 +54,8 @@ public interface ConciergeConfig extends ServiceSpecificConfig, WithHealthCheckC
     ThingsAggregatorConfig getThingsAggregatorConfig();
 
     /**
-     * @return the path where to dispatch search requests
+     *Returns the path where to dispatch search requests.
+ 
      */
     String getSearchActorPath();
 

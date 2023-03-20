@@ -47,9 +47,9 @@ public final class ShutdownReasonFactory {
 
         final ShutdownReasonType type = getReasonType(jsonObject);
 
-        if (ShutdownReasonType.Known.PURGE_NAMESPACE.equals(type)) {
+        if (type.equals(ShutdownReasonType.Known.PURGE_NAMESPACE)) {
             return PurgeNamespaceReason.fromJson(jsonObject);
-        } else if (ShutdownReasonType.Known.PURGE_ENTITIES.equals(type)) {
+        } else if (type.equals(ShutdownReasonType.Known.PURGE_ENTITIES)) {
             return PurgeEntitiesReason.fromJson(jsonObject);
         } else {
             return ShutdownNoReason.INSTANCE;

@@ -169,7 +169,7 @@ public final class RetrieveThing extends AbstractCommand<RetrieveThing> implemen
         if (null != selectedFields) {
             jsonObjectBuilder.set(JSON_SELECTED_FIELDS, selectedFields.toString(), predicate);
         }
-        if (NULL_SNAPSHOT_REVISION != snapshotRevision) {
+        if (snapshotRevision != NULL_SNAPSHOT_REVISION) {
             jsonObjectBuilder.set(JSON_SNAPSHOT_REVISION, snapshotRevision, predicate);
         }
     }
@@ -189,7 +189,7 @@ public final class RetrieveThing extends AbstractCommand<RetrieveThing> implemen
      */
     @Nonnull
     public Optional<Long> getSnapshotRevision() {
-        if (NULL_SNAPSHOT_REVISION != snapshotRevision) {
+        if (snapshotRevision != NULL_SNAPSHOT_REVISION) {
             return Optional.of(snapshotRevision);
         }
         return Optional.empty();

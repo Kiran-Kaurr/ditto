@@ -227,35 +227,40 @@ public final class FieldExpressionUtil {
         }
 
         /**
-         * @return the optional feature id.
+         *Returns the optional feature id.
+ 
          */
         public Optional<String> getFeatureId() {
             return Optional.ofNullable(featureId);
         }
 
         /**
-         * @return the optional feature property path.
+         *Returns the optional feature property path.
+ 
          */
         public Optional<String> getProperty() {
             return Optional.ofNullable(property);
         }
 
         /**
-         * @return the optional feature desiredProperty path.
+         *Returns the optional feature desiredProperty path.
+ 
          */
         public Optional<String> getDesiredProperty() {
             return Optional.ofNullable(desiredProperty);
         }
 
         /**
-         * @return whether the field matches the properties.
+         *Returns whether the field matches the properties.
+ 
          */
         public boolean isProperties() {
             return isProperties;
         }
 
         /**
-         * @return whether the field matches the desired properties.
+         *Returns whether the field matches the desired properties.
+ 
          */
         public boolean isDesiredProperties() {
             return isDesiredProperties;

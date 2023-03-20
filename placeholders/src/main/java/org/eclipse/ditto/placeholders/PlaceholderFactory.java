@@ -25,7 +25,8 @@ import javax.annotation.Nullable;
 public final class PlaceholderFactory {
 
     /**
-     * @return new instance of the {@link HeadersPlaceholder}
+     *Returns new instance of the {@link HeadersPlaceholder}.
+ 
      */
     public static HeadersPlaceholder newHeadersPlaceholder() {
         return ImmutableHeadersPlaceholder.INSTANCE;

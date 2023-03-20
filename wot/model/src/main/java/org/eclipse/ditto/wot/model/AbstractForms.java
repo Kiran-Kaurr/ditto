@@ -51,7 +51,7 @@ abstract class AbstractForms<E extends FormElement<E>> implements Forms<E> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractForms)) {
             return false;
         }
         final AbstractForms<?> that = (AbstractForms<?>) o;

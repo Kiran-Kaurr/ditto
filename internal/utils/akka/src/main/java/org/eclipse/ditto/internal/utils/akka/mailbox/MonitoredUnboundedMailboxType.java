@@ -12,31 +12,29 @@
   */
  package org.eclipse.ditto.internal.utils.akka.mailbox;
 
- import java.util.Optional;
- import java.util.Queue;
- import java.util.concurrent.ConcurrentLinkedQueue;
- import java.util.concurrent.atomic.AtomicInteger;
- import java.util.regex.Pattern;
-
- import org.eclipse.ditto.internal.utils.metrics.DittoMetrics;
- import org.eclipse.ditto.internal.utils.metrics.instruments.gauge.Gauge;
- import org.slf4j.Logger;
- import org.slf4j.LoggerFactory;
-
- import com.typesafe.config.Config;
-
  import akka.actor.ActorPath;
- import akka.actor.ActorRef;
- import akka.actor.ActorRefWithCell;
- import akka.actor.ActorSystem;
- import akka.dispatch.Envelope;
- import akka.dispatch.MailboxType;
- import akka.dispatch.MessageQueue;
- import akka.dispatch.ProducesMessageQueue;
- import akka.dispatch.UnboundedMailbox;
- import akka.event.Logging;
- import akka.event.LoggingAdapter;
- import scala.Option;
+import akka.actor.ActorRef;
+import akka.actor.ActorRefWithCell;
+import akka.actor.ActorSystem;
+import akka.dispatch.Envelope;
+import akka.dispatch.MailboxType;
+import akka.dispatch.MessageQueue;
+import akka.dispatch.ProducesMessageQueue;
+import akka.dispatch.UnboundedMailbox;
+import akka.dispatch.UnboundedMessageQueueSemantics;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
+import com.typesafe.config.Config;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
+import org.eclipse.ditto.internal.utils.metrics.DittoMetrics;
+import org.eclipse.ditto.internal.utils.metrics.instruments.gauge.Gauge;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import scala.Option;
 
  /**
   * MonitoredUnboundedMailboxType is a regular unbounded mailbox, which in addition monitors the size of the
@@ -120,7 +118,7 @@
       * A {@code MessageQueue} implementation which keeps track of its size. The size is tracked separately, to avoid
       * {@link Queue#size} complexity of O(n). The size will be reported via logging and a gauge metric.
       */
-     static final class InstrumentedMessageQueue implements MessageQueue, akka.dispatch.UnboundedMessageQueueSemantics {
+     static final class InstrumentedMessageQueue implements MessageQueue, UnboundedMessageQueueSemantics {
 
          private final LoggingAdapter log;
          private final ActorPath path;

@@ -97,7 +97,8 @@ public final class StartStreaming implements StreamControlMessage {
     }
 
     /**
-     * @return the Streaming type of what streaming to start.
+     *Returns the Streaming type of what streaming to start.
+ 
      */
     public StreamingType getStreamingType() {
         return streamingType;
@@ -116,15 +117,17 @@ public final class StartStreaming implements StreamControlMessage {
     }
 
     /**
-     * @return the List of namespaces for which {@link org.eclipse.ditto.base.model.signals.Signal}s should be emitted to the
-     * stream
+     *Returns the List of namespaces for which {@link org.eclipse.ditto.base.model.signals.Signal}s should be emitted to the
+ stream.
+ 
      */
     public List<String> getNamespaces() {
         return namespaces;
     }
 
     /**
-     * @return the optional RQL filter to apply for events before publishing to the stream
+     *Returns the optional RQL filter to apply for events before publishing to the stream.
+ 
      */
     public Optional<String> getFilter() {
         return Optional.ofNullable(filter);

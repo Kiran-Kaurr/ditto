@@ -46,25 +46,29 @@ public interface ConnectionConfig extends WithSupervisorConfig, WithActivityChec
     int getClientActorRestartsBeforeEscalation();
 
     /**
-     * @return the list of allowed hostnames to which outgoing connections are allowed. This list overrides the list
-     * of blocked hostnames.
+     *Returns the list of allowed hostnames to which outgoing connections are allowed. This list overrides the list
+ of blocked hostnames.
+ 
      */
     Collection<String> getAllowedHostnames();
 
     /**
-     * @return the list of blocked hostnames to which outgoing connections are prevented.
-     * Outgoing connections to private, wildcard, loopback and multicast addresses are also prevented
-     * when the list is nonempty.
+     *Returns the list of blocked hostnames to which outgoing connections are prevented.
+ Outgoing connections to private, wildcard, loopback and multicast addresses are also prevented
+ when the list is nonempty.
+ 
      */
     Collection<String> getBlockedHostnames();
 
     /**
-     * @return the list of blocked subnets to which outgoing connections are prevented.
+     *Returns the list of blocked subnets to which outgoing connections are prevented.
+ 
      */
     Collection<String> getBlockedSubnets();
 
     /**
-     * @return the regex to use for hostnames to which outgoing connections are prevented.
+     *Returns the regex to use for hostnames to which outgoing connections are prevented.
+ 
      */
     String getBlockedHostRegex();
 

@@ -34,10 +34,11 @@ public class ThingResourceMapper<P, R> {
     }
 
     /**
-     * @param visitor the visitor used to map the JsonPointer
+     *Returns new instance of ThingResourceMapper.
+ @param visitor the visitor used to map the JsonPointer
      * @param <P> an extra parameter passed to the visit method
      * @param <R> the result of the mapping
-     * @return new instance of ThingResourceMapper
+     * 
      */
     public static <P, R> ThingResourceMapper<P, R> from(final ThingResourceVisitor<P, R> visitor) {
         return new ThingResourceMapper<>(visitor);

@@ -82,63 +82,72 @@ public final class BaseClientData {
     }
 
     /**
-     * @return the ID of the connection
+     *Returns the ID of the connection.
+ 
      */
     public ConnectionId getConnectionId() {
         return connectionId;
     }
 
     /**
-     * @return the managed connection
+     *Returns the managed connection.
+ 
      */
     public Connection getConnection() {
         return connection;
     }
 
     /**
-     * @return the current connection status
+     *Returns the current connection status.
+ 
      */
     public ConnectivityStatus getConnectionStatus() {
         return connectionStatus;
     }
 
     /**
-     * @return the current recovery status
+     *Returns the current recovery status.
+ 
      */
     public RecoveryStatus getRecoveryStatus() {
         return recoveryStatus;
     }
 
     /**
-     * @return the desired connection status
+     *Returns the desired connection status.
+ 
      */
     ConnectivityStatus getDesiredConnectionStatus() {
         return desiredConnectionStatus;
     }
 
     /**
-     * @return the details description about the current connection status
+     *Returns the details description about the current connection status.
+ 
      */
     Optional<String> getConnectionStatusDetails() {
         return Optional.ofNullable(connectionStatusDetails);
     }
 
     /**
-     * @return the time since when the connection is in the current status
+     *Returns the time since when the connection is in the current status.
+ 
      */
     Instant getInConnectionStatusSince() {
         return inConnectionStatusSince;
     }
 
     /**
-     * @return the Pairs of session senders (including DittoHeaders per sender ActorRef)
+     *Returns the Pairs of session senders (including DittoHeaders per sender ActorRef).
+ 
      */
     List<Pair<ActorRef, DittoHeaders>> getSessionSenders() {
         return sessionSenders;
     }
 
     /**
-     * @return the holder for the state of the ssh tunnel (enabled, established, failed, ...)
+     *Returns the holder for the state of the ssh tunnel (enabled, established, failed, ...).
+ 
      */
     SshTunnelState getSshTunnelState() {
         return sshTunnelState;
@@ -230,7 +239,8 @@ public final class BaseClientData {
     }
 
     /**
-     * @return the current failure count
+     *Returns the current failure count.
+ 
      */
     int getFailureCount() {
         return failureCount;
@@ -260,7 +270,7 @@ public final class BaseClientData {
                 Objects.equals(inConnectionStatusSince, that.inConnectionStatusSince) &&
                 Objects.equals(sessionSenders, that.sessionSenders) &&
                 Objects.equals(sshTunnelState, that.sshTunnelState) &&
-                Objects.equals(failureCount, that.failureCount);
+                (failureCount == that.failureCount);
     }
 
     @Override

@@ -475,23 +475,23 @@ public final class HttpStatus {
     }
 
     public boolean isInformational() {
-        return Category.INFORMATIONAL == category;
+        return category == Category.INFORMATIONAL;
     }
 
     public boolean isSuccess() {
-        return Category.SUCCESS == category;
+        return category == Category.SUCCESS;
     }
 
     public boolean isRedirection() {
-        return Category.REDIRECTION == category;
+        return category == Category.REDIRECTION;
     }
 
     public boolean isClientError() {
-        return Category.CLIENT_ERROR == category;
+        return category == Category.CLIENT_ERROR;
     }
 
     public boolean isServerError() {
-        return Category.SERVER_ERROR == category;
+        return category == Category.SERVER_ERROR;
     }
 
     @Override

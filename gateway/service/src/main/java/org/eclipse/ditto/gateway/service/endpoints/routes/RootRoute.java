@@ -383,7 +383,7 @@ public final class RootRoute extends AllDirectives {
             final Route route) {
 
         return scalaRequestContext ->
-                scala.compat.java8.FutureConverters.toJava(route.asScala().apply(scalaRequestContext));
+                FutureConverters.toJava(route.asScala().apply(scalaRequestContext));
     }
 
     @NotThreadSafe

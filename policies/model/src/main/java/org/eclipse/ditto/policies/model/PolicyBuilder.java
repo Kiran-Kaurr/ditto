@@ -44,7 +44,7 @@ public interface PolicyBuilder {
         /**
          * Sets the given {@link Subjects} to the specified {@code label} to this builder. All previous entries with the
          * same
-         * {@code subjectId} in the {@link Label} are replaced by the specified ones.
+         * {@code subjects} in the {@link Label} are replaced by the specified ones.
          *
          * @param subjects the Subjects to set for the PolicyEntry identified by the {@code label}.
          * @return this builder to allow method chaining.
@@ -57,7 +57,7 @@ public interface PolicyBuilder {
 
         /**
          * Sets the given {@link Subject} to the specified {@code label} to this builder. A previous entry with the same
-         * {@code subjectId} in the {@link Label} is replaced by the specified one.
+         * {@code subject} in the {@link Label} is replaced by the specified one.
          *
          * @param issuer the SubjectId's {@code issuer}.
          * @param subject the character sequence for the SubjectId's {@code subject}.
@@ -74,7 +74,7 @@ public interface PolicyBuilder {
 
         /**
          * Sets the given {@link Subject} to the specified {@code label} to this builder. A previous entry with the same
-         * {@code subjectId} in the {@link Label} is replaced by the specified one. Sets the subject type
+         * {@code subject} in the {@link Label} is replaced by the specified one. Sets the subject type
          * to {@link SubjectType#GENERATED}.
          *
          * @param issuer the SubjectId's {@code issuer}.
@@ -106,7 +106,7 @@ public interface PolicyBuilder {
 
         /**
          * Sets the given {@link Subject} to the specified {@code label} to this builder. A previous entry with the same
-         * {@code subjectId} in the {@link Label} is replaced by the specified one.
+         * {@code subject} in the {@link Label} is replaced by the specified one.
          *
          * @param subject the Subject to set for the PolicyEntry identified by the {@code label}.
          * @return this builder to allow method chaining.
@@ -578,7 +578,7 @@ public interface PolicyBuilder {
 
     /**
      * Sets the given {@link Subjects} to the specified {@code label} to this builder. All previous entries with the
-     * same {@code subjectId} in the {@link Label} are replaced by the specified ones.
+     * same {@code subjects} in the {@link Label} are replaced by the specified ones.
      *
      * @param label the Label identifying the PolicyEntry to modify.
      * @param subjects the Subjects to set for the PolicyEntry identified by the {@code label}.
@@ -628,7 +628,7 @@ public interface PolicyBuilder {
 
     /**
      * Sets the given {@link Subject} to the specified {@code label} to this builder. A previous entry with the same
-     * {@code subjectId} in the {@link Label} is replaced by the specified one.
+     * {@code subject} in the {@link Label} is replaced by the specified one.
      *
      * @param label the Label identifying the PolicyEntry to modify.
      * @param subject the Subject to set for the PolicyEntry identified by the {@code label}.

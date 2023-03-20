@@ -34,15 +34,17 @@ public final class ConnectionFailureStatusReport {
     }
 
     /**
-     * @return the failure
+     *Returns the failure.
+ 
      */
     public ConnectionFailure getFailure() {
         return failure;
     }
 
     /**
-     * @return whether the occurred failure is recoverable (i.e. the client handles the connection recovery) or not
-     * (connection must be closed and re-opened by the client actor)
+     *Returns whether the occurred failure is recoverable (i.e. the client handles the connection recovery) or not
+ (connection must be closed and re-opened by the client actor).
+ 
      */
     public boolean isRecoverable() {
         return recoverable;

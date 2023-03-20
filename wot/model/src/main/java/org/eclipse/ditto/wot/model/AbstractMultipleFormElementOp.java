@@ -54,7 +54,7 @@ abstract class AbstractMultipleFormElementOp<O extends FormElementOp<O>> impleme
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractMultipleFormElementOp)) {
             return false;
         }
         final AbstractMultipleFormElementOp<?> that = (AbstractMultipleFormElementOp<?>) o;

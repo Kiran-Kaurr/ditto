@@ -81,14 +81,16 @@ public interface SupervisedStream {
         }
 
         /**
-         * @return the source queue.
+         *Returns the source queue.
+ 
          */
         public SourceQueueWithComplete<SessionedJsonifiable> getSourceQueue() {
             return sourceQueue;
         }
 
         /**
-         * @return the supervised source.
+         *Returns the supervised source.
+ 
          */
         public SupervisedStream getSupervisedStream() {
             return supervisedStream;

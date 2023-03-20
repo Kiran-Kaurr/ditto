@@ -103,7 +103,7 @@ abstract class AbstractMessageCommandResponse<T, C extends AbstractMessageComman
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (!(obj instanceof AbstractMessageCommandResponse)) {
             return false;
         }
         final AbstractMessageCommandResponse<?, ?> other = (AbstractMessageCommandResponse<?, ?>) obj;

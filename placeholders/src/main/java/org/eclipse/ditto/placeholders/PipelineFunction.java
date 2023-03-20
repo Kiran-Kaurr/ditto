@@ -31,12 +31,14 @@ interface PipelineFunction {
     String DOUBLE_QUOTED_STRING_CONTENT = "(?:\\\\\"|[^\"])*+";
 
     /**
-     * @return the function name
+     *Returns the function name.
+ 
      */
     String getName();
 
     /**
-     * @return the function's signature
+     *Returns the function's signature.
+ 
      */
     Signature getSignature();
 
@@ -59,12 +61,14 @@ interface PipelineFunction {
     interface Signature {
 
         /**
-         * @return the function's signature as a List of {@link PipelineFunction.ParameterDefinition}s.
+         *Returns the function's signature as a List of {@link PipelineFunction.ParameterDefinition}s.
+ 
          */
         List<PipelineFunction.ParameterDefinition<?>> getParameterDefinitions();
 
         /**
-         * @return renders a nice String description of the complete signature
+         *Returns renders a nice String description of the complete signature.
+ 
          */
         default String renderSignature() {
             final List<ParameterDefinition<?>> parameterDefinitions = getParameterDefinitions();
@@ -95,17 +99,20 @@ interface PipelineFunction {
     interface ParameterDefinition<T> {
 
         /**
-         * @return the name of the parameter
+         *Returns the name of the parameter.
+ 
          */
         String getName();
 
         /**
-         * @return the type of the parameter
+         *Returns the type of the parameter.
+ 
          */
         Class<T> getType();
 
         /**
-         * @return the description of the parameter
+         *Returns the description of the parameter.
+ 
          */
         String getDescription();
 

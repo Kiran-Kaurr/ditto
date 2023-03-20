@@ -216,7 +216,7 @@ abstract class AbstractMqttPublisherActor<P, R> extends BasePublisherActor<MqttP
                     .debug("Publishing MQTT message to topic <{}>: {}", getTopic(mqttMessage),
                             decodeAsHumanReadable(getPayload(mqttMessage).orElse(null), message));
         }
-        client.apply(mqttMessage)
+        var unused = client.apply(mqttMessage)
                 .thenApply(result -> buildResponse(signal, autoAckTarget))
                 .thenAccept(sendResult -> sendingContext.getSendResult().complete(sendResult));
     }

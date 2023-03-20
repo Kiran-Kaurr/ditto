@@ -66,7 +66,8 @@ public abstract class AbstractPersistentActorWithTimersAndCleanup extends Abstra
     }
 
     /**
-     * @return the latest and greatest sequence number of a snapshot that was confirmed to be persisted
+     *Returns the latest and greatest sequence number of a snapshot that was confirmed to be persisted.
+ 
      */
     protected abstract long getLatestSnapshotSequenceNumber();
 

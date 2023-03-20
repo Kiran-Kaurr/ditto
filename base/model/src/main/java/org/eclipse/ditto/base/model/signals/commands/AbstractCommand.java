@@ -72,7 +72,7 @@ public abstract class AbstractCommand<T extends AbstractCommand<T>> implements C
     }
 
     private void validateHeaders(final Category category) {
-        if (Category.QUERY == category && !dittoHeaders.isResponseRequired()) {
+        if (category == Category.QUERY && !dittoHeaders.isResponseRequired()) {
             final String headerKey = DittoHeaderDefinition.RESPONSE_REQUIRED.getKey();
             throw CommandHeaderInvalidException.newBuilder(headerKey)
                     .message(MessageFormat.format(
@@ -133,7 +133,7 @@ public abstract class AbstractCommand<T extends AbstractCommand<T>> implements C
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (!(obj instanceof AbstractCommand)) {
             return false;
         }
         final AbstractCommand<?> other = (AbstractCommand<?>) obj;

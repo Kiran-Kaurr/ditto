@@ -117,7 +117,7 @@ final class ImmutableSearchResult implements SearchResult {
 
     @Override
     public boolean hasNextPage() {
-        return cursor != null || nextPageOffset != null && nextPageOffset != NO_NEXT_PAGE;
+        return cursor != null || (nextPageOffset != null && nextPageOffset != NO_NEXT_PAGE);
     }
 
     @Override

@@ -84,7 +84,7 @@ final class VcapServicesStringParser implements Function<String, Config> {
     }
 
     private static ConfigValue convertConfigListToConfigObject(final ConfigValue configValue) {
-        if (ConfigValueType.LIST == configValue.valueType()) {
+        if (configValue.valueType() == ConfigValueType.LIST) {
             return getAsConfigObject((ConfigList) configValue);
         }
         return configValue;
@@ -96,7 +96,7 @@ final class VcapServicesStringParser implements Function<String, Config> {
         for (int i = 0; i < configList.size(); i++) {
             final ConfigValue configValue = configList.get(i);
             final String configPath;
-            if (ConfigValueType.OBJECT == configValue.valueType()) {
+            if (configValue.valueType() == ConfigValueType.OBJECT) {
                 configPath = getName((ConfigObject) configValue);
             } else {
                 configPath = String.valueOf(i);

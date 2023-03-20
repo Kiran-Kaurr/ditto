@@ -23,7 +23,7 @@ import org.eclipse.ditto.base.model.entity.type.EntityType;
 
 
 /**
- * Abstract base class for instances of @{code EntityId}.
+ * Abstract base class for instances of {@code EntityId}.
  *
  * @since 2.0.0
  */
@@ -50,7 +50,7 @@ public abstract class AbstractEntityId implements EntityId {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractEntityId)) {
             return false;
         }
         final AbstractEntityId that = (AbstractEntityId) o;

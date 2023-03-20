@@ -14,6 +14,10 @@ package org.eclipse.ditto.connectivity.service.mapping;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import akka.actor.ActorSystem;
+import akka.actor.DynamicAccess;
+import akka.actor.ExtendedActorSystem;
+import akka.event.LoggingAdapter;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +28,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
 import org.atteo.classindex.ClassIndex;
 import org.eclipse.ditto.connectivity.model.Connection;
 import org.eclipse.ditto.connectivity.model.ConnectivityModelFactory;
@@ -39,13 +41,9 @@ import org.eclipse.ditto.connectivity.service.config.ConnectivityConfig;
 import org.eclipse.ditto.internal.utils.akka.logging.DittoLogger;
 import org.eclipse.ditto.internal.utils.akka.logging.DittoLoggerFactory;
 import org.eclipse.ditto.json.JsonObject;
-
-import akka.actor.ActorSystem;
-import akka.actor.DynamicAccess;
-import akka.actor.ExtendedActorSystem;
-import akka.event.LoggingAdapter;
 import scala.collection.immutable.List$;
 import scala.reflect.ClassTag;
+import scala.reflect.ClassTag$;
 import scala.util.Try;
 
 /**
@@ -154,7 +152,7 @@ public final class DefaultMessageMapperFactory implements MessageMapperFactory {
 
         final Map<String, MessageMapper> fallbackMappers =
                 instantiateMappers(registeredMappers.entrySet().stream()
-                        .filter(requiresNoMandatoryConfiguration())
+                        .filter(this::requiresNoMandatoryConfiguration)
                         .map(Map.Entry::getKey)
                         .map(this::getEmptyMappingContextForAlias));
 
@@ -237,7 +235,7 @@ public final class DefaultMessageMapperFactory implements MessageMapperFactory {
     private static List<MessageMapperExtension> loadMessageMapperExtensions(final DynamicAccess dynamicAccess) {
         return messageMapperExtensionClasses.stream().map(clazz -> {
             final ClassTag<MessageMapperExtension> tag =
-                    scala.reflect.ClassTag$.MODULE$.apply(MessageMapperExtension.class);
+                    ClassTag$.MODULE$.apply(MessageMapperExtension.class);
             return dynamicAccess.createInstanceFor(clazz, List$.MODULE$.empty(), tag).get();
         }).toList();
     }
@@ -274,7 +272,7 @@ public final class DefaultMessageMapperFactory implements MessageMapperFactory {
     @Nullable
     private static MessageMapper createAnyMessageMapper(final Class<?> clazz,
             final DynamicAccess dynamicAccess) {
-        final ClassTag<MessageMapper> tag = scala.reflect.ClassTag$.MODULE$.apply(MessageMapper.class);
+        final ClassTag<MessageMapper> tag = ClassTag$.MODULE$.apply(MessageMapper.class);
         final Try<MessageMapper> mapperTry = dynamicAccess.createInstanceFor(clazz, List$.MODULE$.empty(), tag);
 
         if (mapperTry.isFailure()) {
@@ -295,9 +293,7 @@ public final class DefaultMessageMapperFactory implements MessageMapperFactory {
         return messageMapper;
     }
 
-    private Predicate<? super Map.Entry<String, Class<?>>> requiresNoMandatoryConfiguration() {
-        return e -> !getPayloadMapperAnnotation(e).requiresMandatoryConfiguration();
-    }
+    private  boolean requiresNoMandatoryConfiguration(Map.Entry<String, Class<?>> e){return !getPayloadMapperAnnotation(e).requiresMandatoryConfiguration();}
 
     private static PayloadMapper getPayloadMapperAnnotation(final Map.Entry<String, Class<?>> entry) {
         final Class<?> mapperClass = entry.getValue();

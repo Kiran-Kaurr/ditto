@@ -90,7 +90,7 @@ final class CreateThingStrategy extends AbstractThingCommandStrategy<CreateThing
         Thing newThing;
         try {
             newThing =
-                    handleCommandVersion(context, command.getImplementedSchemaVersion(), command.getThing(),
+                    handleCommandVersion(context, command.getThing(),
                             commandHeaders);
         } catch (final DittoRuntimeException e) {
             return newErrorResult(e, command);
@@ -130,7 +130,7 @@ final class CreateThingStrategy extends AbstractThingCommandStrategy<CreateThing
         return newMutationResult(command, thingCreated, response, true, false);
     }
 
-    private Thing handleCommandVersion(final Context<ThingId> context, final JsonSchemaVersion version,
+    private Thing handleCommandVersion(final Context<ThingId> context,
             final Thing thing,
             final DittoHeaders dittoHeaders) {
 
@@ -143,7 +143,7 @@ final class CreateThingStrategy extends AbstractThingCommandStrategy<CreateThing
     }
 
     private static Thing setLifecycleActive(final Thing thing) {
-        if (ThingLifecycle.ACTIVE.equals(thing.getLifecycle().orElse(null))) {
+        if (thing.getLifecycle().orElse(null).equals(ThingLifecycle.ACTIVE)) {
             return thing;
         }
         return ThingsModelFactory.newThingBuilder(thing)

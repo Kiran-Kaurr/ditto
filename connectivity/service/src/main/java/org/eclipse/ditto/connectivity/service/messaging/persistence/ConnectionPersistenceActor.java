@@ -828,7 +828,7 @@ public final class ConnectionPersistenceActor
         }
     }
 
-    private record RetryOpenConnection(OpenConnection openConnection, Throwable error, boolean ignoreErrors,
+    private record RetryOpenConnection(Throwable error, boolean ignoreErrors,
                                        ActorRef sender) {}
 
     private void closeConnection(final StagedCommand command) {

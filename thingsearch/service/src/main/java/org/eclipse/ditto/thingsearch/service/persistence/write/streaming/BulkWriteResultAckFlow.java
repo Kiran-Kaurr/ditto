@@ -250,7 +250,7 @@ public final class BulkWriteResultAckFlow {
         }
     }
 
-    private record ConsistencyCheckResult(Status status, String message) {}
+    private record ConsistencyCheckResult(String message) {}
 
     /**
      * Summary of the write result status.

@@ -144,7 +144,7 @@ abstract class AbstractConnectionLogger<
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractConnectionLogger)) {
             return false;
         }
         final AbstractConnectionLogger<?, ?> that = (AbstractConnectionLogger<?, ?>) o;

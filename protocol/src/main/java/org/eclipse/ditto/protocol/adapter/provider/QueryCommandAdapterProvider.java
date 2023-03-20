@@ -25,12 +25,14 @@ import org.eclipse.ditto.base.model.signals.commands.CommandResponse;
 interface QueryCommandAdapterProvider<Q extends Signal<?>, R extends CommandResponse<?>> {
 
     /**
-     * @return the query command adapter
+     *Returns the query command adapter.
+ 
      */
     Adapter<Q> getQueryCommandAdapter();
 
     /**
-     * @return the query command response adapter
+     *Returns the query command response adapter.
+ 
      */
     Adapter<R> getQueryCommandResponseAdapter();
 

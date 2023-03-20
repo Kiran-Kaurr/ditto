@@ -57,15 +57,17 @@ public enum MeasurementWindow {
     }
 
     /**
-     * @param name the name for which to find a {@link MeasurementWindow}.
-     * @return the {@link MeasurementWindow} or an empty Optional
+     *Returns the {@link MeasurementWindow} or an empty Optional.
+ @param name the name for which to find a {@link MeasurementWindow}.
+     * 
      */
     public static Optional<MeasurementWindow> forName(final String name) {
         return Arrays.stream(values()).filter(v->v.label.equals(name)).findFirst();
     }
 
     /**
-     * @return the ISO-8601 string representation of the interval
+     *Returns the ISO-8601 string representation of the interval.
+ 
      */
     public String getLabel() {
         return window.toString() + "(" + resolution.toString() + ")";

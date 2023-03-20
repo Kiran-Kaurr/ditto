@@ -73,14 +73,14 @@ public final class StatusSupplierActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(SimpleCommand.class, command -> SIMPLE_COMMAND_RETRIEVE_STATUS.equals(command.getCommandName()),
+                .match(SimpleCommand.class, command -> command.getCommandName().equals(SIMPLE_COMMAND_RETRIEVE_STATUS),
                         command -> {
                             log.info("Sending the status of this system as requested..");
                             final SimpleCommandResponse response = SimpleCommandResponse.of(
                                     command.getCorrelationId().orElse("?"), Status.provideStaticStatus());
                             getSender().tell(response, getSelf());
                         })
-                .match(SimpleCommand.class, command -> SIMPLE_COMMAND_RETRIEVE_HEALTH.equals(command.getCommandName()),
+                .match(SimpleCommand.class, command -> command.getCommandName().equals(SIMPLE_COMMAND_RETRIEVE_HEALTH),
                         command -> {
                             final ActorRef sender = getSender();
                             final ActorRef self = getSelf();

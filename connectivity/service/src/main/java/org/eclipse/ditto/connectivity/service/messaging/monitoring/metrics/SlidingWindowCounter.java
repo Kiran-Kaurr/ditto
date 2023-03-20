@@ -75,24 +75,27 @@ public final class SlidingWindowCounter {
     }
 
     /**
-     * @param metricsCounter the metricsCounter to use
-     * @return a new SlidingWindowCounterBuilder instance
+     *Returns a new SlidingWindowCounterBuilder instance.
+ @param metricsCounter the metricsCounter to use
+     * 
      */
     static SlidingWindowCounterBuilder newBuilder(final Counter metricsCounter) {
         return new SlidingWindowCounterBuilder(metricsCounter);
     }
 
     /**
-     * @return the timestamp of the last {@code success} measurement
-     * (initialized to {@code EPOCH} if no measurement was yet processed)
+     *Returns the timestamp of the last {@code success} measurement
+ (initialized to {@code EPOCH} if no measurement was yet processed).
+ 
      */
     long getLastSuccessMeasurementAt() {
         return lastSuccessTimestamp.get();
     }
 
     /**
-     * @return the timestamp of the last {@code success} measurement
-     * (initialized to {@code EPOCH} if no measurement was yet processed)
+     *Returns the timestamp of the last {@code success} measurement
+ (initialized to {@code EPOCH} if no measurement was yet processed).
+ 
      */
     long getLastFailureMeasurementAt() {
         return lastFailureTimestamp.get();

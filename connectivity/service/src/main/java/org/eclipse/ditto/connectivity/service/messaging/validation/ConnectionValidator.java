@@ -205,7 +205,7 @@ public final class ConnectionValidator {
         hostValidator.validateHostname(connection.getHostname(), dittoHeaders);
 
         // tunneling not supported for kafka
-        if (ConnectionType.KAFKA == connection.getConnectionType() && connection.getSshTunnel().isPresent()) {
+        if (connection.getConnectionType() == ConnectionType.KAFKA && connection.getSshTunnel().isPresent()) {
             throw ConnectionConfigurationInvalidException
                     .newBuilder("SSH tunneling not supported.")
                     .description(

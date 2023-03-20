@@ -48,12 +48,14 @@ public interface DevOpsCommandResponse<T extends DevOpsCommandResponse<T>> exten
     }
 
     /**
-     * @return the service name from which the DevOpsCommandResponse originated.
+     *Returns the service name from which the DevOpsCommandResponse originated.
+ 
      */
     Optional<String> getServiceName();
 
     /**
-     * @return the instance identifier of the serviceName from which the DevOpsCommandResponse originated.
+     *Returns the instance identifier of the serviceName from which the DevOpsCommandResponse originated.
+ 
      */
     Optional<String> getInstance();
 

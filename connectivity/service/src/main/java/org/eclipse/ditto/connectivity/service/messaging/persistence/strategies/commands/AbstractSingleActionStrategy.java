@@ -41,7 +41,8 @@ abstract class AbstractSingleActionStrategy<C extends ConnectivityCommand<?>>
     }
 
     /**
-     * @return the single action to undertake
+     *Returns the single action to undertake.
+ 
      */
     abstract ConnectionAction getAction();
 

@@ -22,17 +22,20 @@ import org.eclipse.ditto.base.model.signals.Signal;
 public interface InboundExternalMessage {
 
     /**
-     * @return the originating {@link ExternalMessage}.
+     *Returns the originating {@link ExternalMessage}.
+ 
      */
     ExternalMessage getSource();
 
     /**
-     * @return the topic path of the mapped message.
+     *Returns the topic path of the mapped message.
+ 
      */
     TopicPath getTopicPath();
 
     /**
-     * @return the {@link Signal} that was mapped from the inbound {@link ExternalMessage}.
+     *Returns the {@link Signal} that was mapped from the inbound {@link ExternalMessage}.
+ 
      */
     Signal<?> getSignal();
 }

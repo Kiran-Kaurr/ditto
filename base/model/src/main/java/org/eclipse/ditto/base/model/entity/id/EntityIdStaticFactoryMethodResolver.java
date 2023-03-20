@@ -65,10 +65,10 @@ final class EntityIdStaticFactoryMethodResolver {
      */
     public static Optional<Method> getStaticFactoryMethod(final Class<? extends EntityId> entityIdClass) {
         return declaredMethods(ConditionChecker.checkNotNull(entityIdClass, "entityIdClass"))
-                .filter(isStatic())
-                .filter(isPublic())
-                .filter(returnsTypeAssignableFromDeclaringClass())
-                .filter(hasExactlyOneCharSequenceParameter())
+                .filter(EntityIdStaticFactoryMethodResolver::isStatic)
+                .filter(EntityIdStaticFactoryMethodResolver::isPublic)
+                .filter(EntityIdStaticFactoryMethodResolver::returnsTypeAssignableFromDeclaringClass)
+                .filter(EntityIdStaticFactoryMethodResolver::hasExactlyOneCharSequenceParameter)
                 .min(preferredMethodNamesFirst());
     }
 
@@ -76,23 +76,16 @@ final class EntityIdStaticFactoryMethodResolver {
         return Stream.of(clazz.getDeclaredMethods());
     }
 
-    private static Predicate<Method> isStatic() {
-        return method -> Modifier.isStatic(method.getModifiers());
-    }
+    private static  boolean isStatic(Method method){return Modifier.isStatic(method.getModifiers());}
 
-    private static Predicate<Method> isPublic() {
-        return method -> Modifier.isPublic(method.getModifiers());
-    }
+    private static  boolean isPublic(Method method){return Modifier.isPublic(method.getModifiers());}
 
-    private static Predicate<Method> returnsTypeAssignableFromDeclaringClass() {
-        return method -> {
+    private static  boolean returnsTypeAssignableFromDeclaringClass(Method method){
             final Class<?> returnType = method.getReturnType();
             return returnType.isAssignableFrom(method.getDeclaringClass());
-        };
-    }
+        }
 
-    private static Predicate<Method> hasExactlyOneCharSequenceParameter() {
-        return method -> {
+    private static  boolean hasExactlyOneCharSequenceParameter(Method method){
             final boolean result;
             if (1 == method.getParameterCount()) {
                 final Class<?>[] parameterTypes = method.getParameterTypes();
@@ -102,8 +95,7 @@ final class EntityIdStaticFactoryMethodResolver {
                 result = false;
             }
             return result;
-        };
-    }
+        }
 
     private static Comparator<Method> preferredMethodNamesFirst() {
         final Comparator<String> staticFactoryMethodNameComparator = new StaticFactoryMethodNameComparator();

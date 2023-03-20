@@ -32,14 +32,16 @@ import org.atteo.classindex.IndexAnnotated;
 public @interface PayloadMapper {
 
     /**
-     * @return the aliases which can be used to reference this {@link PayloadMapper}.
+     *Returns the aliases which can be used to reference this {@link PayloadMapper}.
+ 
      */
     String[] alias();
 
     /**
-     * @return {@code true} if the mapper requires mandatory {@code config} options for initialization,
-     * i.e. it cannot be used directly as a mapping without providing the
-     * {@link org.eclipse.ditto.connectivity.model.MappingContext#getOptionsAsJson()}.
+     *Returns {@code true} if the mapper requires mandatory {@code config} options for initialization,
+ i.e. it cannot be used directly as a mapping without providing the
+ {@link org.eclipse.ditto.connectivity.model.MappingContext#getOptionsAsJson()}.
+ 
      */
     boolean requiresMandatoryConfiguration() default false;
 

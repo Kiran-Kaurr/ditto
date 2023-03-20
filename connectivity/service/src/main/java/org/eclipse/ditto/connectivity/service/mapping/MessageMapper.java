@@ -89,7 +89,8 @@ public interface MessageMapper {
     List<ExternalMessage> map(Adaptable adaptable);
 
     /**
-     * @return a map of default options for this mapper
+     *Returns a map of default options for this mapper.
+ 
      */
     default JsonObject getDefaultOptions() {
         return JsonObject.empty();

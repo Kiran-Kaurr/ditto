@@ -59,7 +59,8 @@ public interface ThingsFieldExpressionFactory extends FieldExpressionFactory {
     }
 
     /**
-     * @return a filter expression for the given namespace
+     *Returns a filter expression for the given namespace.
+ 
      */
     default FilterFieldExpression filterByNamespace() {
         return filterBy(FieldExpressionUtil.FIELD_NAME_NAMESPACE);
@@ -195,7 +196,8 @@ public interface ThingsFieldExpressionFactory extends FieldExpressionFactory {
     }
 
     /**
-     * @return a filter expression for the "thingId" field.
+     *Returns a filter expression for the "thingId" field.
+ 
      */
     default FilterFieldExpression filterByThingId() {
         return filterBy(FieldExpressionUtil.FIELD_NAME_THING_ID);
@@ -210,7 +212,8 @@ public interface ThingsFieldExpressionFactory extends FieldExpressionFactory {
     }
 
     /**
-     * @return a sortOptions expression for the "thingId" field.
+     *Returns a sortOptions expression for the "thingId" field.
+ 
      */
     default SortFieldExpression sortByThingId() {
         return sortBy(FieldExpressionUtil.FIELD_NAME_THING_ID);

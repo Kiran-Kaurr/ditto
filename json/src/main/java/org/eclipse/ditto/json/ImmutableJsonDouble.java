@@ -66,10 +66,10 @@ final class ImmutableJsonDouble extends AbstractJsonNumber<Double> {
         if (o instanceof AbstractJsonNumber) {
             final AbstractJsonNumber<?> that = (AbstractJsonNumber<?>) o;
             if (isInt() && that.isInt()) {
-                return Objects.equals(asInt(), that.asInt());
+                return (asInt() == that.asInt());
             }
             if (isLong() && that.isLong()) {
-                return Objects.equals(asLong(), that.asLong());
+                return (asLong() == that.asLong());
             }
             return Objects.equals(getValue(), that.getValue());
         }

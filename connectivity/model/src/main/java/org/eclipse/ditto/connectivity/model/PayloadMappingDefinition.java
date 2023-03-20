@@ -28,7 +28,8 @@ import org.eclipse.ditto.base.model.json.Jsonifiable;
 public interface PayloadMappingDefinition extends Jsonifiable.WithFieldSelectorAndPredicate<JsonField> {
 
     /**
-     * @return the payload mapping definitions
+     *Returns the payload mapping definitions.
+ 
      */
     Map<String, MappingContext> getDefinitions();
 
@@ -43,7 +44,8 @@ public interface PayloadMappingDefinition extends Jsonifiable.WithFieldSelectorA
     PayloadMappingDefinition withDefinition(String id, MappingContext mappingContext);
 
     /**
-     * @return {@code true} if no mappings are defined
+     *Returns {@code true} if no mappings are defined.
+ 
      */
     boolean isEmpty();
 

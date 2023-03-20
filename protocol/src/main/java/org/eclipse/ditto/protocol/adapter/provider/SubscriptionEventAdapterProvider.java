@@ -21,7 +21,8 @@ import org.eclipse.ditto.base.model.signals.events.Event;
 interface SubscriptionEventAdapterProvider<E extends Event<?>> {
 
     /**
-     * @return the event adapter
+     *Returns the event adapter.
+ 
      */
     Adapter<E> getSubscriptionEventAdapter();
 

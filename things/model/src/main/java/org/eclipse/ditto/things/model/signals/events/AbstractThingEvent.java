@@ -68,7 +68,7 @@ public abstract class AbstractThingEvent<T extends AbstractThingEvent<T>> extend
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractThingEvent)) {
             return false;
         }
         if (!super.equals(o)) {

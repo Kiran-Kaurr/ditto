@@ -23,7 +23,8 @@ import org.eclipse.ditto.base.model.signals.commands.ErrorResponse;
 interface ErrorResponseAdapterProvider<E extends ErrorResponse<?>> {
 
     /**
-     * @return the error response adapter
+     *Returns the error response adapter.
+ 
      */
     Adapter<E> getErrorResponseAdapter();
 }

@@ -117,7 +117,7 @@ class DefaultAkkaReplicatorConfig implements AkkaReplicatorConfig {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DefaultAkkaReplicatorConfig)) {
             return false;
         }
         final DefaultAkkaReplicatorConfig that = (DefaultAkkaReplicatorConfig) o;

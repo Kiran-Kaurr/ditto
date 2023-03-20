@@ -12,6 +12,18 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.httppush;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.actor.Status;
+import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.model.Uri;
+import akka.japi.Pair;
+import akka.stream.javadsl.Sink;
+import akka.stream.javadsl.Source;
+import com.typesafe.config.Config;
 import java.io.InputStream;
 import java.net.Socket;
 import java.net.SocketException;
@@ -20,15 +32,14 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import javax.annotation.Nullable;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
 import org.eclipse.ditto.base.service.config.http.HttpProxyConfig;
 import org.eclipse.ditto.connectivity.model.Connection;
@@ -41,18 +52,6 @@ import org.eclipse.ditto.connectivity.service.messaging.internal.ClientDisconnec
 import org.eclipse.ditto.connectivity.service.messaging.internal.ssl.SSLContextCreator;
 import org.eclipse.ditto.connectivity.service.messaging.monitoring.ConnectionMonitor;
 import org.eclipse.ditto.connectivity.service.messaging.monitoring.logs.InfoProviderFactory;
-
-import com.typesafe.config.Config;
-
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.actor.Status;
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
-import akka.http.javadsl.model.Uri;
-import akka.japi.Pair;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
 import scala.util.Try;
 
 /**
@@ -213,10 +212,10 @@ public final class HttpPushClientActor extends BaseClientActor {
             if (!httpProxyConfig.getUsername().isEmpty()) {
                 final String proxyUserPass = httpProxyConfig.getUsername() + ":" + httpProxyConfig.getPassword();
                 proxyConnect += "\nProxy-Authorization: Basic " +
-                        Base64.getEncoder().encodeToString(proxyUserPass.getBytes());
+                        Base64.getEncoder().encodeToString(proxyUserPass.getBytes(UTF_8));
             }
             proxyConnect += "\n\n";
-            proxySocket.getOutputStream().write(proxyConnect.getBytes());
+            proxySocket.getOutputStream().write(proxyConnect.getBytes(UTF_8));
 
             return checkProxyConnection(hostWithoutLookup, port, proxySocket);
         } catch (final Exception error) {
@@ -225,7 +224,7 @@ public final class HttpPushClientActor extends BaseClientActor {
     }
 
     private CompletionStage<Status.Status> checkProxyConnection(final String hostWithoutLookup, final int port,
-            final Socket proxySocket) throws InterruptedException, java.util.concurrent.ExecutionException {
+            final Socket proxySocket) throws InterruptedException, ExecutionException {
 
         final ExecutorService executor = Executors.newSingleThreadExecutor();
         try {

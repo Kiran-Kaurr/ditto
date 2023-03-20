@@ -18,7 +18,8 @@ package org.eclipse.ditto.placeholders.filter;
 public interface FilterFunction {
 
     /**
-     * @return the name of the function.
+     *Returns the name of the function.
+ 
      */
     String getName();
 

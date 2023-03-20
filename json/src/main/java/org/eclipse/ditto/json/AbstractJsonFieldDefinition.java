@@ -129,7 +129,7 @@ abstract class AbstractJsonFieldDefinition<T> implements JsonFieldDefinition<T> 
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractJsonFieldDefinition)) {
             return false;
         }
         final AbstractJsonFieldDefinition<?> that = (AbstractJsonFieldDefinition<?>) o;

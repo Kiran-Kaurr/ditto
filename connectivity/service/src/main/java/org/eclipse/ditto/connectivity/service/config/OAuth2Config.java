@@ -35,18 +35,21 @@ public interface OAuth2Config {
     }
 
     /**
-     * @return Maximum expected clock skew. Tokens are renewed before they expire this much time into the future.
+     *Returns maximum expected clock skew. Tokens are renewed before they expire this much time into the future.
+ 
      */
     Duration getMaxClockSkew();
 
     /**
-     * @return configuration for OAuth2.
+     *Returns configuration for OAuth2.
+ 
      */
     CacheConfig getTokenCacheConfig();
 
     /**
-     * @return Whether HTTPS is the required protocol of the token endpoint. Should be true in a production
-     * environment to avoid transmitting client secret in plain text.
+     *Returns whether HTTPS is the required protocol of the token endpoint. Should be true in a production
+ environment to avoid transmitting client secret in plain text.
+ 
      */
     boolean shouldEnforceHttps();
 

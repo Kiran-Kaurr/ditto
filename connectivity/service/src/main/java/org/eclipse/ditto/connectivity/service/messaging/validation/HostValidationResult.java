@@ -34,16 +34,18 @@ final class HostValidationResult {
     }
 
     /**
-     * @return a valid {@link HostValidationResult}
+     *Returns a valid {@link HostValidationResult}.
+ 
      */
     static HostValidationResult valid() {
         return new HostValidationResult(true, null, null);
     }
 
     /**
-     * @param host the invalid host
+     *Returns the {@link HostValidationResult} for the invalid host.
+ @param host the invalid host
      * @param reason why the host is invalid
-     * @return the {@link HostValidationResult} for the invalid host
+     * 
      */
     static HostValidationResult invalid(final String host, final String reason) {
         final var errorMessage = String.format("The configured host '%s' is invalid: %s", host, reason);
@@ -51,9 +53,10 @@ final class HostValidationResult {
     }
 
     /**
-     * @param host the blocked host
+     *Returns the {@link HostValidationResult} for the blocked host.
+ @param host the blocked host
      * @param reason why the host is blocked
-     * @return the {@link HostValidationResult} for the blocked host
+     * 
      */
     static HostValidationResult blocked(final String host, final String reason) {
         final var exceptionMessage = String.format("the host is blocked: %s", reason);
@@ -61,15 +64,17 @@ final class HostValidationResult {
     }
 
     /**
-     * @param host the blocked host
-     * @return the {@link HostValidationResult} for the blocked host
+     *Returns the {@link HostValidationResult} for the blocked host.
+ @param host the blocked host
+     * 
      */
     static HostValidationResult blocked(final String host) {
         return blocked(host, "the host is blocked.");
     }
 
     /**
-     * @return whether the host is valid
+     *Returns whether the host is valid.
+ 
      */
     boolean isValid() {
         return valid;

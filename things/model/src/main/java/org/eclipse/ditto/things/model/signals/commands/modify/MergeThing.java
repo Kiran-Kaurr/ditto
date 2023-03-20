@@ -385,7 +385,8 @@ public final class MergeThing extends AbstractCommand<MergeThing> implements Thi
     }
 
     /**
-     * @return the path where the changes are applied.
+     *Returns the path where the changes are applied.
+ 
      */
     public JsonPointer getPath() {
         return path;
@@ -413,8 +414,8 @@ public final class MergeThing extends AbstractCommand<MergeThing> implements Thi
 
     @Override
     public boolean changesAuthorization() {
-        return Thing.JsonFields.POLICY_ID.getPointer().equals(path) || path.isEmpty() && value.isObject() &&
-                value.asObject().contains(Thing.JsonFields.POLICY_ID.getPointer());
+        return Thing.JsonFields.POLICY_ID.getPointer().equals(path) || (path.isEmpty() && value.isObject() &&
+                value.asObject().contains(Thing.JsonFields.POLICY_ID.getPointer()));
     }
 
     @Override
@@ -449,7 +450,8 @@ public final class MergeThing extends AbstractCommand<MergeThing> implements Thi
     }
 
     /**
-     * @return the value describing the changes that are applied to the existing thing.
+     *Returns the value describing the changes that are applied to the existing thing.
+ 
      */
     public JsonValue getValue() {
         return value;

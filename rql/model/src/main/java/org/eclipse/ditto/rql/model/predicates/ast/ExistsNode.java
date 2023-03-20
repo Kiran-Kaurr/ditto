@@ -52,7 +52,7 @@ public class ExistsNode implements Node {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ExistsNode)) {
             return false;
         }
         final ExistsNode that = (ExistsNode) o;

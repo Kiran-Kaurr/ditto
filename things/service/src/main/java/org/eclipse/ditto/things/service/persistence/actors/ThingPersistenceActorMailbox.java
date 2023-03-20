@@ -12,15 +12,6 @@
  */
 package org.eclipse.ditto.things.service.persistence.actors;
 
-import java.util.Deque;
-import java.util.concurrent.LinkedBlockingDeque;
-
-import org.eclipse.ditto.things.model.signals.commands.ThingErrorResponse;
-import org.eclipse.ditto.things.model.signals.commands.exceptions.ThingTooManyModifyingRequestsException;
-import org.eclipse.ditto.things.model.signals.commands.modify.ThingModifyCommand;
-
-import com.typesafe.config.Config;
-
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.dispatch.DequeBasedMessageQueue;
@@ -31,6 +22,13 @@ import akka.dispatch.ProducesMessageQueue;
 import akka.dispatch.UnboundedDequeBasedMessageQueueSemantics;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import com.typesafe.config.Config;
+import java.util.Deque;
+import java.util.concurrent.LinkedBlockingDeque;
+import org.eclipse.ditto.things.model.signals.commands.ThingErrorResponse;
+import org.eclipse.ditto.things.model.signals.commands.exceptions.ThingTooManyModifyingRequestsException;
+import org.eclipse.ditto.things.model.signals.commands.modify.ThingModifyCommand;
+import scala.Option;
 
 /**
  * Mailbox which handles {@link ThingModifyCommand}s which should be passed to the {@link ThingPersistenceActor} in a
@@ -59,7 +57,7 @@ public class ThingPersistenceActorMailbox implements MailboxType,
     }
 
     @Override
-    public MessageQueue create(final scala.Option<ActorRef> owner, final scala.Option<ActorSystem> system) {
+    public MessageQueue create(final Option<ActorRef> owner, final Option<ActorSystem> system) {
         // The create method is called to create the MessageQueue
         return new ThingPersistenceActorMessageQueue(capacity, system.get());
     }

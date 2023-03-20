@@ -39,7 +39,8 @@ public interface Result<E extends Event<?>> {
     <F extends Event<?>> Result<F> map(Function<E, F> mappingFunction);
 
     /**
-     * @return the empty result
+     *Returns the empty result.
+ 
      */
     static <E extends Event<?>> Result<E> empty() {
         return ResultFactory.emptyResult();

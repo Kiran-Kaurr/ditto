@@ -37,32 +37,38 @@ public interface HttpPushConfig {
     }
 
     /**
-     * @return maximum number of messages buffered at the publisher actor before dropping them.
+     *Returns maximum number of messages buffered at the publisher actor before dropping them.
+ 
      */
     int getMaxQueueSize();
 
     /**
-     * @return request-timeout of HTTP requests.
+     *Returns request-timeout of HTTP requests.
+ 
      */
     Duration getRequestTimeout();
 
     /**
-     * @return configuration of the proxy for all outgoing HTTP requests.
+     *Returns configuration of the proxy for all outgoing HTTP requests.
+ 
      */
     HttpProxyConfig getHttpProxyConfig();
 
     /**
-     * @return configuration of HMAC request-signing algorithms.
+     *Returns configuration of HMAC request-signing algorithms.
+ 
      */
     Map<String, String> getHmacAlgorithms();
 
     /**
-     * @return configuration for OAuth2.
+     *Returns configuration for OAuth2.
+ 
      */
     OAuth2Config getOAuth2Config();
 
     /**
-     * @return list of http methods for which the request body is omitted.
+     *Returns list of http methods for which the request body is omitted.
+ 
      */
     List<String> getOmitRequestBodyMethods();
 

@@ -118,7 +118,7 @@ public final class TraceUtils {
     private static String determineChannel(final HttpRequest request) {
         // determine channel based on header or query parameter
         final boolean liveHeaderPresent = request.getHeader(DittoHeaderDefinition.CHANNEL.getKey())
-                .filter(channelHeader -> LIVE_CHANNEL_NAME.equals(channelHeader.value()))
+                .filter(channelHeader -> channelHeader.value().equals(LIVE_CHANNEL_NAME))
                 .isPresent();
         final boolean liveQueryPresent = request.getUri().query().get(DittoHeaderDefinition.CHANNEL.getKey())
                 .filter(LIVE_CHANNEL_NAME::equals)

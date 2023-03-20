@@ -12,6 +12,8 @@
  */
 package org.eclipse.ditto.connectivity.service.mapping.javascript;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -22,9 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.connectivity.api.ExternalMessage;
 import org.eclipse.ditto.connectivity.model.MessageMapperConfigurationFailedException;
 import org.eclipse.ditto.connectivity.service.config.javascript.JavaScriptConfig;
@@ -133,11 +133,11 @@ final class JavaScriptMessageMapperRhino extends AbstractMessageMapper {
 
     private void initLibraries(final Context cx, final Scriptable scope, @Nullable final Path commonJsModulePath) {
         if (getConfiguration().map(JavaScriptMessageMapperConfiguration::isLoadLongJS).orElse(false)) {
-            loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(WEBJARS_LONG)),
+            loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(WEBJARS_LONG), UTF_8),
                     WEBJARS_LONG);
         }
         if (getConfiguration().map(JavaScriptMessageMapperConfiguration::isLoadBytebufferJS).orElse(false)) {
-            loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(WEBJARS_BYTEBUFFER)),
+            loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(WEBJARS_BYTEBUFFER), UTF_8),
                     WEBJARS_BYTEBUFFER);
         }
 
@@ -157,11 +157,11 @@ final class JavaScriptMessageMapperRhino extends AbstractMessageMapper {
                 .createRequire(cx, scope)
                 .install(scope);
 
-        loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(DITTO_SCOPE_SCRIPT)),
+        loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(DITTO_SCOPE_SCRIPT), UTF_8),
                 DITTO_SCOPE_SCRIPT);
-        loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(INCOMING_SCRIPT)),
+        loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(INCOMING_SCRIPT), UTF_8),
                 INCOMING_SCRIPT);
-        loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(OUTGOING_SCRIPT)),
+        loadJavascriptLibrary(cx, scope, new InputStreamReader(getClass().getResourceAsStream(OUTGOING_SCRIPT), UTF_8),
                 OUTGOING_SCRIPT);
 
         final String userIncomingScript = getConfiguration()

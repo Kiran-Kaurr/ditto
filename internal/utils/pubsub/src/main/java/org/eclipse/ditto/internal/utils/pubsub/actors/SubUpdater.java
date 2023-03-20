@@ -12,6 +12,15 @@
  */
 package org.eclipse.ditto.internal.utils.pubsub.actors;
 
+import akka.actor.AbstractActorWithTimers;
+import akka.actor.ActorRef;
+import akka.actor.Address;
+import akka.actor.Props;
+import akka.actor.Status;
+import akka.actor.Terminated;
+import akka.cluster.Cluster;
+import akka.cluster.ddata.Replicator;
+import akka.japi.pf.ReceiveBuilder;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +33,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
-
 import org.eclipse.ditto.base.model.acks.PubSubTerminatedException;
 import org.eclipse.ditto.internal.utils.akka.logging.DittoLoggerFactory;
 import org.eclipse.ditto.internal.utils.akka.logging.ThreadSafeDittoLoggingAdapter;
@@ -43,15 +51,6 @@ import org.eclipse.ditto.internal.utils.pubsub.ddata.compressed.CompressedDData;
 import org.eclipse.ditto.internal.utils.pubsub.ddata.compressed.CompressedSubscriptions;
 import org.eclipse.ditto.internal.utils.pubsub.ddata.literal.LiteralUpdate;
 
-import akka.actor.ActorRef;
-import akka.actor.Address;
-import akka.actor.Props;
-import akka.actor.Status;
-import akka.actor.Terminated;
-import akka.cluster.Cluster;
-import akka.cluster.ddata.Replicator;
-import akka.japi.pf.ReceiveBuilder;
-
 /**
  * Manages local subscriptions. Request distributed data update at regular intervals at the highest write consistency
  * requested by a user since the previous update. Send acknowledgement to local subscription requesters after
@@ -59,7 +58,7 @@ import akka.japi.pf.ReceiveBuilder;
  * the cluster once requested. Local subscribers should most likely not to get any published message before they
  * receive acknowledgement.
  */
-public final class SubUpdater extends akka.actor.AbstractActorWithTimers
+public final class SubUpdater extends AbstractActorWithTimers
         implements ClusterStateSyncBehavior<ActorRef> {
 
     /**

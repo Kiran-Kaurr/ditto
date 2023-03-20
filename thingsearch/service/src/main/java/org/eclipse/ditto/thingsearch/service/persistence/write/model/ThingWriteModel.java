@@ -104,7 +104,8 @@ public final class ThingWriteModel extends AbstractWriteModel {
     }
 
     /**
-     * @return the Thing document to be written in the persistence.
+     *Returns the Thing document to be written in the persistence.
+ 
      */
     public BsonDocument getThingDocument() {
         return thingDocument;
@@ -213,11 +214,11 @@ public final class ThingWriteModel extends AbstractWriteModel {
         final var lastMetadata = lastWriteModel.getMetadata();
         final var nextMetadata = nextWriteModel.getMetadata();
         final boolean isStrictlyOlder = nextMetadata.getThingRevision() < lastMetadata.getThingRevision() ||
-                nextMetadata.getThingRevision() == lastMetadata.getThingRevision() &&
+                (nextMetadata.getThingRevision() == lastMetadata.getThingRevision() &&
                         nextMetadata.getPolicyRevision().flatMap(nextPolicyRevision ->
                                         lastMetadata.getPolicyRevision().map(lastPolicyRevision ->
                                                 nextPolicyRevision < lastPolicyRevision))
-                                .orElse(false);
+                                .orElse(false));
         final boolean hasSameRevisions = nextMetadata.getThingRevision() == lastMetadata.getThingRevision() &&
                 nextMetadata.getPolicyRevision().equals(lastMetadata.getPolicyRevision());
 

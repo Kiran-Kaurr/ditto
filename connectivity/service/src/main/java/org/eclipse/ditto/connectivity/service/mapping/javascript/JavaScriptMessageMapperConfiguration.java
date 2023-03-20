@@ -28,21 +28,24 @@ import org.eclipse.ditto.connectivity.service.mapping.MessageMapperConfiguration
 public interface JavaScriptMessageMapperConfiguration extends MessageMapperConfiguration {
 
     /**
-     * @return the mappingScript responsible for mapping incoming messages.
+     *Returns the mappingScript responsible for mapping incoming messages.
+ 
      */
     default Optional<String> getIncomingScript() {
         return findProperty(JavaScriptMessageMapperConfigurationProperties.INCOMING_SCRIPT);
     }
 
     /**
-     * @return the mappingScript responsible for mapping outgoing messages.
+     *Returns the mappingScript responsible for mapping outgoing messages.
+ 
      */
     default Optional<String> getOutgoingScript() {
         return findProperty(JavaScriptMessageMapperConfigurationProperties.OUTGOING_SCRIPT);
     }
 
     /**
-     * @return whether to load "bytebuffer.js" library.
+     *Returns whether to load "bytebuffer.js" library.
+ 
      */
     default boolean isLoadBytebufferJS() {
         return findProperty(LOAD_BYTEBUFFER_JS, JsonValue::isBoolean, JsonValue::asBoolean)
@@ -50,7 +53,8 @@ public interface JavaScriptMessageMapperConfiguration extends MessageMapperConfi
     }
 
     /**
-     * @return whether to load "long.js" library.
+     *Returns whether to load "long.js" library.
+ 
      */
     default boolean isLoadLongJS() {
         return findProperty(LOAD_LONG_JS, JsonValue::isBoolean, JsonValue::asBoolean)

@@ -237,21 +237,24 @@ public final class RetrieveConnectionLogsResponse
     }
 
     /**
-     * @return the log entries for the connection.
+     *Returns the log entries for the connection.
+ 
      */
     public Collection<LogEntry> getConnectionLogs() {
         return connectionLogs;
     }
 
     /**
-     * @return since when logging is enabled for the connection, or empty if it isn't enabled.
+     *Returns since when logging is enabled for the connection, or empty if it isn't enabled.
+ 
      */
     public Optional<Instant> getEnabledSince() {
         return Optional.ofNullable(enabledSince);
     }
 
     /**
-     * @return until when logging is enabled for the connection, or empty if it isn't enabled.
+     *Returns until when logging is enabled for the connection, or empty if it isn't enabled.
+ 
      */
     public Optional<Instant> getEnabledUntil() {
         return Optional.ofNullable(enabledUntil);

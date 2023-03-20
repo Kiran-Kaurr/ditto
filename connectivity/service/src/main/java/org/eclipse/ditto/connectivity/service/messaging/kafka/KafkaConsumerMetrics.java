@@ -65,9 +65,7 @@ public final class KafkaConsumerMetrics {
         return new KafkaConsumerMetrics(consumerControl, connectionId, consumerId);
     }
 
-    private static Predicate<Metric> metricContainsValue() {
-        return metric -> !(metric.metricValue() instanceof String);
-    }
+    private static  boolean metricContainsValue(Metric metric){return !(metric.metricValue() instanceof String);}
 
     /**
      * Report metrics via Kamon gauges.
@@ -77,7 +75,7 @@ public final class KafkaConsumerMetrics {
             consumerControl.getMetrics()
                     .thenAccept(metrics -> metrics.values()
                             .stream()
-                            .filter(metricContainsValue())
+                            .filter(KafkaConsumerMetrics::metricContainsValue)
                             .forEach(metric -> getGauge(metric.metricName()).set((Double) metric.metricValue())));
         } catch (final NullPointerException ex) {
             /*

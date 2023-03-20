@@ -12,6 +12,7 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.amqp;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.qpid.jms.message.JmsMessageSupport.ACCEPTED;
 import static org.apache.qpid.jms.message.JmsMessageSupport.MODIFIED_FAILED;
 import static org.apache.qpid.jms.message.JmsMessageSupport.REJECTED;
@@ -19,6 +20,12 @@ import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 import static org.eclipse.ditto.connectivity.api.EnforcementFactoryFactory.newEnforcementFilterFactory;
 import static org.eclipse.ditto.placeholders.PlaceholderFactory.newHeadersPlaceholder;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.actor.Status;
+import akka.japi.pf.ReceiveBuilder;
+import akka.pattern.Patterns;
+import akka.stream.javadsl.Sink;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.time.Duration;
@@ -27,7 +34,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
-
 import javax.annotation.Nullable;
 import javax.jms.BytesMessage;
 import javax.jms.Destination;
@@ -36,7 +42,6 @@ import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-
 import org.apache.qpid.jms.JmsAcknowledgeCallback;
 import org.apache.qpid.jms.JmsMessageConsumer;
 import org.apache.qpid.jms.message.JmsMessage;
@@ -68,13 +73,6 @@ import org.eclipse.ditto.internal.utils.config.InstanceIdentifierSupplier;
 import org.eclipse.ditto.internal.utils.tracing.DittoTracing;
 import org.eclipse.ditto.internal.utils.tracing.instruments.trace.StartedTrace;
 import org.eclipse.ditto.internal.utils.tracing.instruments.trace.Traces;
-
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.actor.Status;
-import akka.japi.pf.ReceiveBuilder;
-import akka.pattern.Patterns;
-import akka.stream.javadsl.Sink;
 
 /**
  * Actor which receives message from an AMQP source and forwards them to a {@code MessageMappingProcessorActor}.
@@ -457,7 +455,7 @@ final class AmqpConsumerActor extends LegacyBaseConsumerActor
             final ExternalMessageBuilder builder, @Nullable final String correlationId) throws JMSException {
         if (message instanceof TextMessage) {
             final String payload = ((TextMessage) message).getText();
-            builder.withTextAndBytes(payload, payload.getBytes());
+            builder.withTextAndBytes(payload, payload.getBytes(UTF_8));
         } else if (message instanceof BytesMessage) {
             final BytesMessage bytesMessage = (BytesMessage) message;
             final long bodyLength = bytesMessage.getBodyLength();

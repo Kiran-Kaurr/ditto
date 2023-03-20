@@ -57,7 +57,8 @@ public interface KafkaConsumerConfig {
     Duration getMetricCollectingInterval();
 
     /**
-     * @return timeout before the consumer is initialized and considered "ready".
+     *Returns timeout before the consumer is initialized and considered "ready".
+ 
      */
     long getInitTimeoutSeconds();
 

@@ -35,16 +35,18 @@ final class ExceptionMapper {
     private final JsonPointer certificatePath;
 
     /**
-     * @return an instance of the ExceptionMapper prepared to be used when working with
-     * {@link org.eclipse.ditto.connectivity.model.ClientCertificateCredentials}.
+     *Returns an instance of the ExceptionMapper prepared to be used when working with
+ {@link org.eclipse.ditto.connectivity.model.ClientCertificateCredentials}.
+ 
      */
     static ExceptionMapper forClientCertificateCredentials() {
         return forClientCertificateCredentials(DittoHeaders.empty());
     }
 
     /**
-     * @return an instance of the ExceptionMapper prepared to be used when working with
-     * {@link org.eclipse.ditto.connectivity.model.ClientCertificateCredentials}.
+     *Returns an instance of the ExceptionMapper prepared to be used when working with
+ {@link org.eclipse.ditto.connectivity.model.ClientCertificateCredentials}.
+ 
      */
     static ExceptionMapper forClientCertificateCredentials(@Nullable final DittoHeaders dittoHeaders) {
         final JsonPointer certificatePath = Connection.JsonFields.CREDENTIALS.getPointer()
@@ -56,8 +58,9 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return an instance of the ExceptionMapper prepared to be used when working with
-     * {@link org.eclipse.ditto.connectivity.model.SshPublicKeyCredentials}.
+     *Returns an instance of the ExceptionMapper prepared to be used when working with
+ {@link org.eclipse.ditto.connectivity.model.SshPublicKeyCredentials}.
+ 
      */
     static ExceptionMapper forSshPublicKeyCredentials(final DittoHeaders dittoHeaders) {
         final JsonPointer publicKeyPath = Connection.JsonFields.CREDENTIALS.getPointer()
@@ -68,8 +71,9 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return an instance of the ExceptionMapper prepared to be used when working with
-     * trusted certificates.
+     *Returns an instance of the ExceptionMapper prepared to be used when working with
+ trusted certificates.
+ 
      */
     static ExceptionMapper forTrustedCertificates(final DittoHeaders dittoHeaders) {
         final JsonPointer trustedCertificates = Connection.JsonFields.TRUSTED_CERTIFICATES.getPointer();
@@ -93,7 +97,8 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return preconfigured builder for fatal errors
+     *Returns preconfigured builder for fatal errors.
+ 
      */
     DittoRuntimeExceptionBuilder<ConnectionUnavailableException> fatalError(final String whatHappened) {
         return ConnectionUnavailableException.newBuilder(ConnectionId.of("unimportant"))
@@ -103,7 +108,8 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return preconfigured builder for private key bad format errors
+     *Returns preconfigured builder for private key bad format errors.
+ 
      */
     DittoRuntimeExceptionBuilder<ConnectionConfigurationInvalidException> badPrivateKeyFormat(final String label,
             final String binaryFormat) {
@@ -111,7 +117,8 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return preconfigured builder for public key bad format errors
+     *Returns preconfigured builder for public key bad format errors.
+ 
      */
     DittoRuntimeExceptionBuilder<ConnectionConfigurationInvalidException> badPublicKeyFormat(final String label,
             final String binaryFormat) {
@@ -119,7 +126,8 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return preconfigured builder for certificate bad format errors
+     *Returns preconfigured builder for certificate bad format errors.
+ 
      */
     DittoRuntimeExceptionBuilder<ConnectionConfigurationInvalidException> badCertificateFormat(final String label,
             final String binaryFormat) {
@@ -127,7 +135,8 @@ final class ExceptionMapper {
     }
 
     /**
-     * @return preconfigured builder for bad format errors
+     *Returns preconfigured builder for bad format errors.
+ 
      */
     DittoRuntimeExceptionBuilder<ConnectionConfigurationInvalidException> badFormat(final JsonPointer errorLocation,
             final String label, final String binaryFormat) {

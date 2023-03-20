@@ -114,7 +114,7 @@ abstract class AbstractSubscriptionEvent<T extends AbstractSubscriptionEvent<T>>
 
     @Override
     public boolean equals(@Nullable final Object o) {
-        if (o != null && getClass() == o.getClass()) {
+        if (o instanceof AbstractSubscriptionEvent) {
             final AbstractSubscriptionEvent<?> that = (AbstractSubscriptionEvent<?>) o;
             return Objects.equals(type, that.type) &&
                     Objects.equals(subscriptionId, that.subscriptionId) &&

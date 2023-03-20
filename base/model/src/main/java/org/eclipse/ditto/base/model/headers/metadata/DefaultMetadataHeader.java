@@ -124,7 +124,7 @@ final class DefaultMetadataHeader implements MetadataHeader {
             result = 0;
         } else {
             final int keyComparisonResult = key.compareTo(metadataHeader.getKey());
-            if (0 == keyComparisonResult) {
+            if (keyComparisonResult == 0) {
 
                 // as both keys are equal the values determine the final result
                 result = compareValues(metadataHeader.getValue());

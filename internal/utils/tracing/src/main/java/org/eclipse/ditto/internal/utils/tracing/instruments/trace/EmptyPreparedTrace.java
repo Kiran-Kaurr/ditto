@@ -33,7 +33,8 @@ final class EmptyPreparedTrace implements PreparedTrace {
     }
 
     /**
-     * @return the {@code EmptyPreparedTrace} singleton instance.
+     *Returns the {@code EmptyPreparedTrace} singleton instance.
+ 
      */
     static PreparedTrace getInstance() {
         return INSTANCE;

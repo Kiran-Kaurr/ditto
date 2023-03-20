@@ -117,7 +117,7 @@ public final class IndexOperations {
     public Source<List<Index>, NotUsed> getIndicesExceptDefaultIndex(final String collectionName) {
         return getIndices(collectionName)
                 .map(indices -> indices.stream()
-                        .filter(indexInfo -> !DEFAULT_INDEX_NAME.equals(indexInfo.getName()))
+                        .filter(indexInfo -> !indexInfo.getName().equals(DEFAULT_INDEX_NAME))
                         .toList());
     }
 

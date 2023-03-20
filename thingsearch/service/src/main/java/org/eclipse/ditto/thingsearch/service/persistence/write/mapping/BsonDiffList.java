@@ -38,7 +38,7 @@ public final class BsonDiffList {
     private static final String UNSET_FIELD = "$unsetField";
     private static final String FIELD = "field";
     private static final String INPUT = "input";
-    private static final String VALUE = "value";
+    
 
     final List<Pair<JsonPointer, BsonValue>> set;
     final List<JsonPointer> unset;

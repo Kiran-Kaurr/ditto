@@ -149,7 +149,8 @@ public final class ThingMerged extends AbstractThingEvent<ThingMerged> implement
     }
 
     /**
-     * @return the value describing the changes that were applied to the existing thing.
+     *Returns the value describing the changes that were applied to the existing thing.
+ 
      */
     public JsonValue getValue() {
         return value;

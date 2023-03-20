@@ -44,7 +44,8 @@ public final class StopStreaming implements StreamControlMessage {
     }
 
     /**
-     * @return the Streaming type of what streaming to stop.
+     *Returns the Streaming type of what streaming to stop.
+ 
      */
     public StreamingType getStreamingType() {
         return streamingType;

@@ -20,7 +20,8 @@ import java.util.Optional;
 public interface WithNamespace {
 
     /**
-     * @return the associated namespace.
+     *Returns the associated namespace.
+ 
      */
     Optional<String> getNamespace();
 

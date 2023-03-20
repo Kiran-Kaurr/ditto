@@ -159,7 +159,7 @@ public final class Acknowledgements
 
     private static HttpStatus getCombinedHttpStatus(final Collection<? extends Acknowledgement> acknowledgements) {
         final HttpStatus result;
-        if (1 == acknowledgements.size()) {
+        if (acknowledgements.size() == 1) {
             result = acknowledgements.stream()
                     .findFirst()
                     .map(Acknowledgement::getHttpStatus)
@@ -353,9 +353,9 @@ public final class Acknowledgements
     public Optional<JsonValue> getEntity(final JsonSchemaVersion schemaVersion) {
         final int acknowledgementsSize = acknowledgements.size();
         final Optional<JsonValue> result;
-        if (0 == acknowledgementsSize) {
+        if (acknowledgementsSize == 0) {
             result = Optional.empty();
-        } else if (1 == acknowledgementsSize) {
+        } else if (acknowledgementsSize == 1) {
             final Acknowledgement soleAcknowledgement = acknowledgements.get(0);
             result = soleAcknowledgement.getEntity(schemaVersion);
         } else {

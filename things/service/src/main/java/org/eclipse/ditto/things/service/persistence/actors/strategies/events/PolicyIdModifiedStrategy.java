@@ -23,7 +23,7 @@ import org.eclipse.ditto.things.model.signals.events.PolicyIdModified;
 @Immutable
 final class PolicyIdModifiedStrategy extends AbstractThingEventStrategy<PolicyIdModified> {
 
-    protected PolicyIdModifiedStrategy() {
+    PolicyIdModifiedStrategy() {
         super();
     }
 

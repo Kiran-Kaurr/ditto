@@ -58,7 +58,7 @@ final class CollectEffectedSubjectsVisitor implements Visitor<EffectedSubjects> 
 
     @Override
     public void visitTreeNode(final PolicyTreeNode node) {
-        if (PolicyTreeNode.Type.SUBJECT == node.getType()) {
+        if (node.getType() == PolicyTreeNode.Type.SUBJECT) {
             visitSubjectNode(node);
         } else {
             visitResourceNode((ResourceNode) node);
@@ -105,7 +105,7 @@ final class CollectEffectedSubjectsVisitor implements Visitor<EffectedSubjects> 
 
         private void aggregateWeightedPermissions(final ResourceNode resourceNode) {
             final PointerLocation pointerLocation = getLocationInRelationToTargetPointer(resourceNode);
-            if (PointerLocation.ABOVE == pointerLocation || PointerLocation.SAME == pointerLocation) {
+            if (pointerLocation == PointerLocation.ABOVE || pointerLocation == PointerLocation.SAME) {
                 final EffectedPermissions effectedPermissions = resourceNode.getPermissions();
                 final Permissions grantedPermissions = effectedPermissions.getGrantedPermissions();
                 final Permissions revokedPermissions = effectedPermissions.getRevokedPermissions();

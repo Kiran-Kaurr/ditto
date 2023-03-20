@@ -96,7 +96,7 @@ public final class DefaultHttpProxyConfig implements HttpProxyConfig {
 
     @Override
     public ClientTransport toClientTransport() {
-        if (hostName.isEmpty() || 0 == port) {
+        if (hostName.isEmpty() || port == 0) {
             throw new DittoConfigError("When HTTP proxy is enabled via config, at least proxy hostname and port must " +
                     "be configured as well!");
         }

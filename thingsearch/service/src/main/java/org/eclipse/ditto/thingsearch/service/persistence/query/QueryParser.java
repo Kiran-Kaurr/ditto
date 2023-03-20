@@ -125,7 +125,8 @@ public final class QueryParser {
     }
 
     /**
-     * @return the criteria factory.
+     *Returns the criteria factory.
+ 
      */
     public CriteriaFactory getCriteriaFactory() {
         return queryFilterCriteriaFactory.toCriteriaFactory();

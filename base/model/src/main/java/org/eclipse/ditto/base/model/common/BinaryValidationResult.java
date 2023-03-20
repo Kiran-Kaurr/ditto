@@ -66,7 +66,8 @@ public final class BinaryValidationResult {
     }
 
     /**
-     * @return the reason why {@link #isValid()} is {@code false} or {@code null} if the result is valid.
+     *Returns the reason why {@link #isValid()} is {@code false} or {@code null} if the result is valid.
+ 
      */
     @Nullable
     public Throwable getReasonForInvalidity() {

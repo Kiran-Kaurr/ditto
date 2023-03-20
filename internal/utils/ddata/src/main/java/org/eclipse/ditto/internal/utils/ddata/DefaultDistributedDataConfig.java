@@ -127,7 +127,7 @@ class DefaultDistributedDataConfig implements DistributedDataConfig {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DefaultDistributedDataConfig)) {
             return false;
         }
         final DefaultDistributedDataConfig that = (DefaultDistributedDataConfig) o;

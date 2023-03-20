@@ -157,7 +157,7 @@ public final class CreateSubscription extends AbstractCommand<CreateSubscription
      *
      * @return the filter string.
      */
-    public Optional<String> getFilter() {
+    @Override public Optional<String> getFilter() {
         return Optional.ofNullable(filter);
     }
 

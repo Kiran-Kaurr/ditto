@@ -193,11 +193,11 @@ public final class CommandAndCommandResponseMatchingValidator
     }
 
     private static boolean isAcknowledgement(final WithType commandResponse) {
-        return Acknowledgement.TYPE.equals(commandResponse.getType());
+        return commandResponse.getType().equals(Acknowledgement.TYPE);
     }
 
     private static boolean isErrorResponseType(final CommandResponse<?> commandResponse) {
-        return ResponseType.ERROR == commandResponse.getResponseType();
+        return commandResponse.getResponseType() == ResponseType.ERROR;
     }
 
     private static boolean isSameSignalDomain(final SemanticSignalType semanticCommandType,

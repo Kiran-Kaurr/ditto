@@ -12,15 +12,6 @@
  */
 package org.eclipse.ditto.policies.service.persistence.actors;
 
-import java.util.Deque;
-import java.util.concurrent.LinkedBlockingDeque;
-
-import org.eclipse.ditto.policies.model.signals.commands.PolicyErrorResponse;
-import org.eclipse.ditto.policies.model.signals.commands.exceptions.PolicyTooManyModifyingRequestsException;
-import org.eclipse.ditto.policies.model.signals.commands.modify.PolicyModifyCommand;
-
-import com.typesafe.config.Config;
-
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.dispatch.DequeBasedMessageQueue;
@@ -31,6 +22,13 @@ import akka.dispatch.ProducesMessageQueue;
 import akka.dispatch.UnboundedDequeBasedMessageQueueSemantics;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import com.typesafe.config.Config;
+import java.util.Deque;
+import java.util.concurrent.LinkedBlockingDeque;
+import org.eclipse.ditto.policies.model.signals.commands.PolicyErrorResponse;
+import org.eclipse.ditto.policies.model.signals.commands.exceptions.PolicyTooManyModifyingRequestsException;
+import org.eclipse.ditto.policies.model.signals.commands.modify.PolicyModifyCommand;
+import scala.Option;
 
 /**
  * Mailbox which handles {@link PolicyModifyCommand}s which should be passed to the {@link org.eclipse.ditto.policies.service.persistence.actors.PolicyPersistenceActor} in a
@@ -66,7 +64,7 @@ public class PolicyPersistenceActorMailbox implements MailboxType,
     }
 
     @Override
-    public MessageQueue create(final scala.Option<ActorRef> owner, final scala.Option<ActorSystem> system) {
+    public MessageQueue create(final Option<ActorRef> owner, final Option<ActorSystem> system) {
         // The create method is called to create the MessageQueue
         return new PolicyPersistenceActorMessageQueue(capacity, system.get());
     }

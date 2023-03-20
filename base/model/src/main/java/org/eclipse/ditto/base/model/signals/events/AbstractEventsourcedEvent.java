@@ -114,7 +114,7 @@ public abstract class AbstractEventsourcedEvent<T extends AbstractEventsourcedEv
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractEventsourcedEvent)) {
             return false;
         }
         if (!super.equals(o)) {
@@ -123,7 +123,7 @@ public abstract class AbstractEventsourcedEvent<T extends AbstractEventsourcedEv
         final AbstractEventsourcedEvent<?> that = (AbstractEventsourcedEvent<?>) o;
         return that.canEqual(this) &&
                 Objects.equals(entityId, that.entityId) &&
-                Objects.equals(revision, that.revision) &&
+                (revision == that.revision) &&
                 Objects.equals(entityIdFieldDefinition, that.entityIdFieldDefinition);
     }
 
@@ -138,7 +138,7 @@ public abstract class AbstractEventsourcedEvent<T extends AbstractEventsourcedEv
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + Objects.hashCode(entityId);
-        result = prime * result + Objects.hashCode(revision);
+        result = prime * result + Long.hashCode(revision);
         result = prime * result + Objects.hashCode(entityIdFieldDefinition);
         return result;
     }

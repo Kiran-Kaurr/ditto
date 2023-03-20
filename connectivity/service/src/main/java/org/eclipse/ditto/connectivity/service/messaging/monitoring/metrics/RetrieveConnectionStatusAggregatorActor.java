@@ -79,7 +79,7 @@ public final class RetrieveConnectionStatusAggregatorActor extends AbstractActor
         // one response per client actor
         expectedResponses.put(ResourceStatus.ResourceType.CLIENT, configuredClientCount);
 
-        if (ConnectivityStatus.OPEN.equals(connection.getConnectionStatus())) {
+        if (connection.getConnectionStatus().equals(ConnectivityStatus.OPEN)) {
             // one response per source/target
             expectedResponses.put(ResourceStatus.ResourceType.TARGET,
                     connection.getTargets()
@@ -163,7 +163,7 @@ public final class RetrieveConnectionStatusAggregatorActor extends AbstractActor
         final ConnectivityStatus liveSshTunnelStatus = determineLiveStatus(tmpResponse.getSshTunnelStatus());
 
         final Optional<Instant> earliestConnectedSince = clientStatus.stream()
-                .filter(rs -> ConnectivityStatus.OPEN.equals(rs.getStatus()))
+                .filter(rs -> rs.getStatus().equals(ConnectivityStatus.OPEN))
                 .map(ResourceStatus::getInStateSince)
                 .filter(Optional::isPresent)
                 .map(Optional::get)

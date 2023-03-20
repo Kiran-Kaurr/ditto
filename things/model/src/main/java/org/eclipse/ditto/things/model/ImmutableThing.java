@@ -120,7 +120,7 @@ final class ImmutableThing implements Thing {
 
     @Override
     public boolean isDeleted() {
-        return ThingLifecycle.DELETED.equals(lifecycle);
+        return lifecycle.equals(ThingLifecycle.DELETED);
     }
 
     @Override
@@ -182,7 +182,7 @@ final class ImmutableThing implements Thing {
 
     @Override
     public Optional<ThingDefinition> getDefinition() {
-        return (Optional.ofNullable(definition));
+        return  Optional.ofNullable(definition);
     }
 
     @Override

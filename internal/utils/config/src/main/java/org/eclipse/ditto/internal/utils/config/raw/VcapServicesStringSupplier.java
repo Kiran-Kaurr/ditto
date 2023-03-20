@@ -12,6 +12,7 @@
  */
 package org.eclipse.ditto.internal.utils.config.raw;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
 import java.io.IOException;
@@ -22,10 +23,8 @@ import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.function.Supplier;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
 import org.eclipse.ditto.internal.utils.config.DittoConfigError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,7 +108,7 @@ final class VcapServicesStringSupplier implements Supplier<Optional<String>> {
     @Nullable
     private String readConfigFile() throws IOException {
         LOGGER.info("Reading VCAP services config from path <{}>.", vcapServicesFilePath);
-        final String result = new String(Files.readAllBytes(vcapServicesFilePath));
+        final String result = new String(Files.readAllBytes(vcapServicesFilePath), UTF_8);
         if (!result.isEmpty()) {
             return result;
         }

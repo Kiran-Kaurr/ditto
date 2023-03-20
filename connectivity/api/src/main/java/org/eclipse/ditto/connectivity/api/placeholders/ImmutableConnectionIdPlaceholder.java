@@ -58,7 +58,7 @@ final class ImmutableConnectionIdPlaceholder implements ConnectionIdPlaceholder 
     public List<String> resolveValues(final ConnectionId connectionId, final String placeholder) {
         argumentNotEmpty(placeholder, "placeholder");
         checkNotNull(connectionId, "Connection ID");
-        if (ID_PLACEHOLDER.equals(placeholder)) {
+        if (placeholder.equals(ID_PLACEHOLDER)) {
             return Collections.singletonList(connectionId.toString());
         }
         return Collections.emptyList();

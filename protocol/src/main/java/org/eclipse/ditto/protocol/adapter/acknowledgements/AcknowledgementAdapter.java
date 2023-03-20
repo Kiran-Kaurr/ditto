@@ -64,9 +64,9 @@ final class AcknowledgementAdapter implements Adapter<Acknowledgement> {
             final EntityId entityId) {
 
         final TopicPathBuilder topicPathBuilder = TopicPath.newBuilder(ThingId.of(entityId));
-        if (TopicPath.Channel.TWIN == channel) {
+        if (channel == TopicPath.Channel.TWIN) {
             topicPathBuilder.twin();
-        } else if (TopicPath.Channel.LIVE == channel) {
+        } else if (channel == TopicPath.Channel.LIVE) {
             topicPathBuilder.live();
         } else {
             throw new IllegalArgumentException(MessageFormat.format("Unknown channel <{}>", channel));

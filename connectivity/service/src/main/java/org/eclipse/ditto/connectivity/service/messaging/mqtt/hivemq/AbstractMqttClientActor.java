@@ -148,7 +148,8 @@ abstract class AbstractMqttClientActor<S, P, Q extends MqttClient, R> extends Ba
             MqttSpecificConfig specificConfig);
 
     /**
-     * @return the factory that creates new HiveMqttClients
+     *Returns the factory that creates new HiveMqttClients.
+ 
      */
     abstract HiveMqttClientFactory<Q, ?> getClientFactory();
 

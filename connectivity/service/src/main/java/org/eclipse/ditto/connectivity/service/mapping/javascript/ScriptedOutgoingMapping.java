@@ -23,21 +23,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.annotation.Nullable;
 import javax.script.Bindings;
-
-import org.eclipse.ditto.connectivity.model.MessageMappingFailedException;
-import org.eclipse.ditto.protocol.Adaptable;
-import org.eclipse.ditto.protocol.JsonifiableAdaptable;
-import org.eclipse.ditto.protocol.ProtocolFactory;
-import org.eclipse.ditto.connectivity.service.mapping.MessageMapper;
 import org.eclipse.ditto.connectivity.api.ExternalMessage;
 import org.eclipse.ditto.connectivity.api.ExternalMessageBuilder;
 import org.eclipse.ditto.connectivity.api.ExternalMessageFactory;
+import org.eclipse.ditto.connectivity.model.MessageMappingFailedException;
+import org.eclipse.ditto.connectivity.service.mapping.MessageMapper;
+import org.eclipse.ditto.protocol.Adaptable;
+import org.eclipse.ditto.protocol.JsonifiableAdaptable;
+import org.eclipse.ditto.protocol.ProtocolFactory;
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeJSON;
 import org.mozilla.javascript.NativeObject;
@@ -74,8 +73,8 @@ public final class ScriptedOutgoingMapping implements MappingFunction<Adaptable,
                 final Object dittoProtocolMessage =
                         NativeJSON.parse(cx, scope, jsonifiableAdaptable.toJsonString(), new NullCallable());
 
-                final org.mozilla.javascript.Function mapFromDittoProtocolMsgWrapper =
-                        (org.mozilla.javascript.Function) scope.get(OUTGOING_FUNCTION_NAME, scope);
+                final Function mapFromDittoProtocolMsgWrapper =
+                        (Function) scope.get(OUTGOING_FUNCTION_NAME, scope);
                 final Object result =
                         mapFromDittoProtocolMsgWrapper.call(cx, scope, scope, new Object[]{dittoProtocolMessage});
 

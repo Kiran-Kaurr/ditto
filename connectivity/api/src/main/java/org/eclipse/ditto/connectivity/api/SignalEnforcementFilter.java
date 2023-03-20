@@ -71,7 +71,7 @@ final class SignalEnforcementFilter implements EnforcementFilter<Signal<?>> {
     public void match(final Signal<?> filterInput) {
         final EntityId entityId = extractEntityId(filterInput)
                 .orElseThrow(() -> getEnforcementFailedException(filterInput.getDittoHeaders()));
-        final List<UnresolvedPlaceholderException> exceptions = new LinkedList<>();
+        final List<UnresolvedPlaceholderException> exceptions = new ArrayList<>();
 
         for (final Placeholder<EntityId> filterPlaceholder : filterPlaceholders) {
             for (final String filter : enforcement.getFilters()) {

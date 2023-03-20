@@ -242,7 +242,7 @@ public final class DispatcherActor
      */
     private static void sanityCheck(final ActorRef self) {
         final String selfPath = self.path().toStringWithoutAddress();
-        if (!Objects.equals(DISPATCHER_ACTOR_PATH, selfPath)) {
+        if (!Objects.equals(selfPath, DISPATCHER_ACTOR_PATH)) {
             final String message =
                     String.format("Path of <%s> is <%s>, which does not agree with the advertised path <%s>",
                             ACTOR_NAME, selfPath, DISPATCHER_ACTOR_PATH);

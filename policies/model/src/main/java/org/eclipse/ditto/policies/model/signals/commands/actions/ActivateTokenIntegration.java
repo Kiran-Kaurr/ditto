@@ -209,7 +209,7 @@ public final class ActivateTokenIntegration extends AbstractCommand<ActivateToke
                 .anyMatch(resource -> {
                     final String resourceType = resource.getResourceKey().getResourceType();
                     final EffectedPermissions permissions = resource.getEffectedPermissions();
-                    return PoliciesResourceType.THING.equals(resourceType) &&
+                    return resourceType.equals(PoliciesResourceType.THING) &&
                             permissions.getGrantedPermissions().contains(READ_PERMISSION) &&
                             !permissions.getRevokedPermissions().contains(READ_PERMISSION);
                 });

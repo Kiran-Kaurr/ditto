@@ -34,17 +34,20 @@ public interface LiveSignalPub {
     }
 
     /**
-     * @return Distributed-pub access for live commands.
+     *Returns distributed-pub access for live commands.
+ 
      */
     DistributedPub<ThingCommand<?>> command();
 
     /**
-     * @return Distributed-pub access for live events.
+     *Returns distributed-pub access for live events.
+ 
      */
     DistributedPub<ThingEvent<?>> event();
 
     /**
-     * @return Distributed-pub access for messages.
+     *Returns distributed-pub access for messages.
+ 
      */
     DistributedPub<SignalWithEntityId<?>> message();
 

@@ -47,14 +47,16 @@ public class ThingJsonObjectCreator {
     }
 
     /**
-     * @return a Thing JSON for PUT requests.
+     *Returns a Thing JSON for PUT requests.
+ 
      */
     JsonObject forPut() {
         return checkThingIdForPut();
     }
 
     /**
-     * @return a Thing JSON for PATCH requests.
+     *Returns a Thing JSON for PATCH requests.
+ 
      */
     JsonObject forPatch() {
         checkThingIdForPatch();

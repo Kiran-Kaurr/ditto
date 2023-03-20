@@ -257,9 +257,9 @@ final class ImmutableJsonObject extends AbstractJsonValue implements JsonObject 
 
         final JsonKey rootKey = pointer.getRoot().orElse(ROOT_KEY);
         final int levelCount = pointer.getLevelCount();
-        if (0 == levelCount) {
+        if (levelCount == 0) {
             result = Optional.of(this);
-        } else if (1 == levelCount) {
+        } else if (levelCount == 1) {
             // same as getting a value for a key
             result = getValueForKey(rootKey);
         } else {
@@ -408,7 +408,7 @@ final class ImmutableJsonObject extends AbstractJsonValue implements JsonObject 
         final JsonKey rootKey = pointer.getRoot().orElse(ROOT_KEY);
         if (pointer.isEmpty()) {
             result = this;
-        } else if (1 == pointer.getLevelCount()) {
+        } else if (pointer.getLevelCount() == 1) {
             result = removeValueForKey(rootKey);
         } else {
             final JsonPointer nextPointerLevel = pointer.nextLevel();
@@ -727,7 +727,7 @@ final class ImmutableJsonObject extends AbstractJsonValue implements JsonObject 
         @Override
         public int hashCode() {
             int result = hashCode;
-            if (0 == result) {
+            if (result == 0) {
                 result = fields().hashCode();
                 hashCode = result;
             }

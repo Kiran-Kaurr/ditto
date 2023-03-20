@@ -83,21 +83,24 @@ public final class SubscriberData {
     }
 
     /**
-     * @return topics the subscriber subscribes to.
+     *Returns topics the subscriber subscribes to.
+ 
      */
     public Set<String> getTopics() {
         return topics;
     }
 
     /**
-     * @return the filter of the subscriber.
+     *Returns the filter of the subscriber.
+ 
      */
     public Optional<Predicate<Collection<String>>> getFilter() {
         return Optional.ofNullable(filter);
     }
 
     /**
-     * @return the group the subscriber belongs to, or an empty optional.
+     *Returns the group the subscriber belongs to, or an empty optional.
+ 
      */
     public Optional<String> getGroup() {
         return Optional.ofNullable(group);

@@ -14,6 +14,27 @@ package org.eclipse.ditto.gateway.service.endpoints.routes.sse;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import akka.NotUsed;
+import akka.actor.ActorRef;
+import akka.actor.ActorSelection;
+import akka.http.javadsl.marshalling.sse.EventStreamMarshalling;
+import akka.http.javadsl.model.HttpHeader;
+import akka.http.javadsl.model.MediaTypes;
+import akka.http.javadsl.model.StatusCodes;
+import akka.http.javadsl.model.headers.Accept;
+import akka.http.javadsl.model.sse.ServerSentEvent;
+import akka.http.javadsl.server.PathMatchers;
+import akka.http.javadsl.server.RequestContext;
+import akka.http.javadsl.server.Route;
+import akka.http.javadsl.server.directives.RouteDirectives;
+import akka.japi.pf.PFBuilder;
+import akka.pattern.Patterns;
+import akka.stream.KillSwitch;
+import akka.stream.KillSwitches;
+import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Source;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
@@ -35,10 +56,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
-
 import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
 import org.eclipse.ditto.base.model.exceptions.SignalEnrichmentFailedException;
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
@@ -74,26 +93,6 @@ import org.eclipse.ditto.things.model.Thing;
 import org.eclipse.ditto.things.model.ThingFieldSelector;
 import org.eclipse.ditto.things.model.ThingId;
 import org.eclipse.ditto.things.model.signals.events.ThingEvent;
-
-import akka.NotUsed;
-import akka.actor.ActorRef;
-import akka.actor.ActorSelection;
-import akka.http.javadsl.marshalling.sse.EventStreamMarshalling;
-import akka.http.javadsl.model.HttpHeader;
-import akka.http.javadsl.model.MediaTypes;
-import akka.http.javadsl.model.StatusCodes;
-import akka.http.javadsl.model.headers.Accept;
-import akka.http.javadsl.model.sse.ServerSentEvent;
-import akka.http.javadsl.server.PathMatchers;
-import akka.http.javadsl.server.RequestContext;
-import akka.http.javadsl.server.Route;
-import akka.http.javadsl.server.directives.RouteDirectives;
-import akka.japi.pf.PFBuilder;
-import akka.pattern.Patterns;
-import akka.stream.KillSwitch;
-import akka.stream.KillSwitches;
-import akka.stream.javadsl.Keep;
-import akka.stream.javadsl.Source;
 import scala.PartialFunction;
 
 /**
@@ -468,9 +467,9 @@ public final class ThingsSseRouteBuilder extends RouteDirectives implements SseR
         // determine charset, if one was set in the form of:
         // application/json; charset=utf-8
         return fullContentTypeString.filter(ct -> ct.contains(";"))
-                .map(ct -> ct.split(";")[1])
+                .map(ct -> Iterables.get(Splitter.on(';').split(ct), 1))
                 .filter(charsetStr -> charsetStr.contains("="))
-                .map(charsetStr -> charsetStr.split("=")[1])
+                .map(charsetStr -> Iterables.get(Splitter.on('=').split(charsetStr), 1))
                 .filter(Charset::isSupported)
                 .map(Charset::forName);
     }
@@ -672,7 +671,7 @@ public final class ThingsSseRouteBuilder extends RouteDirectives implements SseR
 
     private static boolean matchesTextEventStream(final Accept accept) {
         return StreamSupport.stream(accept.getMediaRanges().spliterator(), false)
-                .filter(mr -> !"*".equals(mr.mainType()))
+                .filter(mr -> !mr.mainType().equals("*"))
                 .anyMatch(mr -> mr.matches(MediaTypes.TEXT_EVENT_STREAM));
     }
 

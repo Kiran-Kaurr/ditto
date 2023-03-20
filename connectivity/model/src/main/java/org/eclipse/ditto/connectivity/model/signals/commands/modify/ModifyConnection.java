@@ -113,7 +113,8 @@ public final class ModifyConnection extends AbstractCommand<ModifyConnection>
     }
 
     /**
-     * @return the {@code Connection} to be created.
+     *Returns the {@code Connection} to be created.
+ 
      */
     public Connection getConnection() {
         return connection;

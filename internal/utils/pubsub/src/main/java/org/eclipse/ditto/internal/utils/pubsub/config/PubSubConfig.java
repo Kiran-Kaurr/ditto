@@ -27,27 +27,32 @@ import akka.actor.ActorSystem;
 public interface PubSubConfig {
 
     /**
-     * @return Seed of hash functions shared across the cluster.
+     *Returns seed of hash functions shared across the cluster.
+ 
      */
     String getSeed();
 
     /**
-     * @return How long to wait to restart pub-sub if a child actor crashes.
+     *Returns how long to wait to restart pub-sub if a child actor crashes.
+ 
      */
     Duration getRestartDelay();
 
     /**
-     * @return How often to update distributed data.
+     *Returns how often to update distributed data.
+ 
      */
     Duration getUpdateInterval();
 
     /**
-     * @return How often to sync the distributed data against the cluster state.
+     *Returns how often to sync the distributed data against the cluster state.
+ 
      */
     Duration getSyncInterval();
 
     /**
-     * @return Probability to reset the distributed data of a subscriber.
+     *Returns probability to reset the distributed data of a subscriber.
+ 
      */
     double getResetProbability();
 

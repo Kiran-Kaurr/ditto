@@ -12,16 +12,19 @@
  */
 package org.eclipse.ditto.internal.utils.cacheloaders;
 
+import akka.actor.ActorRef;
+import akka.actor.Scheduler;
+import akka.pattern.AskTimeoutException;
+import akka.pattern.Patterns;
 import java.time.Duration;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.common.HttpStatus;
 import org.eclipse.ditto.base.model.exceptions.AskException;
 import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
@@ -31,11 +34,6 @@ import org.eclipse.ditto.base.model.headers.WithDittoHeaders;
 import org.eclipse.ditto.internal.utils.akka.logging.DittoLoggerFactory;
 import org.eclipse.ditto.internal.utils.akka.logging.ThreadSafeDittoLogger;
 import org.eclipse.ditto.internal.utils.cacheloaders.config.AskWithRetryConfig;
-
-import akka.actor.ActorRef;
-import akka.actor.Scheduler;
-import akka.pattern.AskTimeoutException;
-import akka.pattern.Patterns;
 import scala.compat.java8.FutureConverters;
 
 /**
@@ -141,7 +139,7 @@ public final class AskWithRetry {
                     if (null != throwable) {
                         final var dre = DittoRuntimeException.asDittoRuntimeException(throwable,
                                 cause -> DUMMY_DRE); // throwable was no DittoRuntimeException when DUMMY_DRE is used
-                        if (dre != DUMMY_DRE) {
+                        if (!Objects.equals(dre, DUMMY_DRE)) {
                             // we have a real DittoRuntimeException:
                             return new AskFailure<>(dre);
                         }

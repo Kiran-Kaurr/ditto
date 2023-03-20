@@ -63,7 +63,7 @@ final class DefaultAuthenticationFailureAggregator implements AuthenticationFail
             throw new IllegalArgumentException(message);
         }
 
-        if (1 == reasonsOfFailure.size()) {
+        if (reasonsOfFailure.size() == 1) {
             return reasonsOfFailure.get(0);
         }
 

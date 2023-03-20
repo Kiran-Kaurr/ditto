@@ -56,21 +56,24 @@ public final class SshPublicKeyCredentials implements Credentials {
     }
 
     /**
-     * @return the username
+     *Returns the username.
+ 
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * @return the public key
+     *Returns the public key.
+ 
      */
     public String getPublicKey() {
         return publicKey;
     }
 
     /**
-     * @return the private key
+     *Returns the private key.
+ 
      */
     public String getPrivateKey() {
         return privateKey;

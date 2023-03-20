@@ -173,7 +173,8 @@ public final class TrustManagerFactoryFactory {
     public interface ThrowingSupplier<T> {
 
         /**
-         * @return the result.
+         *Returns the result.
+ 
          */
         T get() throws CertificateException, KeyStoreException, NoSuchAlgorithmException,
                 InvalidAlgorithmParameterException;

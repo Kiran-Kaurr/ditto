@@ -304,7 +304,7 @@ final class ImmutableSource implements Source {
         final ImmutableSource that = (ImmutableSource) o;
         return consumerCount == that.consumerCount &&
                 Objects.equals(addresses, that.addresses) &&
-                Objects.equals(index, that.index) &&
+                (index == that.index) &&
                 Objects.equals(qos, that.qos) &&
                 Objects.equals(enforcement, that.enforcement) &&
                 Objects.equals(acknowledgementRequests, that.acknowledgementRequests) &&

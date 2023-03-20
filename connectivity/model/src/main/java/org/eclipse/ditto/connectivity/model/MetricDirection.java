@@ -39,15 +39,17 @@ public enum MetricDirection {
     }
 
     /**
-     * @return the direction label
+     *Returns the direction label.
+ 
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name name of the MetricDirection
-     * @return the MetricDirection matching the given name
+     *Returns the MetricDirection matching the given name.
+ @param name name of the MetricDirection
+     * 
      */
     public static Optional<MetricDirection> forName(final CharSequence name) {
         checkNotNull(name, "Name");

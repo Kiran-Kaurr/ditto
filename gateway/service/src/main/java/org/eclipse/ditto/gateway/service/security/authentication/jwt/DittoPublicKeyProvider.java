@@ -14,6 +14,18 @@ package org.eclipse.ditto.gateway.service.security.authentication.jwt;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.argumentNotNull;
 
+import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.HttpResponse;
+import akka.stream.Materializer;
+import akka.stream.SystemMaterializer;
+import akka.stream.javadsl.Sink;
+import akka.util.ByteString;
+import com.github.benmanes.caffeine.cache.AsyncCacheLoader;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.RemovalCause;
+import com.github.benmanes.caffeine.cache.RemovalListener;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
@@ -25,10 +37,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.exceptions.DittoRuntimeException;
 import org.eclipse.ditto.base.model.signals.commands.exceptions.GatewayAuthenticationProviderUnavailableException;
 import org.eclipse.ditto.base.model.signals.commands.exceptions.GatewayJwtIssuerNotSupportedException;
@@ -51,19 +61,6 @@ import org.eclipse.ditto.jwt.model.JsonWebKey;
 import org.eclipse.ditto.policies.model.SubjectIssuer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.benmanes.caffeine.cache.AsyncCacheLoader;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.benmanes.caffeine.cache.RemovalListener;
-
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
-import akka.stream.Materializer;
-import akka.stream.SystemMaterializer;
-import akka.stream.javadsl.Sink;
-import akka.util.ByteString;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
 
 /**
  * Implementation of {@link PublicKeyProvider}. This provider requests keys at the {@link SubjectIssuer} and caches
@@ -281,7 +278,7 @@ public final class DittoPublicKeyProvider implements PublicKeyProvider {
 
         @Override
         public void onRemoval(@Nullable final PublicKeyIdWithIssuer key, @Nullable final PublicKeyWithParser value,
-                @Nonnull final com.github.benmanes.caffeine.cache.RemovalCause cause) {
+                @Nonnull final RemovalCause cause) {
 
             final String msgTemplate = "Removed PublicKey with ID <{}> from cache due to cause '{}'.";
             LOGGER.debug(msgTemplate, key, cause);

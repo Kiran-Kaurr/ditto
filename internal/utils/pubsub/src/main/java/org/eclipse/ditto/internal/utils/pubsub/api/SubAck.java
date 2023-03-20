@@ -46,28 +46,32 @@ public final class SubAck {
     }
 
     /**
-     * @return the request this object is acknowledging.
+     *Returns the request this object is acknowledging.
+ 
      */
     public Request getRequest() {
         return request;
     }
 
     /**
-     * @return sender of the request.
+     *Returns sender of the request.
+ 
      */
     public ActorRef getSender() {
         return sender;
     }
 
     /**
-     * @return the sequence number.
+     *Returns the sequence number.
+ 
      */
     public int getSeqNr() {
         return seqNr;
     }
 
     /**
-     * @return whether the consistency test of resubscription is successful.
+     *Returns whether the consistency test of resubscription is successful.
+ 
      */
     public boolean isConsistent() {
         return consistent;

@@ -49,7 +49,7 @@ abstract class AbstractSinglePredicate implements Predicate {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractSinglePredicate)) {
             return false;
         }
         final AbstractSinglePredicate that = (AbstractSinglePredicate) o;

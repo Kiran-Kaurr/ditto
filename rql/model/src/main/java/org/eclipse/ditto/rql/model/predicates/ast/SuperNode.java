@@ -41,7 +41,7 @@ public abstract class SuperNode implements Node {
     /**
      * {@inheritDoc}
      */
-    public void accept(final PredicateVisitor predicateVisitor) {
+    @Override public void accept(final PredicateVisitor predicateVisitor) {
         predicateVisitor.visit(this);
     }
 
@@ -67,10 +67,8 @@ public abstract class SuperNode implements Node {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        
+        if (!(obj instanceof SuperNode)) {
             return false;
         }
         final SuperNode other = (SuperNode) obj;

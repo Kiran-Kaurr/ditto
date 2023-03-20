@@ -31,7 +31,8 @@ public interface SimpleFieldExpression extends FilterFieldExpression, SortFieldE
     }
 
     /**
-     * @return the field name.
+     *Returns the field name.
+ 
      */
     String getFieldName();
 

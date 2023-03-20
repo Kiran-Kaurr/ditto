@@ -56,7 +56,7 @@ public final class CheckConnectionLogsActive extends AbstractCommand<CheckConnec
      */
     public static final String TYPE = TYPE_PREFIX + NAME;
 
-    protected static final JsonFieldDefinition<String> JSON_TIMESTAMP =
+    static final JsonFieldDefinition<String> JSON_TIMESTAMP =
             JsonFactory.newStringFieldDefinition("timestamp", FieldType.REGULAR,
                     JsonSchemaVersion.V_2);
 

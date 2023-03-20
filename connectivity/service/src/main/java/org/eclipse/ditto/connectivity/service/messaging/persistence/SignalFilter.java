@@ -215,12 +215,12 @@ public final class SignalFilter {
                 .orElse(TopicPath.Channel.TWIN);
         final TopicPath.Criterion criterion = getCriterionOfSignal(signal);
 
-        if (TopicPath.Group.THINGS.equals(group)) {
-            if (TopicPath.Channel.TWIN.equals(channel)) {
-                if (EVENTS.equals(criterion)) {
+        if (group.equals(TopicPath.Group.THINGS)) {
+            if (channel.equals(TopicPath.Channel.TWIN)) {
+                if (criterion.equals(EVENTS)) {
                     return Optional.of(Topic.TWIN_EVENTS);
                 }
-            } else if (TopicPath.Channel.LIVE.equals(channel) && criterion != null) {
+            } else if (channel.equals(TopicPath.Channel.LIVE) && criterion != null) {
                 switch (criterion) {
                     case COMMANDS:
                         return Optional.of(Topic.LIVE_COMMANDS);

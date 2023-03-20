@@ -74,7 +74,7 @@ public final class ConditionChecker {
      * @throws NullPointerException if {@code argument} is {@code null}.
      */
     public static <T extends CharSequence> T checkNotEmpty(final T argument, final String argumentName) {
-        if (0 == argument.length()) {
+        if (argument.length() == 0) {
             throw new IllegalArgumentException(MessageFormat.format("The {0} must not be empty!", argumentName));
         }
         return argument;

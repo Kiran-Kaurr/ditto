@@ -72,7 +72,7 @@ public final class DevOpsBasicAuthenticationDirective implements DevopsAuthentic
      * @param inner the inner route, which will be performed on successful authentication.
      * @return the inner route wrapped with authentication.
      */
-    public Route authenticateDevOps(final String realm, final Route inner) {
+    @Override public Route authenticateDevOps(final String realm, final Route inner) {
         LOGGER.debug("DevOps basic authentication is enabled for {}.", realm);
         return Directives.authenticateBasic(realm, new BasicAuthenticator(passwords), userName -> inner);
     }
@@ -89,7 +89,7 @@ public final class DevOpsBasicAuthenticationDirective implements DevopsAuthentic
         @Override
         public Optional<String> apply(final Optional<SecurityDirectives.ProvidedCredentials> credentials) {
             return credentials
-                    .filter(providedCredentials -> USER_DEVOPS.equals(providedCredentials.identifier()))
+                    .filter(providedCredentials -> providedCredentials.identifier().equals(USER_DEVOPS))
                     .filter(providedCredentials -> passwords.stream().anyMatch(providedCredentials::verify))
                     .map(SecurityDirectives.ProvidedCredentials::identifier);
         }

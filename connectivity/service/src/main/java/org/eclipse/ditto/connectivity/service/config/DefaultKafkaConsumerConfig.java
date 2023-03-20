@@ -106,7 +106,7 @@ final class DefaultKafkaConsumerConfig implements KafkaConsumerConfig {
                 Objects.equals(restartBackOffConfig, that.restartBackOffConfig) &&
                 Objects.equals(alpakkaConfig, that.alpakkaConfig) &&
                 Objects.equals(metricCollectingInterval, that.metricCollectingInterval) &&
-                Objects.equals(initTimeoutSeconds, that.initTimeoutSeconds);
+                (initTimeoutSeconds == that.initTimeoutSeconds);
     }
 
     @Override

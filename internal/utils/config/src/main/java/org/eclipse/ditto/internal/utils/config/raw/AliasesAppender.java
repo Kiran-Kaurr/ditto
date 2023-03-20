@@ -14,24 +14,22 @@ package org.eclipse.ditto.internal.utils.config.raw;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import com.google.common.collect.ImmutableMap;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigException;
+import com.typesafe.config.ConfigFactory;
+import com.typesafe.config.ConfigValue;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.UnaryOperator;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
 import org.eclipse.ditto.json.JsonField;
 import org.eclipse.ditto.json.JsonObject;
 import org.eclipse.ditto.json.JsonValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigException;
-import com.typesafe.config.ConfigFactory;
-import com.typesafe.config.ConfigValue;
 
 /**
  * Extends a given {@link com.typesafe.config.Config} by the same config values using aliases for the original config
@@ -73,11 +71,11 @@ final class AliasesAppender implements UnaryOperator<Config> {
         return System.getenv(CONFIG_ALIASES_ENV_VARIABLE_NAME);
     }
 
-    private static Map<String, String> parseString(@Nullable final String systemConfigAliasesJsonObjectString) {
+    private static ImmutableMap<String, String> parseString(@Nullable final String systemConfigAliasesJsonObjectString) {
         if (null == systemConfigAliasesJsonObjectString || systemConfigAliasesJsonObjectString.isEmpty()) {
             LOGGER.info("Environment variable <{}> is not defined or empty, using default config aliases: {}.",
                     CONFIG_ALIASES_ENV_VARIABLE_NAME, DEFAULT_CONFIG_ALIASES);
-            return DEFAULT_CONFIG_ALIASES;
+            return ImmutableMap.copyOf(DEFAULT_CONFIG_ALIASES);
         }
 
         final JsonObject systemConfigAliasesAsJsonObject = JsonObject.of(systemConfigAliasesJsonObjectString);
@@ -90,7 +88,7 @@ final class AliasesAppender implements UnaryOperator<Config> {
         LOGGER.info("Environment variable <{}> defines these config aliases: {}.", CONFIG_ALIASES_ENV_VARIABLE_NAME,
                 result);
 
-        return result;
+        return ImmutableMap.copyOf(result);
     }
 
     /**

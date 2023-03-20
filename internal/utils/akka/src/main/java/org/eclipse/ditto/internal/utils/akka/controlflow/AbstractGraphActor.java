@@ -104,12 +104,14 @@ public abstract class AbstractGraphActor<T, M> extends AbstractActor {
     }
 
     /**
-     * @return the Sink handling the messages of type {@code T} this graph actor handles.
+     *Returns the Sink handling the messages of type {@code T} this graph actor handles.
+ 
      */
     protected abstract Sink<T, ?> createSink();
 
     /**
-     * @return the buffer size used for the Source queue.
+     *Returns the buffer size used for the Source queue.
+ 
      */
     protected abstract int getBufferSize();
 

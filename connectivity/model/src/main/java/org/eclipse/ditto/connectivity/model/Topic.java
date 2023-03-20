@@ -50,22 +50,25 @@ public enum Topic {
     }
 
     /**
-     * @return the corresponding pubsub topic used to subscribe to events of this type in the akka cluster
+     *Returns the corresponding pubsub topic used to subscribe to events of this type in the akka cluster.
+ 
      */
     public String getPubSubTopic() {
         return pubSubTopic;
     }
 
     /**
-     * @return the name of the topic
+     *Returns the name of the topic.
+ 
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name name of the topic
-     * @return the topic matching the given name
+     *Returns the topic matching the given name.
+ @param name name of the topic
+     * 
      */
     public static Optional<Topic> forName(final CharSequence name) {
         checkNotNull(name, "Name");

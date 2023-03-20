@@ -75,7 +75,8 @@ public abstract class AbstractWriteModel {
     }
 
     /**
-     * @return Metadata of this write model.
+     *Returns metadata of this write model.
+ 
      */
     public Metadata getMetadata() {
         return metadata;
@@ -95,7 +96,7 @@ public abstract class AbstractWriteModel {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractWriteModel)) {
             return false;
         }
         final AbstractWriteModel that = (AbstractWriteModel) o;

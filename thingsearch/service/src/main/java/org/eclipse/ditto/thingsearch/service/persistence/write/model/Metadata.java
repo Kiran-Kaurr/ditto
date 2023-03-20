@@ -240,7 +240,8 @@ public final class Metadata {
     }
 
     /**
-     * @return the Thing ID.
+     *Returns the Thing ID.
+ 
      */
     public ThingId getThingId() {
         return thingId;
@@ -256,21 +257,24 @@ public final class Metadata {
     }
 
     /**
-     * @return the policyId of the Thing according to the search index.
+     *Returns the policyId of the Thing according to the search index.
+ 
      */
     public Optional<PolicyId> getPolicyId() {
         return Optional.ofNullable(policyId);
     }
 
     /**
-     * @return namespace field as to be written in the persistence.
+     *Returns namespace field as to be written in the persistence.
+ 
      */
     public String getNamespaceInPersistence() {
         return thingId.getNamespace();
     }
 
     /**
-     * @return the policyId-field as to be written in the persistence.
+     *Returns the policyId-field as to be written in the persistence.
+ 
      */
     public String getPolicyIdInPersistence() {
         return getPolicyId().map(PolicyId::toString).orElse("");

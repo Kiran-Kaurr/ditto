@@ -39,14 +39,16 @@ public final class SortOption {
     }
 
     /**
-     * @return the sortExpression
+     *Returns the sortExpression.
+ 
      */
     public SortFieldExpression getSortExpression() {
         return sortExpression;
     }
 
     /**
-     * @return the sortDirection
+     *Returns the sortDirection.
+ 
      */
     public SortDirection getSortDirection() {
         return sortDirection;

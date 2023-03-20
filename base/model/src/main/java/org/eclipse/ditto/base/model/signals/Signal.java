@@ -12,11 +12,13 @@
  */
 package org.eclipse.ditto.base.model.signals;
 
-import org.eclipse.ditto.json.JsonField;
-import org.eclipse.ditto.json.JsonObject;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import org.eclipse.ditto.base.model.headers.DittoHeadersSettable;
 import org.eclipse.ditto.base.model.headers.WithManifest;
 import org.eclipse.ditto.base.model.json.Jsonifiable;
+import org.eclipse.ditto.json.JsonField;
+import org.eclipse.ditto.json.JsonObject;
 
 /**
  * A service message that incites to action or conveys notice or warning.
@@ -33,7 +35,7 @@ public interface Signal<T extends Signal<T>> extends Jsonifiable.WithPredicate<J
      */
     @Override
     default String getName() {
-        return getType().contains(":") ? getType().split(":")[1] : getType();
+        return getType().contains(":") ? Iterables.get(Splitter.on(':').split(getType()), 1) : getType();
     }
 
 }

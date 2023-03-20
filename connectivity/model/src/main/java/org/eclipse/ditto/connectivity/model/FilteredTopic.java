@@ -24,17 +24,20 @@ import org.eclipse.ditto.json.JsonFieldSelector;
 public interface FilteredTopic extends CharSequence {
 
     /**
-     * @return the {@code Topic} of this FilteredTopic
+     *Returns the {@code Topic} of this FilteredTopic.
+ 
      */
     Topic getTopic();
 
     /**
-     * @return the namespaces for which the filter should be applied - if empty, all namespaces are considered.
+     *Returns the namespaces for which the filter should be applied - if empty, all namespaces are considered.
+ 
      */
     List<String> getNamespaces();
 
     /**
-     * @return the optional filter string as RQL query
+     *Returns the optional filter string as RQL query.
+ 
      */
     Optional<String> getFilter();
 

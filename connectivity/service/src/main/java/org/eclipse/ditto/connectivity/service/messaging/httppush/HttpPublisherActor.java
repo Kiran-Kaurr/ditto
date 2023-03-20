@@ -12,6 +12,33 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.httppush;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import akka.Done;
+import akka.NotUsed;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.http.javadsl.model.HttpCharset;
+import akka.http.javadsl.model.HttpEntities;
+import akka.http.javadsl.model.HttpHeader;
+import akka.http.javadsl.model.HttpMethod;
+import akka.http.javadsl.model.HttpMethods;
+import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.model.Uri;
+import akka.http.javadsl.model.headers.ContentType;
+import akka.japi.Pair;
+import akka.japi.pf.ReceiveBuilder;
+import akka.stream.KillSwitch;
+import akka.stream.KillSwitches;
+import akka.stream.Materializer;
+import akka.stream.OverflowStrategy;
+import akka.stream.QueueOfferResult;
+import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Sink;
+import akka.stream.javadsl.Source;
+import akka.stream.javadsl.SourceQueue;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -29,9 +56,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.ditto.base.model.acks.DittoAcknowledgementLabel;
 import org.eclipse.ditto.base.model.auth.AuthorizationContext;
 import org.eclipse.ditto.base.model.common.HttpStatus;
@@ -81,32 +106,6 @@ import org.eclipse.ditto.protocol.ProtocolFactory;
 import org.eclipse.ditto.protocol.adapter.DittoProtocolAdapter;
 import org.eclipse.ditto.things.model.signals.commands.ThingCommand;
 import org.eclipse.ditto.things.model.signals.commands.ThingCommandResponse;
-
-import akka.Done;
-import akka.NotUsed;
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.http.javadsl.model.HttpCharset;
-import akka.http.javadsl.model.HttpEntities;
-import akka.http.javadsl.model.HttpHeader;
-import akka.http.javadsl.model.HttpMethod;
-import akka.http.javadsl.model.HttpMethods;
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
-import akka.http.javadsl.model.Uri;
-import akka.http.javadsl.model.headers.ContentType;
-import akka.japi.Pair;
-import akka.japi.pf.ReceiveBuilder;
-import akka.stream.KillSwitch;
-import akka.stream.KillSwitches;
-import akka.stream.Materializer;
-import akka.stream.OverflowStrategy;
-import akka.stream.QueueOfferResult;
-import akka.stream.javadsl.Flow;
-import akka.stream.javadsl.Keep;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
-import akka.stream.javadsl.SourceQueue;
 import scala.util.Try;
 
 /**
@@ -159,7 +158,7 @@ final class HttpPublisherActor extends BasePublisherActor<HttpPublishTarget> {
         // Inform self of stream termination.
         // If self is alive, the error should be escalated.
         materialized.second()
-                .whenComplete((done, error) -> getSelf().tell(toConnectionFailure(done, error), ActorRef.noSender()));
+                .whenComplete((done, error) -> getSelf().tell(toConnectionFailure(error), ActorRef.noSender()));
 
         httpRequestSigning = connection.getCredentials()
                 .map(credentials -> credentials.accept(HttpRequestSigningExtension.get(getContext().getSystem())))
@@ -242,7 +241,7 @@ final class HttpPublisherActor extends BasePublisherActor<HttpPublishTarget> {
 
     private static byte[] getPayloadAsBytes(final ExternalMessage message) {
         return message.isTextMessage()
-                ? getTextPayload(message).getBytes()
+                ? getTextPayload(message).getBytes(UTF_8)
                 : getBytePayload(message);
     }
 
@@ -701,7 +700,7 @@ final class HttpPublisherActor extends BasePublisherActor<HttpPublishTarget> {
         }
     }
 
-    private ConnectionFailure toConnectionFailure(@Nullable final Done done, @Nullable final Throwable error) {
+    private ConnectionFailure toConnectionFailure(@Nullable final Throwable error) {
         return ConnectionFailure.of(getSelf(), error, "HttpPublisherActor stream terminated");
     }
 

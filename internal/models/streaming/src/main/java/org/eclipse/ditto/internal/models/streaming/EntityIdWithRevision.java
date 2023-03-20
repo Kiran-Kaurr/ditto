@@ -45,7 +45,7 @@ public interface EntityIdWithRevision<I extends EntityId> extends Jsonifiable<Js
      *
      * @return the tag as an identifier
      */
-    default String asIdentifierString() {
+    @Override default String asIdentifierString() {
         return getEntityId() + ":" + getRevision();
     }
 

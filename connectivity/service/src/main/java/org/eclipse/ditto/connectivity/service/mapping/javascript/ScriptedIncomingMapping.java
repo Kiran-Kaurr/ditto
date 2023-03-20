@@ -15,19 +15,18 @@ package org.eclipse.ditto.connectivity.service.mapping.javascript;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.annotation.Nullable;
-
-import org.eclipse.ditto.json.JsonFactory;
-import org.eclipse.ditto.json.JsonObject;
 import org.eclipse.ditto.base.model.exceptions.DittoJsonException;
 import org.eclipse.ditto.base.model.headers.DittoHeaders;
+import org.eclipse.ditto.connectivity.api.ExternalMessage;
 import org.eclipse.ditto.connectivity.model.MessageMappingFailedException;
+import org.eclipse.ditto.json.JsonFactory;
+import org.eclipse.ditto.json.JsonObject;
 import org.eclipse.ditto.protocol.Adaptable;
 import org.eclipse.ditto.protocol.ProtocolFactory;
-import org.eclipse.ditto.connectivity.api.ExternalMessage;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeJSON;
 import org.mozilla.javascript.NativeObject;
@@ -63,9 +62,9 @@ public class ScriptedIncomingMapping implements MappingFunction<ExternalMessage,
             return contextFactory.call(cx -> {
                 final NativeObject externalMessage = mapExternalMessageToNativeObject(message);
 
-                final org.mozilla.javascript.Function
+                final Function
                         mapToDittoProtocolMsgWrapper =
-                        (org.mozilla.javascript.Function) scope.get(INCOMING_FUNCTION_NAME, scope);
+                        (Function) scope.get(INCOMING_FUNCTION_NAME, scope);
                 final Object result =
                         mapToDittoProtocolMsgWrapper.call(cx, scope, scope, new Object[]{externalMessage});
 

@@ -33,7 +33,7 @@ public final class DefaultConnectivityCommandAdapterProvider implements Connecti
         announcementAdapter = ConnectivityAnnouncementAdapter.of(headerTranslator);
     }
 
-    public Adapter<ConnectivityAnnouncement<?>> getAnnouncementAdapter() {
+    @Override public Adapter<ConnectivityAnnouncement<?>> getAnnouncementAdapter() {
         return announcementAdapter;
     }
 

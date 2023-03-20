@@ -23,7 +23,7 @@ import org.eclipse.ditto.things.model.signals.events.FeatureDefinitionCreated;
 @Immutable
 final class FeatureDefinitionCreatedStrategy extends AbstractThingEventStrategy<FeatureDefinitionCreated> {
 
-    protected FeatureDefinitionCreatedStrategy() {
+    FeatureDefinitionCreatedStrategy() {
         super();
     }
 

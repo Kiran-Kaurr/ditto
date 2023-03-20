@@ -154,7 +154,7 @@ final class EvictingConnectionLogger extends AbstractConnectionLogger<EvictingCo
     @Override
     public void logEntry(final LogEntry logEntry) {
         checkNotNull(logEntry, "logEntry");
-        if (LogLevel.SUCCESS == logEntry.getLogLevel()) {
+        if (logEntry.getLogLevel() == LogLevel.SUCCESS) {
             final var logTimer = startConnectionLogTimer();
             logTraceWithCorrelationId(logEntry);
             logTimer.startNewSegment("message_internally_logged");

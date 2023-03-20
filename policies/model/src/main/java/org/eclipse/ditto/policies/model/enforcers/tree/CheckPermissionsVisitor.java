@@ -64,7 +64,7 @@ abstract class CheckPermissionsVisitor implements Visitor<Boolean> {
 
     @Override
     public void visitTreeNode(final PolicyTreeNode node) {
-        if (PolicyTreeNode.Type.SUBJECT == node.getType()) {
+        if (node.getType() == PolicyTreeNode.Type.SUBJECT) {
             visitSubjectNode(node);
         } else {
             visitResourceNode((ResourceNode) node);

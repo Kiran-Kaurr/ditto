@@ -23,7 +23,8 @@ import org.eclipse.ditto.thingsearch.model.signals.commands.SearchErrorResponse;
 interface SearchErrorResponseAdapterProvider {
 
     /**
-     * @return the error response adapter
+     *Returns the error response adapter.
+ 
      */
     Adapter<SearchErrorResponse> getSearchErrorResponseAdapter();
 }

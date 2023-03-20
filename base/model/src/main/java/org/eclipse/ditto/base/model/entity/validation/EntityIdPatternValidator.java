@@ -25,8 +25,9 @@ import org.eclipse.ditto.base.model.entity.id.RegexPatterns;
 public final class EntityIdPatternValidator extends AbstractPatternValidator {
 
     /**
-     * @param id the char sequence that is validated
-     * @return new instance of {@link org.eclipse.ditto.base.model.entity.validation.EntityIdPatternValidator}
+     *Returns new instance of {@link org.eclipse.ditto.base.model.entity.validation.EntityIdPatternValidator}.
+ @param id the char sequence that is validated
+     * 
      */
     public static EntityIdPatternValidator getInstance(final CharSequence id) {
         return new EntityIdPatternValidator(id);

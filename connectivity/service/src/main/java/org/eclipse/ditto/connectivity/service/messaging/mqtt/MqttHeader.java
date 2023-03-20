@@ -36,14 +36,16 @@ public enum MqttHeader {
     }
 
     /**
-     * @return the header name
+     *Returns the header name.
+ 
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return list of default header names used for mqtt sources
+     *Returns list of default header names used for mqtt sources.
+ 
      */
     public static List<String> getHeaderNames() {
         return Arrays.stream(values()).map(MqttHeader::getName).toList();

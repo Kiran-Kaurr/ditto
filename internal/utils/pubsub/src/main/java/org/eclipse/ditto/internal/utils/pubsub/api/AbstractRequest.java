@@ -42,12 +42,13 @@ abstract class AbstractRequest implements Request {
     /**
      * @return topics in the subscription.
      */
-    public Set<String> getTopics() {
+    @Override public Set<String> getTopics() {
         return topics;
     }
 
     /**
-     * @return subscriber of the subscription.
+     *Returns subscriber of the subscription.
+ 
      */
     public ActorRef getSubscriber() {
         return subscriber;
@@ -56,14 +57,14 @@ abstract class AbstractRequest implements Request {
     /**
      * @return write consistency for the request.
      */
-    public Replicator.WriteConsistency getWriteConsistency() {
+    @Override public Replicator.WriteConsistency getWriteConsistency() {
         return writeConsistency;
     }
 
     /**
      * @return whether acknowledgement is expected.
      */
-    public boolean shouldAcknowledge() {
+    @Override public boolean shouldAcknowledge() {
         return acknowledge;
     }
 

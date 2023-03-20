@@ -68,7 +68,8 @@ public interface StartedTimer extends Timer, TaggedMetricInstrument<StartedTimer
     List<OnStopHandler> getOnStopHandlers();
 
     /**
-     * @return the instant when the timer was started.
+     *Returns the instant when the timer was started.
+ 
      */
     Instant getStartInstant();
 

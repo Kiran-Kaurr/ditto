@@ -143,7 +143,7 @@ public final class DefaultClientConfig implements ClientConfig {
                 Objects.equals(connectingMaxTimeout, that.connectingMaxTimeout) &&
                 Objects.equals(disconnectingMaxTimeout, that.disconnectingMaxTimeout) &&
                 Objects.equals(disconnectAnnouncementTimeout, that.disconnectAnnouncementTimeout) &&
-                Objects.equals(connectingMaxTries, that.connectingMaxTries) &&
+                (connectingMaxTries == that.connectingMaxTries) &&
                 Objects.equals(testingTimeout, that.testingTimeout) &&
                 Objects.equals(minBackoff, that.minBackoff) &&
                 Objects.equals(maxBackoff, that.maxBackoff) &&

@@ -112,7 +112,8 @@ public final class CreateConnection extends AbstractCommand<CreateConnection>
     }
 
     /**
-     * @return the {@code Connection} to be created.
+     *Returns the {@code Connection} to be created.
+ 
      */
     public Connection getConnection() {
         return connection;

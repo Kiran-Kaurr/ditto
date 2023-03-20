@@ -77,7 +77,7 @@ abstract class AbstractFormElementBuilder<
     @Override
     public B setScopes(@Nullable final OAuth2Scopes scopes) {
         if (scopes != null) {
-            if (scopes instanceof MultipleOAuth2Scopes) {
+            if (scopes instanceof MultipleSecurity) {
                 putValue(FormElement.JsonFields.SCOPES_MULTIPLE, ((MultipleSecurity) scopes).toJson());
             } else if (scopes instanceof SingleOAuth2Scopes) {
                 putValue(FormElement.JsonFields.SCOPES, scopes.toString());

@@ -73,7 +73,7 @@ public class DefaultCreationRestrictionConfig implements CreationRestrictionConf
         return namespacePatterns;
     }
 
-    public List<Pattern> getAuthSubject() {
+    @Override public List<Pattern> getAuthSubject() {
         return authSubjectPatterns;
     }
 
@@ -82,7 +82,7 @@ public class DefaultCreationRestrictionConfig implements CreationRestrictionConf
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DefaultCreationRestrictionConfig)) {
             return false;
         }
         DefaultCreationRestrictionConfig that = (DefaultCreationRestrictionConfig) o;

@@ -25,12 +25,14 @@ import org.eclipse.ditto.base.model.signals.commands.CommandResponse;
 interface ModifyCommandAdapterProvider<M extends Signal<?>, R extends CommandResponse<?>> {
 
     /**
-     * @return the modify command adapter
+     *Returns the modify command adapter.
+ 
      */
     Adapter<M> getModifyCommandAdapter();
 
     /**
-     * @return the modify command response adapter
+     *Returns the modify command response adapter.
+ 
      */
     Adapter<R> getModifyCommandResponseAdapter();
 

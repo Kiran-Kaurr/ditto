@@ -31,7 +31,7 @@ import org.eclipse.ditto.base.model.exceptions.DittoHeaderInvalidException;
 @Immutable
 public final class EntityTag {
 
-    private static final String VALIDATION_ERROR_MESSAGE_TEMPLATE = "The opaque tag <%s> is not a valid entity-tag.";
+    
     private static final Pattern ENTITY_TAG_REGEX_PATTERN = Pattern.compile(Regex.ENTITY_TAG);
 
     private static final String WEAK_PREFIX = "W/";
@@ -43,7 +43,7 @@ public final class EntityTag {
     private EntityTag(final boolean weak, final String opaqueTag) {
         if (!isValid(opaqueTag)) {
             throw DittoHeaderInvalidException.newBuilder()
-                    .message(String.format(VALIDATION_ERROR_MESSAGE_TEMPLATE, opaqueTag))
+                    .message(String.format("The opaque tag <%s> is not a valid entity-tag.", opaqueTag))
                     .build();
         }
         this.weak = weak;

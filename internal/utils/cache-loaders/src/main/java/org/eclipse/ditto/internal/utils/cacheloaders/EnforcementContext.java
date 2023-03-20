@@ -46,7 +46,8 @@ public final class EnforcementContext implements CacheLookupContext {
 
 
     /**
-     * @return The persistence lifecycle of the entity if known.
+     *Returns the persistence lifecycle of the entity if known.
+ 
      */
     public Optional<PersistenceLifecycle> getPersistenceLifecycle() {
         return Optional.ofNullable(persistenceLifecycle);

@@ -176,10 +176,10 @@ public final class ThingsAggregatorProxyActor extends AbstractActor {
         final Function<List<PlainJson>, List<PlainJson>> plainJsonSorter = supplyPlainJsonSorter(thingIds);
 
         if (originatingCommand instanceof SudoRetrieveThings) {
-            thingPlainJsonSupplier = supplyPlainJsonFromSudoRetrieveThingResponse();
+            thingPlainJsonSupplier = this::supplyPlainJsonFromSudoRetrieveThingResponse;
             overallResponseSupplier = supplySudoRetrieveThingsResponse(originatingCommand.getDittoHeaders());
         } else {
-            thingPlainJsonSupplier = supplyPlainJsonFromRetrieveThingResponse();
+            thingPlainJsonSupplier = this::supplyPlainJsonFromRetrieveThingResponse;
             final String namespace = ((RetrieveThings) originatingCommand).getNamespace().orElse(null);
             overallResponseSupplier = supplyRetrieveThingsResponse(originatingCommand.getDittoHeaders(), namespace);
         }
@@ -208,7 +208,7 @@ public final class ThingsAggregatorProxyActor extends AbstractActor {
 
         final CompletionStage<? extends CommandResponse<?>> commandResponseCompletionStage = o
                 .thenApply(plainJsonSorter)
-                .thenApply(overallResponseSupplier::apply)
+                .thenApply(overallResponseSupplier)
                 .thenApply(list -> {
                     stopTimer(timer);
                     return list;
@@ -217,8 +217,7 @@ public final class ThingsAggregatorProxyActor extends AbstractActor {
         Patterns.pipe(commandResponseCompletionStage, getContext().dispatcher()).to(originatingSender);
     }
 
-    private Function<Jsonifiable<?>, PlainJson> supplyPlainJsonFromRetrieveThingResponse() {
-        return jsonifiable -> {
+    private  PlainJson supplyPlainJsonFromRetrieveThingResponse(Jsonifiable<?> jsonifiable){
             if (jsonifiable instanceof RetrieveThingResponse) {
                 final RetrieveThingResponse response = (RetrieveThingResponse) jsonifiable;
                 final String json = response.getEntityPlainString().orElseGet(() ->
@@ -231,11 +230,9 @@ public final class ThingsAggregatorProxyActor extends AbstractActor {
             } else {
                 return PlainJson.empty();
             }
-        };
-    }
+        }
 
-    private Function<Jsonifiable<?>, PlainJson> supplyPlainJsonFromSudoRetrieveThingResponse() {
-        return jsonifiable -> {
+    private  PlainJson supplyPlainJsonFromSudoRetrieveThingResponse(Jsonifiable<?> jsonifiable){
             if (jsonifiable instanceof SudoRetrieveThingResponse) {
                 final SudoRetrieveThingResponse response = (SudoRetrieveThingResponse) jsonifiable;
                 final String json = response.getEntityPlainString().orElseGet(() ->
@@ -246,8 +243,7 @@ public final class ThingsAggregatorProxyActor extends AbstractActor {
             } else {
                 return null;
             }
-        };
-    }
+        }
 
     private Function<List<PlainJson>, List<PlainJson>> supplyPlainJsonSorter(final List<ThingId> thingIds) {
         return plainJsonThings -> {

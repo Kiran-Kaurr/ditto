@@ -40,6 +40,6 @@ public interface CacheKey<C extends CacheLookupContext> {
      *
      * @return serialized form of this object.
      */
-    String toString();
+    @Override String toString();
 
 }

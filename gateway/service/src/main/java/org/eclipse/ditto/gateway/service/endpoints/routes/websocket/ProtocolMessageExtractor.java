@@ -72,7 +72,7 @@ final class ProtocolMessageExtractor implements Function<String, Optional<Stream
         return getProtocolMessageType(protocolMessage)
                 .map(protocolMessageType -> {
                     final StreamControlMessage result;
-                    if (ProtocolMessageType.JWT == protocolMessageType) {
+                    if (protocolMessageType == ProtocolMessageType.JWT) {
                         result = getJwt(protocolMessage);
                     } else if (protocolMessageType.isStartSending()) {
                         result = getStartStreaming(protocolMessageType, protocolMessage);

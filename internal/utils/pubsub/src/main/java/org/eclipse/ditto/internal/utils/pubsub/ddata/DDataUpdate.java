@@ -25,12 +25,14 @@ import javax.annotation.concurrent.NotThreadSafe;
 public interface DDataUpdate<S> {
 
     /**
-     * @return Inserted elements.
+     *Returns inserted elements.
+ 
      */
     Set<S> getInserts();
 
     /**
-     * @return Deleted elements.
+     *Returns deleted elements.
+ 
      */
     Set<S> getDeletes();
 
@@ -43,7 +45,8 @@ public interface DDataUpdate<S> {
     DDataUpdate<S> diff(DDataUpdate<S> previousState);
 
     /**
-     * @return whether this update is empty.
+     *Returns whether this update is empty.
+ 
      */
     boolean isEmpty();
 }

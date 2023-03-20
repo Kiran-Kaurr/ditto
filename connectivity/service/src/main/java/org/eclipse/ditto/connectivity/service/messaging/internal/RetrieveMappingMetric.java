@@ -23,7 +23,8 @@ public final class RetrieveMappingMetric {
     }
 
     /**
-     * @return the singleton instance of this class.
+     *Returns the singleton instance of this class.
+ 
      */
     public static RetrieveMappingMetric getInstance() {
         return INSTANCE;

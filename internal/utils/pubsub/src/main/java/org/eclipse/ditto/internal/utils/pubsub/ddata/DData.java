@@ -22,12 +22,14 @@ package org.eclipse.ditto.internal.utils.pubsub.ddata;
 public interface DData<K, R, W extends DDataUpdate<?>> {
 
     /**
-     * @return the distributed data reader.
+     *Returns the distributed data reader.
+ 
      */
     DDataReader<K, R> getReader();
 
     /**
-     * @return the distributed data writer.
+     *Returns the distributed data writer.
+ 
      */
     DDataWriter<K, W> getWriter();
 

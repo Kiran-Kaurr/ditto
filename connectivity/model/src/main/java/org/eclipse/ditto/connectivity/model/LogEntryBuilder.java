@@ -25,50 +25,58 @@ import org.eclipse.ditto.things.model.ThingId;
 public interface LogEntryBuilder {
 
     /**
-     * @param correlationId  correlation ID that is associated with the log entry.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param correlationId  correlation ID that is associated with the log entry.
+     * 
      */
     LogEntryBuilder correlationId(String correlationId);
 
     /**
-     * @param timestamp  timestamp of the log entry.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param timestamp  timestamp of the log entry.
+     * 
      */
     LogEntryBuilder timestamp(Instant timestamp);
 
     /**
-     * @param logCategory  category of the log entry.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param logCategory  category of the log entry.
+     * 
      */
     LogEntryBuilder logCategory(LogCategory logCategory);
 
     /**
-     * @param logType  type of the log entry.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param logType  type of the log entry.
+     * 
      */
     LogEntryBuilder logType(LogType logType);
 
     /**
-     * @param logLevel  the log level.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param logLevel  the log level.
+     * 
      */
     LogEntryBuilder logLevel(LogLevel logLevel);
 
     /**
-     * @param message  the log message.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param message  the log message.
+     * 
      */
     LogEntryBuilder message(String message);
 
     /**
-     * @param address if the log can be correlated to a known source or target, empty otherwise.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param address if the log can be correlated to a known source or target, empty otherwise.
+     * 
      */
     LogEntryBuilder address(@Nullable String address);
 
     /**
-     * @param entityId entity ID if the log can be correlated to a known entity (e.g. a Thing), empty otherwise.
-     * @return this builder to allow method chaining.
+     *Returns this builder to allow method chaining.
+ @param entityId entity ID if the log can be correlated to a known entity (e.g. a Thing), empty otherwise.
+     * 
      */
     LogEntryBuilder entityId(@Nullable EntityId entityId);
 

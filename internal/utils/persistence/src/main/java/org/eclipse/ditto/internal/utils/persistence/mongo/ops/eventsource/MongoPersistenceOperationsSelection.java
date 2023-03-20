@@ -46,21 +46,24 @@ final class MongoPersistenceOperationsSelection {
     }
 
     /**
-     * @return name of the collection.
+     *Returns name of the collection.
+ 
      */
     public String getCollectionName() {
         return collectionName;
     }
 
     /**
-     * @return filter of documents.
+     *Returns filter of documents.
+ 
      */
     public Document getFilter() {
         return new Document(filter);
     }
 
     /**
-     * @return whether all documents of the collection are affected.
+     *Returns whether all documents of the collection are affected.
+ 
      */
     public boolean isEntireCollection() {
         return filter.isEmpty();

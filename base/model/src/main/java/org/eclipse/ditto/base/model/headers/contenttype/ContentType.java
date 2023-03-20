@@ -14,11 +14,12 @@ package org.eclipse.ditto.base.model.headers.contenttype;
 
 import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
-
 import org.eclipse.ditto.base.model.common.DittoConstants;
 
 /**
@@ -83,9 +84,9 @@ public final class ContentType {
     public static ContentType of(final CharSequence contentTypeValue) {
         final String lowerCaseValue = checkNotNull(contentTypeValue, "contentTypeValue").toString()
                 .toLowerCase();
-        final String mediaType = lowerCaseValue.split(";")[0];
+        final String mediaType = Iterables.get(Splitter.on(';').split(lowerCaseValue), 0);
         final ParsingStrategy parsingStrategy;
-        if (JSON_MERGE_PATCH.equals(mediaType)) {
+        if (mediaType.equals(JSON_MERGE_PATCH)) {
             parsingStrategy = ParsingStrategy.JSON_MERGE_PATCH;
         } else if (TEXT_PATTERN.matcher(mediaType).matches()) {
             parsingStrategy = ParsingStrategy.TEXT;
@@ -98,49 +99,56 @@ public final class ContentType {
     }
 
     /**
-     * @return the strategy of how to parse the content-type.
+     *Returns the strategy of how to parse the content-type.
+ 
      */
     public ParsingStrategy getParsingStrategy() {
         return parsingStrategy;
     }
 
     /**
-     * @return the actual content-type string value.
+     *Returns the actual content-type string value.
+ 
      */
     public String getValue() {
         return value;
     }
 
     /**
-     * @return whether this content-type matches the Ditto Protocol {@link org.eclipse.ditto.base.model.common.DittoConstants#DITTO_PROTOCOL_CONTENT_TYPE}.
+     *Returns whether this content-type matches the Ditto Protocol {@link org.eclipse.ditto.base.model.common.DittoConstants#DITTO_PROTOCOL_CONTENT_TYPE}.
+ 
      */
     public boolean isDittoProtocol() {
-        return DittoConstants.DITTO_PROTOCOL_CONTENT_TYPE.equals(mediaType);
+        return mediaType.equals(DittoConstants.DITTO_PROTOCOL_CONTENT_TYPE);
     }
 
     /**
-     * @return whether this content-type is to be parsed as text.
+     *Returns whether this content-type is to be parsed as text.
+ 
      */
     public boolean isText() {
         return parsingStrategy == ParsingStrategy.TEXT;
     }
 
     /**
-     * @return whether this content-type is to be parsed as JSON.
+     *Returns whether this content-type is to be parsed as JSON.
+ 
      */
     public boolean isJson() {
         return parsingStrategy == ParsingStrategy.JSON;
     }
 
     /**
-     * @return whether this content-type is to be parsed as JSON Merge Patch.
+     *Returns whether this content-type is to be parsed as JSON Merge Patch.
+ 
      */
     public boolean isJsonMergePatch() {
-        return JSON_MERGE_PATCH.equals(mediaType);
+        return mediaType.equals(JSON_MERGE_PATCH);
     }
 
     /**
-     * @return whether this content-type is to be parsed as binary.
+     *Returns whether this content-type is to be parsed as binary.
+ 
      */
     public boolean isBinary() {
         return parsingStrategy == ParsingStrategy.BINARY;

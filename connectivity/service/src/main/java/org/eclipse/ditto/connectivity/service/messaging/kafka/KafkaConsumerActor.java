@@ -195,7 +195,7 @@ final class KafkaConsumerActor extends BaseConsumerActor {
     }
 
     private void restartStream(final MessageRejectedException ex) {
-        kafkaStream.restart().toCompletableFuture()
+        var unused = kafkaStream.restart().toCompletableFuture()
                 .thenAccept(newKafkaStream -> self().tell(newKafkaStream, self()));
     }
 

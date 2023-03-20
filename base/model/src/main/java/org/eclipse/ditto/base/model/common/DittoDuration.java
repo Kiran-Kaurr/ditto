@@ -121,7 +121,7 @@ public final class DittoDuration implements CharSequence {
      * @return {@code true} if this duration has a total length equal to zero.
      */
     public boolean isZero() {
-        return 0 == amount;
+        return amount == 0;
     }
 
     /**

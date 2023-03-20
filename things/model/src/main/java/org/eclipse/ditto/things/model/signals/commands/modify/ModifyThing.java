@@ -236,15 +236,17 @@ public final class ModifyThing extends AbstractCommand<ModifyThing> implements T
     }
 
     /**
-     * @return the initial {@code Policy} if there should be one applied when creating the Thing.
+     *Returns the initial {@code Policy} if there should be one applied when creating the Thing.
+ 
      */
     public Optional<JsonObject> getInitialPolicy() {
         return Optional.ofNullable(initialPolicy);
     }
 
     /**
-     * @return The policy id of the {@code Policy} to copy and set for the Thing when creating it.
-     * Could also be a placeholder like: {{ ref:things/theThingId/policyId }}.
+     *Returns the policy id of the {@code Policy} to copy and set for the Thing when creating it.
+ Could also be a placeholder like: {{ ref:things/theThingId/policyId }}.
+ 
      */
     public Optional<String> getPolicyIdOrPlaceholder() {
         return Optional.ofNullable(policyIdOrPlaceholder);

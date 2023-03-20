@@ -161,14 +161,16 @@ public final class ExecutePiggybackCommand extends AbstractDevOpsCommand<Execute
     }
 
     /**
-     * @return the ActorSelection path as string where to send the piggybackCommand to.
+     *Returns the ActorSelection path as string where to send the piggybackCommand to.
+ 
      */
     public String getTargetActorSelection() {
         return targetActorSelection;
     }
 
     /**
-     * @return the {@code Command} as JsonObject to execute.
+     *Returns the {@code Command} as JsonObject to execute.
+ 
      */
     public JsonObject getPiggybackCommand() {
         return piggybackCommand;

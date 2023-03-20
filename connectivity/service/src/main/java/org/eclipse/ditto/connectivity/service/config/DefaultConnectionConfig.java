@@ -232,7 +232,7 @@ public final class DefaultConnectionConfig implements ConnectionConfig {
         }
         final DefaultConnectionConfig that = (DefaultConnectionConfig) o;
         return Objects.equals(clientActorAskTimeout, that.clientActorAskTimeout) &&
-                Objects.equals(clientActorRestartsBeforeEscalation, that.clientActorRestartsBeforeEscalation) &&
+                (clientActorRestartsBeforeEscalation == that.clientActorRestartsBeforeEscalation) &&
                 Objects.equals(allowedHostnames, that.allowedHostnames) &&
                 Objects.equals(blockedHostnames, that.blockedHostnames) &&
                 Objects.equals(blockedSubnets, that.blockedSubnets) &&

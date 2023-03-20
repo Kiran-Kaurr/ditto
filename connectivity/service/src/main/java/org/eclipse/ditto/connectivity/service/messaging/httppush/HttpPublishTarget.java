@@ -40,14 +40,16 @@ final class HttpPublishTarget implements PublishTarget {
     }
 
     /**
-     * @return the Akka HTTP method to use for the HTTP request.
+     *Returns the Akka HTTP method to use for the HTTP request.
+ 
      */
     HttpMethod getMethod() {
         return method;
     }
 
     /**
-     * @return the complete path including optional query parameters to use for the HTTP request.
+     *Returns the complete path including optional query parameters to use for the HTTP request.
+ 
      */
     String getPathWithQuery() {
         return pathWithQuery;

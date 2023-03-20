@@ -112,7 +112,7 @@ public class GatewayServiceTooManyRequestsException extends DittoRuntimeExceptio
             description(DEFAULT_DESCRIPTION);
         }
 
-        protected GatewayServiceTooManyRequestsException doBuild(final DittoHeaders dittoHeaders,
+        @Override protected GatewayServiceTooManyRequestsException doBuild(final DittoHeaders dittoHeaders,
                 @Nullable final String message,
                 @Nullable final String description,
                 @Nullable final Throwable cause,

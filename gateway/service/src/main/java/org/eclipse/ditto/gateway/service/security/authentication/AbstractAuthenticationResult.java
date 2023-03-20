@@ -91,7 +91,7 @@ public abstract class AbstractAuthenticationResult implements AuthenticationResu
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractAuthenticationResult)) {
             return false;
         }
         final AbstractAuthenticationResult that = (AbstractAuthenticationResult) o;

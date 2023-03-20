@@ -23,7 +23,7 @@ import org.eclipse.ditto.things.model.signals.events.FeatureDesiredPropertyCreat
 @Immutable
 final class FeatureDesiredPropertyCreatedStrategy extends AbstractThingEventStrategy<FeatureDesiredPropertyCreated> {
 
-    protected FeatureDesiredPropertyCreatedStrategy() {
+    FeatureDesiredPropertyCreatedStrategy() {
         super();
     }
 

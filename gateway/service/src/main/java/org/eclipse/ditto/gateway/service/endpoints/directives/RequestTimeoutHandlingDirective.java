@@ -47,8 +47,8 @@ public final class RequestTimeoutHandlingDirective {
     private static final ThreadSafeDittoLogger LOGGER =
             DittoLoggerFactory.getThreadSafeLogger(RequestTimeoutHandlingDirective.class);
 
-    private static final Duration SEARCH_WARN_TIMEOUT_MS = Duration.ofMillis(5_000);
-    private static final Duration HTTP_WARN_TIMEOUT_MS = Duration.ofMillis(1_000);
+    private static final Duration SEARCH_WARN_TIMEOUT_MS = Duration.ofSeconds(5);
+    private static final Duration HTTP_WARN_TIMEOUT_MS = Duration.ofSeconds(1);
 
     private final HttpConfig httpConfig;
 

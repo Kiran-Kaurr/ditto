@@ -22,7 +22,8 @@ import akka.actor.ActorRef;
 public interface WithOrigin {
 
     /**
-     * @return the optional ActorRef where this message originated from.
+     *Returns the optional ActorRef where this message originated from.
+ 
      */
     Optional<ActorRef> getOrigin();
 }

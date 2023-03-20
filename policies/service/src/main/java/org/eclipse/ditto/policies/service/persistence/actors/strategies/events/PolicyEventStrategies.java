@@ -61,7 +61,8 @@ public final class PolicyEventStrategies extends AbstractEventStrategies<PolicyE
     }
 
     /**
-     * @return the unique {@code PolicyEventStrategies} instance.
+     *Returns the unique {@code PolicyEventStrategies} instance.
+ 
      */
     public static PolicyEventStrategies getInstance() {
         return INSTANCE;

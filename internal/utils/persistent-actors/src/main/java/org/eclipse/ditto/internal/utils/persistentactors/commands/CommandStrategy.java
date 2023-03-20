@@ -32,7 +32,8 @@ import org.eclipse.ditto.base.model.signals.events.Event;
 public interface CommandStrategy<C extends Command<?>, S, K, E extends Event<?>> {
 
     /**
-     * @return the message class to react to.
+     *Returns the message class to react to.
+ 
      */
     Class<C> getMatchingClass();
 
@@ -99,12 +100,14 @@ public interface CommandStrategy<C extends Command<?>, S, K, E extends Event<?>>
     interface Context<K> {
 
         /**
-         * @return the state.
+         *Returns the state.
+ 
          */
         K getState();
 
         /**
-         * @return the log.
+         *Returns the log.
+ 
          */
         DittoDiagnosticLoggingAdapter getLog();
 

@@ -114,7 +114,8 @@ public final class TestConnection extends AbstractCommand<TestConnection>
     }
 
     /**
-     * @return the {@code Connection} to be tested.
+     *Returns the {@code Connection} to be tested.
+ 
      */
     public Connection getConnection() {
         return connection;

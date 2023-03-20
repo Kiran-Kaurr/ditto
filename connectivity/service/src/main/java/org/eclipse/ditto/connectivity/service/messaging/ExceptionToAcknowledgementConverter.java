@@ -34,11 +34,11 @@ import org.eclipse.ditto.json.JsonPointer;
  */
 public abstract class ExceptionToAcknowledgementConverter {
 
-    private static final Predicate<JsonField> IS_NOT_STATUS_PREDICATE = jsonField -> {
+    private static  boolean isNotStatusPredicate(JsonField jsonField){
         final JsonPointer statusFieldDefinitionPointer = DittoRuntimeException.JsonFields.STATUS.getPointer();
         final JsonPointer jsonFieldKeyAsPointer = jsonField.getKey().asPointer();
         return !statusFieldDefinitionPointer.equals(jsonFieldKeyAsPointer);
-    };
+    }
 
     /**
      * Constructs a new ExceptionToAcknowledgementConverter object.
@@ -99,7 +99,7 @@ public abstract class ExceptionToAcknowledgementConverter {
     }
 
     private static JsonObject getPayload(final DittoRuntimeException dittoRuntimeException) {
-        return dittoRuntimeException.toJson(IS_NOT_STATUS_PREDICATE);
+        return dittoRuntimeException.toJson(ExceptionToAcknowledgementConverter::isNotStatusPredicate);
     }
 
     /**

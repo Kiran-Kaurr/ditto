@@ -120,7 +120,7 @@ public final class HiveMqtt5ClientActor
             @Nullable final Duration keepAliveInterval) {
         final Mqtt5ConnectBuilder.Send<CompletableFuture<Mqtt5ConnAck>> connectWith = client.connectWith();
         if (keepAliveInterval != null) {
-            connectWith.keepAlive((int) keepAliveInterval.getSeconds());
+            connectWith = connectWith.keepAlive((int) keepAliveInterval.getSeconds());
         }
         return connectWith.cleanStart(cleanSession).send();
     }

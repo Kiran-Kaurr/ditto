@@ -50,7 +50,7 @@ final class DittoChannelValueValidator extends AbstractHeaderValueValidator {
     protected void validateValue(final HeaderDefinition definition, final CharSequence value) {
         final String normalizedValue = normalize(value);
 
-        if (!CHANNEL_TWIN.equals(normalizedValue) && !CHANNEL_LIVE.equals(normalizedValue)) {
+        if (!normalizedValue.equals(CHANNEL_TWIN) && !normalizedValue.equals(CHANNEL_LIVE)) {
             throw DittoHeaderInvalidException.newInvalidTypeBuilder(definition, value,
                             DittoHeaderDefinition.CHANNEL.getKey())
                     .description(MessageFormat.format("The value must either be <{0}> or <{1}>.",

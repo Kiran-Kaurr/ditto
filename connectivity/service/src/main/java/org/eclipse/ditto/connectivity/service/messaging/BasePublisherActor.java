@@ -297,7 +297,7 @@ public abstract class BasePublisherActor<T extends PublishTarget> extends Abstra
     private int computeMaxAckPayloadBytesForSignal(final OutboundSignal.MultiMapped multiMapped) {
         final List<OutboundSignal.Mapped> mappedOutboundSignals = multiMapped.getMappedOutboundSignals();
         final int numberOfSignals = mappedOutboundSignals.size();
-        return 0 == numberOfSignals ? acknowledgementSizeBudget : acknowledgementSizeBudget / numberOfSignals;
+        return numberOfSignals == 0 ? acknowledgementSizeBudget : acknowledgementSizeBudget / numberOfSignals;
     }
 
     private Stream<SendingOrDropped> sendMappedOutboundSignal(final OutboundSignal.Mapped outbound,
@@ -637,7 +637,7 @@ public abstract class BasePublisherActor<T extends PublishTarget> extends Abstra
 
     private static boolean isLiveSignal(final Signal<?> signal) {
         return signal instanceof MessageCommand ||
-                signal instanceof ThingCommand && ProtocolAdapter.isLiveSignal(signal);
+                (signal instanceof ThingCommand && ProtocolAdapter.isLiveSignal(signal));
     }
 
     private static ResourceStatus getTargetResourceStatus(final Target target) {

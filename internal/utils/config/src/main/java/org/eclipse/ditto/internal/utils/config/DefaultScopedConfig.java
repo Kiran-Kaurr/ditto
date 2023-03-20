@@ -251,7 +251,7 @@ public final class DefaultScopedConfig implements ScopedConfig {
             return config.getInt(path);
         } catch (final ConfigException.WrongType e) {
             final var configValue = config.getValue(path);
-            if (ConfigValueType.STRING == configValue.valueType()) {
+            if (configValue.valueType() == ConfigValueType.STRING) {
                 return Integer.parseInt(String.valueOf(configValue.unwrapped()));
             }
             throw e;
@@ -273,7 +273,7 @@ public final class DefaultScopedConfig implements ScopedConfig {
             return config.getLong(path);
         } catch (final ConfigException.WrongType e) {
             final var configValue = config.getValue(path);
-            if (ConfigValueType.STRING == configValue.valueType()) {
+            if (configValue.valueType() == ConfigValueType.STRING) {
                 return Long.parseLong(String.valueOf(configValue.unwrapped()));
             }
             throw e;
@@ -295,7 +295,7 @@ public final class DefaultScopedConfig implements ScopedConfig {
             return config.getDouble(path);
         } catch (final ConfigException.WrongType e) {
             final var configValue = config.getValue(path);
-            if (ConfigValueType.STRING == configValue.valueType()) {
+            if (configValue.valueType() == ConfigValueType.STRING) {
                 return Double.parseDouble(String.valueOf(configValue.unwrapped()));
             }
             throw e;

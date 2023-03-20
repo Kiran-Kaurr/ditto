@@ -85,7 +85,7 @@ abstract class AbstractSecurityScheme implements SecurityScheme {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractSecurityScheme)) {
             return false;
         }
         final AbstractSecurityScheme that = (AbstractSecurityScheme) o;

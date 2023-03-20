@@ -193,7 +193,8 @@ public final class RetrieveConnectionStatusResponse extends AbstractCommandRespo
     }
 
     /**
-     * @return the current ConnectionStatus of the related {@link org.eclipse.ditto.connectivity.model.Connection}.
+     *Returns the current ConnectionStatus of the related {@link org.eclipse.ditto.connectivity.model.Connection}.
+ 
      */
     public ConnectivityStatus getConnectionStatus() {
         return ConnectivityStatus.forName(jsonObject.getValue(JsonFields.CONNECTION_STATUS).orElse("UNKNOWN"))
@@ -201,7 +202,8 @@ public final class RetrieveConnectionStatusResponse extends AbstractCommandRespo
     }
 
     /**
-     * @return the current live ConnectionStatus of the related {@link org.eclipse.ditto.connectivity.model.Connection}.
+     *Returns the current live ConnectionStatus of the related {@link org.eclipse.ditto.connectivity.model.Connection}.
+ 
      */
     public ConnectivityStatus getLiveStatus() {
         return ConnectivityStatus.forName(jsonObject.getValue(JsonFields.LIVE_STATUS).orElse("UNKNOWN"))
@@ -209,7 +211,8 @@ public final class RetrieveConnectionStatusResponse extends AbstractCommandRespo
     }
 
     /**
-     * @return the current RecoveryStatus of the related {@link org.eclipse.ditto.connectivity.model.Connection}.
+     *Returns the current RecoveryStatus of the related {@link org.eclipse.ditto.connectivity.model.Connection}.
+ 
      */
     public RecoveryStatus getRecoveryStatus() {
         return jsonObject.getValue(JsonFields.RECOVERY_STATUS)
@@ -218,7 +221,8 @@ public final class RetrieveConnectionStatusResponse extends AbstractCommandRespo
     }
 
     /**
-     * @return the Instant since when the earliest client of the connection was connected.
+     *Returns the Instant since when the earliest client of the connection was connected.
+ 
      */
     public Optional<Instant> getConnectedSince() {
         final String connSinceStr = jsonObject.getValue(JsonFields.CONNECTED_SINCE).orElse(null);
@@ -226,28 +230,32 @@ public final class RetrieveConnectionStatusResponse extends AbstractCommandRespo
     }
 
     /**
-     * @return in which state the client handling the {@link org.eclipse.ditto.connectivity.model.Connection} currently is.
+     *Returns in which state the client handling the {@link org.eclipse.ditto.connectivity.model.Connection} currently is.
+ 
      */
     public List<ResourceStatus> getClientStatus() {
         return readAddressStatus(jsonObject.getValue(JsonFields.CLIENT_STATUS).orElse(JsonArray.empty()));
     }
 
     /**
-     * @return the source {@link org.eclipse.ditto.connectivity.model.ResourceStatus}.
+     *Returns the source {@link org.eclipse.ditto.connectivity.model.ResourceStatus}.
+ 
      */
     public List<ResourceStatus> getSourceStatus() {
         return readAddressStatus(jsonObject.getValue(JsonFields.SOURCE_STATUS).orElse(JsonArray.empty()));
     }
 
     /**
-     * @return the target {@link org.eclipse.ditto.connectivity.model.ResourceStatus}.
+     *Returns the target {@link org.eclipse.ditto.connectivity.model.ResourceStatus}.
+ 
      */
     public List<ResourceStatus> getTargetStatus() {
         return readAddressStatus(jsonObject.getValue(JsonFields.TARGET_STATUS).orElse(JsonArray.empty()));
     }
 
     /**
-     * @return the ssh tunnel {@link org.eclipse.ditto.connectivity.model.ResourceStatus}.
+     *Returns the ssh tunnel {@link org.eclipse.ditto.connectivity.model.ResourceStatus}.
+ 
      */
     public List<ResourceStatus> getSshTunnelStatus() {
         return readAddressStatus(jsonObject.getValue(JsonFields.SSH_TUNNEL_STATUS).orElse(JsonArray.empty()));

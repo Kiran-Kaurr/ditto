@@ -31,7 +31,7 @@ public interface Enforcer {
 
     /**
      * Checks whether for the {@code authorizationContext} either implicitly or explicitly
-     * has "GRANT" for the {@code permissions} on the specified {@code resourceKey} considering "REVOKE"s down in the
+     * has "GRANT" for the {@code permission} on the specified {@code resourceKey} considering "REVOKE"s down in the
      * hierarchy, so if there is a REVOKE for the {@code authorizationContext} somewhere down the hierarchy of the
      * {@code resourceKey}, the result will be {@code false}.
      *
@@ -53,7 +53,7 @@ public interface Enforcer {
 
     /**
      * Checks whether for the {@code authorizationContext} either implicitly or explicitly
-     * has "GRANT" for the {@code permissions} on the specified set of {@code resourceKeys} considering "REVOKE"s
+     * has "GRANT" for the {@code permission} on the specified set of {@code resourceKeys} considering "REVOKE"s
      * down in the hierarchy, so if there is a REVOKE for the {@code authorizationContext} somewhere down the hierarchy
      * for any of the {@code resourceKeys}, the result will be {@code false}.
      *
@@ -212,7 +212,7 @@ public interface Enforcer {
 
     /**
      * Builds a view of the passed {@code jsonFields} (e.g. a {@link org.eclipse.ditto.json.JsonObject} or a {@link
-     * org.eclipse.ditto.json.JsonObjectBuilder}) {@code authorizationContext} and {@code permissions}. The resulting
+     * org.eclipse.ditto.json.JsonObjectBuilder}) {@code authorizationContext} and {@code permission}. The resulting
      * {@code JsonObject} only contains {@code JsonFields} for which the {@code authorizationContext} has the required
      * permissions.
      *
@@ -237,7 +237,7 @@ public interface Enforcer {
 
     /**
      * Builds a view of the passed {@code jsonFields} (e.g. a {@link org.eclipse.ditto.json.JsonObject} or a {@link
-     * org.eclipse.ditto.json.JsonObjectBuilder}) {@code authorizationContext} and {@code permissions}. The resulting
+     * org.eclipse.ditto.json.JsonObjectBuilder}) {@code authorizationContext} and {@code permission}. The resulting
      * {@code JsonObject} only contains {@code JsonFields} for which the {@code authorizationContext} has the required
      * permissions.
      *

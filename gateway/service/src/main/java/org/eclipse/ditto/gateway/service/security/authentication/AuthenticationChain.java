@@ -205,7 +205,7 @@ public final class AuthenticationChain {
                         new IllegalStateException("No applicable authentication provider was found!"));
             }
 
-            if (1 == failureResults.size()) {
+            if (failureResults.size() == 1) {
                 return failureResults.get(0);
             }
 

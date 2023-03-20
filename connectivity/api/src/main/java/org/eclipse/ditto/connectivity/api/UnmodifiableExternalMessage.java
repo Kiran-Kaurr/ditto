@@ -119,12 +119,12 @@ final class UnmodifiableExternalMessage implements ExternalMessage {
 
     @Override
     public boolean isTextMessage() {
-        return PayloadType.TEXT.equals(payloadType) || PayloadType.TEXT_AND_BYTES.equals(payloadType);
+        return payloadType.equals(PayloadType.TEXT) || payloadType.equals(PayloadType.TEXT_AND_BYTES);
     }
 
     @Override
     public boolean isBytesMessage() {
-        return PayloadType.BYTES.equals(payloadType) || PayloadType.TEXT_AND_BYTES.equals(payloadType);
+        return payloadType.equals(PayloadType.BYTES) || payloadType.equals(PayloadType.TEXT_AND_BYTES);
     }
 
     @Override
@@ -211,8 +211,8 @@ final class UnmodifiableExternalMessage implements ExternalMessage {
                 Objects.equals(payloadMapping, that.payloadMapping) &&
                 Objects.equals(sourceAddress, that.sourceAddress) &&
                 Objects.equals(source, that.source) &&
-                Objects.equals(response, that.response) &&
-                Objects.equals(error, that.error) &&
+                (response == that.response) &&
+                (error == that.error) &&
                 payloadType == that.payloadType &&
                 Objects.equals(internalHeaders, that.internalHeaders);
     }

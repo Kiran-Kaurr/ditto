@@ -12,16 +12,17 @@
  */
 package org.eclipse.ditto.connectivity.service.messaging.kafka;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import akka.kafka.ConsumerMessage;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
 import org.eclipse.ditto.base.model.common.ByteBufferUtils;
@@ -39,8 +40,6 @@ import org.eclipse.ditto.internal.utils.akka.logging.DittoLoggerFactory;
 import org.eclipse.ditto.internal.utils.akka.logging.ThreadSafeDittoLogger;
 import org.eclipse.ditto.internal.utils.tracing.DittoTracing;
 import org.eclipse.ditto.internal.utils.tracing.instruments.trace.StartedTrace;
-
-import akka.kafka.ConsumerMessage;
 
 /**
  * Transforms incoming messages from Apache Kafka to {@link org.eclipse.ditto.connectivity.api.ExternalMessage}.
@@ -155,7 +154,7 @@ final class KafkaMessageTransformer {
     private Map<String, String> extractMessageHeaders(final ConsumerRecord<String, ByteBuffer> consumerRecord) {
         final Map<String, String> messageHeaders = new HashMap<>();
         for (final Header header : consumerRecord.headers()) {
-            if (messageHeaders.put(header.key(), new String(header.value())) != null) {
+            if (messageHeaders.put(header.key(), new String(header.value(), UTF_8)) != null) {
                 inboundMonitor.exception("Dropped duplicated headers in record from topic {0} at offset #{1}",
                         consumerRecord.topic(), consumerRecord.offset());
             }

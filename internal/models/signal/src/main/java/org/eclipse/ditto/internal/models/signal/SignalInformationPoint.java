@@ -53,7 +53,7 @@ public final class SignalInformationPoint {
      * {@value CHANNEL_LIVE_VALUE} in its headers, {@code false} else.
      */
     public static boolean isLiveCommand(@Nullable final Signal<?> signal) {
-        return isMessageCommand(signal) || isCommand(signal) && isChannelLive(signal);
+        return isMessageCommand(signal) || (isCommand(signal) && isChannelLive(signal));
     }
 
     /**
@@ -95,7 +95,7 @@ public final class SignalInformationPoint {
      * {@code false} if {@code signal} is not a live command response.
      */
     public static boolean isLiveCommandResponse(@Nullable final Signal<?> signal) {
-        return isMessageCommandResponse(signal) || isCommandResponse(signal) && isChannelLive(signal);
+        return isMessageCommandResponse(signal) || (isCommandResponse(signal) && isChannelLive(signal));
     }
 
     /**
@@ -159,8 +159,8 @@ public final class SignalInformationPoint {
         if (signal instanceof ThingQueryCommand) {
             final var headers = signal.getDittoHeaders();
             if (isChannelLive(signal)) {
-                result = LiveChannelTimeoutStrategy.USE_TWIN ==
-                        headers.getLiveChannelTimeoutStrategy().orElse(LiveChannelTimeoutStrategy.FAIL);
+                result = headers.getLiveChannelTimeoutStrategy().orElse(LiveChannelTimeoutStrategy.FAIL) ==
+                        LiveChannelTimeoutStrategy.USE_TWIN;
             } else {
                 result = headers.getLiveChannelCondition().isPresent();
             }

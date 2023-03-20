@@ -45,7 +45,7 @@ public final class DefaultPersistenceStreamConfig implements PersistenceStreamCo
         ackDelay = persistenceStreamScopedConfig.getNonNegativeDurationOrThrow(PersistenceStreamConfigValue.ACK_DELAY);
         final var writeConcernString = persistenceStreamScopedConfig.getString(
                 PersistenceStreamConfigValue.WITH_ACKS_WRITE_CONCERN.getConfigPath());
-        withAcknowledgementsWriteConcern = Optional.of(WriteConcern.valueOf(writeConcernString))
+        withAcknowledgementsWriteConcern = Optional.ofNullable(WriteConcern.valueOf(writeConcernString))
                 .orElseThrow(() -> {
                     final String msg =
                             MessageFormat.format("Could not parse a WriteConcern from configured string <{0}>",

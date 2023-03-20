@@ -37,7 +37,8 @@ public final class ConnectionCreatedStrategies
     }
 
     /**
-     * @return the unique instance of this class.
+     *Returns the unique instance of this class.
+ 
      */
     public static ConnectionCreatedStrategies getInstance() {
         return CREATED_STRATEGIES;

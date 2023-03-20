@@ -12,12 +12,11 @@
  */
 package org.eclipse.ditto.concierge.service.enforcement.placeholders.strategies;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
 import javax.annotation.concurrent.Immutable;
-
 import org.eclipse.ditto.base.model.headers.DittoHeadersSettable;
 import org.eclipse.ditto.base.model.headers.WithDittoHeaders;
 
@@ -60,7 +59,7 @@ public final class SubstitutionStrategyRegistry {
     }
 
     private static List<SubstitutionStrategy<?>> createStrategies() {
-        final List<SubstitutionStrategy<?>> strategies = new LinkedList<>();
+        final List<SubstitutionStrategy<?>> strategies = new ArrayList<>();
 
         // replacement for policy-subject-id
         strategies.add(new ModifySubjectSubstitutionStrategy());

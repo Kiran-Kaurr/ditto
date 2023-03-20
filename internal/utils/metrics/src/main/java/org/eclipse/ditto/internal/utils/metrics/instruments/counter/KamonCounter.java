@@ -18,15 +18,13 @@ import static org.eclipse.ditto.base.model.common.ConditionChecker.checkNotNull;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
+import kamon.Kamon;
+import kamon.metric.Counter.LongAdder;
+import kamon.tag.TagSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import kamon.Kamon;
-import kamon.tag.TagSet;
 
 /**
  * Kamon based implementation of {@link Counter}.
@@ -105,8 +103,8 @@ public final class KamonCounter implements Counter {
 
     private long getSnapshot() {
         final kamon.metric.Counter kamonInternalCounter = getKamonInternalCounter();
-        if (kamonInternalCounter instanceof kamon.metric.Counter.LongAdder) {
-            return ((kamon.metric.Counter.LongAdder) kamonInternalCounter).snapshot(false);
+        if (kamonInternalCounter instanceof LongAdder) {
+            return ((LongAdder) kamonInternalCounter).snapshot(false);
         }
         LOGGER.warn("Could not get snapshot of Kamon counter with name <{}>!", name);
         return 0L;
@@ -120,8 +118,8 @@ public final class KamonCounter implements Counter {
     public boolean reset() {
         try {
             final kamon.metric.Counter kamonInternalCounter = getKamonInternalCounter();
-            if (kamonInternalCounter instanceof kamon.metric.Counter.LongAdder) {
-                ((kamon.metric.Counter.LongAdder) kamonInternalCounter).snapshot(true);
+            if (kamonInternalCounter instanceof LongAdder) {
+                ((LongAdder) kamonInternalCounter).snapshot(true);
                 LOGGER.trace("Reset counter with name <{}>.", name);
                 return true;
             }

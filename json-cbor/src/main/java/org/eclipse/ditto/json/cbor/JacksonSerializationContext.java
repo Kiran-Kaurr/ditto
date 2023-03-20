@@ -12,14 +12,13 @@
  */
 package org.eclipse.ditto.json.cbor;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-
 import org.eclipse.ditto.json.SerializationContext;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
 
 /**
  * Implementation of {@link SerializationContext} backed by Jackson's {@link JsonGenerator}.
@@ -37,7 +36,7 @@ final class JacksonSerializationContext implements SerializationContext {
      * @param outputStream The stream to write serialized data to. The stream is considered to be borrowed and will not
      * be closed.
      */
-    public JacksonSerializationContext(final com.fasterxml.jackson.core.JsonFactory jacksonFactory,
+    public JacksonSerializationContext(final JsonFactory jacksonFactory,
             final OutputStream outputStream) throws IOException {
         this.outputStream = new ControllableOutputStream(outputStream);
         jacksonGenerator = jacksonFactory.createGenerator(this.outputStream);
@@ -55,7 +54,7 @@ final class JacksonSerializationContext implements SerializationContext {
      * @param targetBuffer The Buffer to write serialized data to. The Buffer is considered to be borrowed and will not
      * be closed.
      */
-    public JacksonSerializationContext(final com.fasterxml.jackson.core.JsonFactory jacksonFactory,
+    public JacksonSerializationContext(final JsonFactory jacksonFactory,
             final ByteBuffer targetBuffer) throws IOException {
         this(jacksonFactory, new ByteBufferOutputStream(targetBuffer));
     }

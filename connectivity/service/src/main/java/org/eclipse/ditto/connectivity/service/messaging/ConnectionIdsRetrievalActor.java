@@ -93,7 +93,7 @@ public final class ConnectionIdsRetrievalActor extends AbstractActor {
 
     private static boolean isNotDeleted(final Document document) {
         return Optional.ofNullable(document.getString(MongoReadJournal.J_EVENT_MANIFEST))
-                .map(manifest -> !ConnectionDeleted.TYPE.equals(manifest))
+                .map(manifest -> !manifest.equals(ConnectionDeleted.TYPE))
                 .orElse(false);
     }
 

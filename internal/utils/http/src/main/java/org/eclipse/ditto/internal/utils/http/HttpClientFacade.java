@@ -32,7 +32,8 @@ public interface HttpClientFacade {
     CompletionStage<HttpResponse> createSingleHttpRequest(HttpRequest request);
 
     /**
-     * @return an {@link akka.actor.ActorSystem} instance which can be used for stream execution.
+     *Returns an {@link akka.actor.ActorSystem} instance which can be used for stream execution.
+ 
      */
     ActorSystem getActorSystem();
 

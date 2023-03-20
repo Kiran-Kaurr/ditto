@@ -30,7 +30,7 @@
      private static final RetrieveThingsCommandMappingStrategies INSTANCE =
              new RetrieveThingsCommandMappingStrategies();
 
-     protected RetrieveThingsCommandMappingStrategies() {
+     RetrieveThingsCommandMappingStrategies() {
          super(initMappingStrategies());
      }
 

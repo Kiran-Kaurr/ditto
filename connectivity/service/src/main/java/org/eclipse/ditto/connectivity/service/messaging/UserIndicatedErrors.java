@@ -54,13 +54,13 @@ final class UserIndicatedErrors {
         try {
             final ConfigList list = config.getList(USER_INDICATED_ERRORS);
             final Stream<ErrorDefinition> errorDefinitionsFromString = list.stream()
-                    .filter(value -> ConfigValueType.STRING.equals(value.valueType()))
+                    .filter(value -> value.valueType().equals(ConfigValueType.STRING))
                     .map(ConfigValue::unwrapped)
                     .map(Object::toString)
                     .map(ConfigFactory::parseString)
                     .map(ErrorDefinition::of);
             final Stream<ErrorDefinition> errorDefinitionsFromMap = list.stream()
-                    .filter(value -> ConfigValueType.OBJECT.equals(value.valueType()))
+                    .filter(value -> value.valueType().equals(ConfigValueType.OBJECT))
                     .map(ConfigValue::render)
                     .map(ConfigFactory::parseString)
                     .map(ErrorDefinition::of);

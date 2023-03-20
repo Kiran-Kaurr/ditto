@@ -117,14 +117,14 @@ final class DefaultMqttConfig implements MqttConfig {
             return false;
         }
         final DefaultMqttConfig that = (DefaultMqttConfig) o;
-        return Objects.equals(eventLoopThreads, that.eventLoopThreads) &&
-                Objects.equals(cleanSession, that.cleanSession) &&
-                Objects.equals(reconnectForRedelivery, that.reconnectForRedelivery) &&
+        return (eventLoopThreads == that.eventLoopThreads) &&
+                (cleanSession == that.cleanSession) &&
+                (reconnectForRedelivery == that.reconnectForRedelivery) &&
                 Objects.equals(reconnectForRedeliveryDelay, that.reconnectForRedeliveryDelay) &&
-                Objects.equals(useSeparateClientForPublisher, that.useSeparateClientForPublisher) &&
+                (useSeparateClientForPublisher == that.useSeparateClientForPublisher) &&
                 Objects.equals(reconnectMinTimeoutForMqttBrokerInitiatedDisconnect,
                         that.reconnectMinTimeoutForMqttBrokerInitiatedDisconnect) &&
-                Objects.equals(maxQueueSize, that.maxQueueSize) &&
+                (maxQueueSize == that.maxQueueSize) &&
                 Objects.equals(reconnectBackOffConfig, that.reconnectBackOffConfig);
     }
 

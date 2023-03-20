@@ -143,7 +143,7 @@ public interface TopicPath {
     String getPath();
 
     default boolean isWildcardTopic() {
-        return ID_PLACEHOLDER.equals(getEntityName());
+        return getEntityName().equals(ID_PLACEHOLDER);
     }
 
     /**

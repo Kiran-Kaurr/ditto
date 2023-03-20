@@ -12,15 +12,16 @@
  */
 package org.eclipse.ditto.internal.utils.health.status;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.InputStream;
 import java.util.Scanner;
-
-import org.eclipse.ditto.json.JsonFactory;
-import org.eclipse.ditto.json.JsonObject;
 import org.eclipse.ditto.internal.utils.config.DittoConfigError;
 import org.eclipse.ditto.internal.utils.config.HostNameSupplier;
 import org.eclipse.ditto.internal.utils.config.InstanceIdentifierSupplier;
 import org.eclipse.ditto.internal.utils.config.LocalHostAddressSupplier;
+import org.eclipse.ditto.json.JsonFactory;
+import org.eclipse.ditto.json.JsonObject;
 
 /**
  * Helper class providing the status of a Things-Service microservice instance.
@@ -36,7 +37,7 @@ public final class Status {
         if (versionsInputStream == null) {
             throw new DittoConfigError("Missing required file in classpath: " + VERSIONS_FILE_NAME);
         }
-        VERSIONS_JSON = JsonFactory.readFrom(new Scanner(versionsInputStream).useDelimiter("\\Z").next()).asObject()
+        VERSIONS_JSON = JsonFactory.readFrom(new Scanner(versionsInputStream, UTF_8.name()).useDelimiter("\\Z").next()).asObject()
                 .setValue("hostname", HostNameSupplier.getInstance().get())
                 .setValue("local-address", LocalHostAddressSupplier.getInstance().get())
                 .setValue("instance", InstanceIdentifierSupplier.getInstance().get())

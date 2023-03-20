@@ -82,8 +82,7 @@ final class Thing3ValuePredicateVisitor implements CriteriaVisitor<Function<Thin
             final Set<JsonPointer> unknownFields,
             final Thing partialThing,
             final Collection<PlaceholderResolver<?>> placeholderResolvers) {
-        return Trilean.FALSE != criteria.accept(new Thing3ValuePredicateVisitor(unknownFields, placeholderResolvers))
-                .apply(partialThing);
+        return criteria.accept(new Thing3ValuePredicateVisitor(unknownFields, placeholderResolvers)).apply(partialThing) != Trilean.FALSE;
     }
 
     @Override

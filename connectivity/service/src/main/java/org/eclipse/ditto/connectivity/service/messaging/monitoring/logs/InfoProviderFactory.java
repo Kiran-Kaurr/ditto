@@ -98,7 +98,7 @@ public final class InfoProviderFactory {
         final String correlationId = extractCorrelationId(headers);
         final Instant timestamp = Instant.now();
 
-        return new ImmutableInfoProvider(correlationId, timestamp, null, headers, supplyEmptyPayload(), false);
+        return new ImmutableInfoProvider(correlationId, timestamp, null, headers, InfoProviderFactory::supplyEmptyPayload, false);
     }
 
     private static String extractCorrelationId(final Map<String, String> headers) {
@@ -113,11 +113,9 @@ public final class InfoProviderFactory {
 
     public static ConnectionMonitor.InfoProvider empty() {
         return new ImmutableInfoProvider(FALLBACK_CORRELATION_ID, Instant.now(), null, Collections.emptyMap(),
-                supplyEmptyPayload(), true);
+                InfoProviderFactory::supplyEmptyPayload, true);
     }
 
-    private static Supplier<String> supplyEmptyPayload() {
-        return () -> null;
-    }
+    private static  String supplyEmptyPayload(){return null;}
 
 }

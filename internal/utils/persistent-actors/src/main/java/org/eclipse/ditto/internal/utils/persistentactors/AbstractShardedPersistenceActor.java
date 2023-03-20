@@ -136,37 +136,44 @@ public abstract class AbstractShardedPersistenceActor<
     public abstract String snapshotPluginId();
 
     /**
-     * @return class of the events persisted by this actor.
+     *Returns class of the events persisted by this actor.
+ 
      */
     protected abstract Class<?> getEventClass();
 
     /**
-     * @return the context for handling commands based on the actor's current state.
+     *Returns the context for handling commands based on the actor's current state.
+ 
      */
     protected abstract CommandStrategy.Context<K> getStrategyContext();
 
     /**
-     * @return strategies to handle commands when the entity exists.
+     *Returns strategies to handle commands when the entity exists.
+ 
      */
     protected abstract CommandStrategy<C, S, K, E> getCreatedStrategy();
 
     /**
-     * @return strategies to handle commands when the entity does not exist.
+     *Returns strategies to handle commands when the entity does not exist.
+ 
      */
     protected abstract CommandStrategy<? extends C, S, K, E> getDeletedStrategy();
 
     /**
-     * @return strategies to modify the entity by events.
+     *Returns strategies to modify the entity by events.
+ 
      */
     protected abstract EventStrategy<E, S> getEventStrategy();
 
     /**
-     * @return configuration for activity check.
+     *Returns configuration for activity check.
+ 
      */
     protected abstract ActivityCheckConfig getActivityCheckConfig();
 
     /**
-     * @return configuration for automatic snapshotting.
+     *Returns configuration for automatic snapshotting.
+ 
      */
     protected abstract SnapshotConfig getSnapshotConfig();
 
@@ -178,7 +185,8 @@ public abstract class AbstractShardedPersistenceActor<
     protected abstract boolean entityExistsAsDeleted();
 
     /**
-     * @return An exception builder to respond to unexpected commands addressed to a nonexistent entity.
+     *Returns an exception builder to respond to unexpected commands addressed to a nonexistent entity.
+ 
      */
     protected abstract DittoRuntimeExceptionBuilder<?> newNotAccessibleExceptionBuilder();
 
@@ -235,7 +243,8 @@ public abstract class AbstractShardedPersistenceActor<
     }
 
     /**
-     * @return the current revision number for event handling.
+     *Returns the current revision number for event handling.
+ 
      */
     protected long getRevisionNumber() {
         return lastSequenceNr();

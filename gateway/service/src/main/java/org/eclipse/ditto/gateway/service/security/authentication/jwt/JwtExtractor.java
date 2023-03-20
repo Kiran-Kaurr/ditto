@@ -50,7 +50,8 @@ public interface JwtExtractor extends BiFunction<RequestContext, DittoHeaders, O
     }
 
     /**
-     * @return detail information about the error and where the token information was expected.
+     *Returns detail information about the error and where the token information was expected.
+ 
      */
     String getErrorDescription();
 }

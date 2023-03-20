@@ -115,17 +115,20 @@ public interface ConnectionFailure extends WithOrigin {
     }
 
     /**
-     * @return the description of the failure.
+     *Returns the description of the failure.
+ 
      */
     String getFailureDescription();
 
     /**
-     * @return the optionally already certainly known connectivity status.
+     *Returns the optionally already certainly known connectivity status.
+ 
      */
     Optional<ConnectivityStatus> getStatus();
 
     /**
-     * @return the Failure containing the cause.
+     *Returns the Failure containing the cause.
+ 
      */
     Status.Failure getFailure();
 

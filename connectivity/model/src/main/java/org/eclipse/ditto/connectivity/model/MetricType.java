@@ -77,7 +77,8 @@ public enum MetricType {
     }
 
     /**
-     * @return the label which can be used in a JSON representation.
+     *Returns the label which can be used in a JSON representation.
+ 
      */
     public String getName() {
         return name;
@@ -94,8 +95,9 @@ public enum MetricType {
     }
 
     /**
-     * @param name name of the MetricType
-     * @return the MetricType matching the given name
+     *Returns the MetricType matching the given name.
+ @param name name of the MetricType
+     * 
      */
     public static Optional<MetricType> forName(final CharSequence name) {
         checkNotNull(name, "Name");

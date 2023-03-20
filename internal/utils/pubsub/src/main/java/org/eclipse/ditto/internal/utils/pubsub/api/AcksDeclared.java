@@ -39,14 +39,16 @@ public final class AcksDeclared {
     }
 
     /**
-     * @return the request this object is acknowledging.
+     *Returns the request this object is acknowledging.
+ 
      */
     public AckRequest getRequest() {
         return request;
     }
 
     /**
-     * @return sender of the request.
+     *Returns sender of the request.
+ 
      */
     public ActorRef getSender() {
         return sender;

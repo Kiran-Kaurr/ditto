@@ -41,7 +41,8 @@ public interface ConnectionMetricsCounter {
     void recordFailure(long ts);
 
     /**
-     * @return the metricType of this collector.
+     *Returns the metricType of this collector.
+ 
      */
     MetricType getMetricType();
 

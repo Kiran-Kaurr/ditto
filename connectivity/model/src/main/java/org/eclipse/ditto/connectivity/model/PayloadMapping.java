@@ -23,12 +23,14 @@ import org.eclipse.ditto.base.model.json.Jsonifiable;
 public interface PayloadMapping extends Jsonifiable<JsonArray>  {
 
     /**
-     * @return the payload mappings that should be applied for inbound/outbound messages
+     *Returns the payload mappings that should be applied for inbound/outbound messages.
+ 
      */
     List<String> getMappings();
 
     /**
-     * @return {@code true} if no mappings are defined
+     *Returns {@code true} if no mappings are defined.
+ 
      */
     boolean isEmpty();
 

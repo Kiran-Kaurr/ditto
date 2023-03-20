@@ -59,7 +59,7 @@ public final class DefaultIndexInitializationConfig implements IndexInitializati
             return false;
         }
         final DefaultIndexInitializationConfig that = (DefaultIndexInitializationConfig) o;
-        return Objects.equals(indexInitializationEnabled, that.indexInitializationEnabled);
+        return (indexInitializationEnabled == that.indexInitializationEnabled);
     }
 
     @Override

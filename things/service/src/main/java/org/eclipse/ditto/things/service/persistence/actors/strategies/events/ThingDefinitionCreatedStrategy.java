@@ -23,7 +23,7 @@ import org.eclipse.ditto.things.model.signals.events.ThingDefinitionCreated;
 @Immutable
 final class ThingDefinitionCreatedStrategy extends AbstractThingEventStrategy<ThingDefinitionCreated> {
 
-    protected ThingDefinitionCreatedStrategy() {
+    ThingDefinitionCreatedStrategy() {
         super();
     }
 

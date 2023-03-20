@@ -171,7 +171,7 @@ public final class CountThingsResponse extends AbstractCommandResponse<CountThin
             return false;
         }
         final CountThingsResponse that = (CountThingsResponse) o;
-        return that.canEqual(this) && Objects.equals(count, that.count) && super.equals(that);
+        return that.canEqual(this) && (count == that.count) && super.equals(that);
     }
 
     @Override

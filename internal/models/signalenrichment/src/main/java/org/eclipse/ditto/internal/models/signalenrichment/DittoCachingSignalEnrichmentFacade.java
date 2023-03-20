@@ -115,7 +115,7 @@ public final class DittoCachingSignalEnrichmentFacade implements CachingSignalEn
             @Nullable final Signal<?> concernedSignal) {
 
         final List<ThingEvent<?>> thingEvents =
-                (concernedSignal instanceof ThingEvent) && !(ProtocolAdapter.isLiveSignal(concernedSignal)) ?
+                (concernedSignal instanceof ThingEvent) && ! ProtocolAdapter.isLiveSignal(concernedSignal) ?
                         List.of((ThingEvent<?>) concernedSignal) : List.of();
 
         // as second step only return what was originally requested as fields:

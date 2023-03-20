@@ -56,7 +56,7 @@ final class ConnectionMetricsCounterFactory {
             @Nullable final MetricsAlert metricsAlert) {
         final Counter metricsCounter = metricsCounter(connectionId, connectionType, metricType, metricDirection);
         final SlidingWindowCounter counter;
-        if (MetricType.THROTTLED == metricType) {
+        if (metricType == MetricType.THROTTLED) {
             counter = SlidingWindowCounter.newBuilder(metricsCounter)
                     .clock(clock)
                     // we need to record for every minute of the last 24h if throttling occurred
